@@ -1,83 +1,129 @@
 import Link from "next/link";
 import { Section } from "@/components/Section";
 
+const faqItems = [
+  {
+    q: "What is Proof of Transaction (PoT)?",
+    a: "PoT is Ryvra’s contribution framework. Eligible, finalized, policy-compliant transactions generate contribution points before TGE.",
+  },
+  {
+    q: "How do I earn points?",
+    a: "By performing eligible transactions on Ryvra products/modules. Activity must pass quality and anti-abuse checks.",
+  },
+  {
+    q: "Is there a daily earning cap?",
+    a: "Yes. Base cap starts at 2 points/day/account.",
+  },
+  {
+    q: "What does halved proportionally mean?",
+    a: "The daily max points cap decreases by half each epoch: 2.0 → 1.0 → 0.5 → 0.25 ...",
+  },
+];
+
 export default function HomePage() {
   return (
     <>
-      <Section className="hero" title="Ryvra Thesis">
+      <Section className="hero" title="Ryvra Protocol">
         <h1>Every transaction contributes.</h1>
         <p className="lead">
-          Ryvra aligns Account Abstraction, Unified Assets, and Proof of
-          Transaction into one interoperable account layer for coordinated global
-          finance.
+          Ryvra is the Account Abstraction and Unified Assets protocol for
+          payments and markets—where verified transaction activity earns
+          contribution rewards through Proof of Transaction.
         </p>
         <div className="button-row">
           <Link className="button button-primary" href="/build">
             Build on Ryvra
           </Link>
           <Link className="button button-secondary" href="/litepaper">
-            Read Litepaper
+            Read the Litepaper
           </Link>
         </div>
       </Section>
 
-      <Section title="The Problem">
+      <Section title="Why Ryvra">
         <p className="lead">
-          Financial infrastructure is fragmented across chains, custodial silos,
-          and incompatible account systems. This fragmentation increases cost,
-          limits composability, and obscures verifiable participation.
+          Finance is fragmented by default. Ryvra unifies account execution,
+          asset state, and incentives into one programmable protocol so teams can
+          build reliable payment and market experiences on shared foundations.
         </p>
+        <div className="grid grid-2">
+          <article className="card">
+            <strong>EIP-4337 Account Abstraction</strong>
+            <p>Smart accounts, UserOps, session policies, and composable controls.</p>
+          </article>
+          <article className="card">
+            <strong>Unified Asset Model</strong>
+            <p>One canonical framework across stablecoins, crypto, RWAs, and metals.</p>
+          </article>
+          <article className="card">
+            <strong>Policy + Risk Hooks</strong>
+            <p>Compliance-ready controls and modular enforcement by product and region.</p>
+          </article>
+          <article className="card">
+            <strong>PoT Rewards Engine</strong>
+            <p>Transparent accounting for contribution and reward distribution.</p>
+          </article>
+        </div>
       </Section>
 
-      <Section title="The Solution">
-        <p className="lead">
-          Ryvra introduces a unified account layer where users and applications
-          can coordinate assets, identity, and transaction logic through one
-          consistent execution model.
-        </p>
-      </Section>
-
-      <Section title="Core Modules">
+      <Section title="Built as protocol modules">
         <div className="grid grid-3">
           <article className="card">
-            <strong>Accounts</strong>
-            <p>Programmable AA-native accounts for secure user operations.</p>
+            <strong>Ryvra Accounts</strong>
+            <p>
+              EIP-4337 smart account orchestration, session keys, sponsorship
+              policy, and account-level controls.
+            </p>
           </article>
           <article className="card">
-            <strong>Pay</strong>
-            <p>Efficient payment rails designed for everyday and B2B flows.</p>
+            <strong>Ryvra Pay</strong>
+            <p>
+              Stablecoin rails for payouts, collections, and treasury movement
+              with programmable policy checks.
+            </p>
           </article>
           <article className="card">
-            <strong>Markets</strong>
-            <p>Shared liquidity and pricing primitives over unified assets.</p>
+            <strong>Ryvra Markets</strong>
+            <p>
+              Crypto/RWA/metals execution with shared account context and unified
+              asset treatment.
+            </p>
           </article>
         </div>
       </Section>
 
       <Section title="Proof of Transaction (PoT)">
+        <p className="lead">
+          Ryvra rewards eligible economic activity via Proof of Transaction.
+          Before TGE, users earn points under transparent caps and anti-abuse
+          rules.
+        </p>
         <ul>
-          <li>Participation points begin during the pre-TGE phase.</li>
-          <li>Baseline accrual is capped at 2 points per day.</li>
-          <li>Emission scales by proportional halving across epochs.</li>
-          <li>Current timeline references a Q4 2026 TGE target window.</li>
+          <li>Base launch cap: 2 points/day/account.</li>
+          <li>Epoch model: cap halves proportionally over time.</li>
+          <li>Target TGE window: Q4 2026 (subject to updates).</li>
         </ul>
         <p className="disclaimer">
-          Tokenomics parameters are subject to governance and legal review and
-          do not constitute investment advice or performance commitments.
+          Tokenomics parameters may evolve through governance and legal review.
+          This content is informational and does not constitute investment advice.
         </p>
       </Section>
 
-      <Section title="For Developers and Ecosystem Partners">
-        <p className="lead">
-          Build account-native products, integrate Ryvra modules, and partner on
-          ecosystem distribution and infrastructure pilots.
-        </p>
+      <Section title="Tokenomics FAQ">
+        <div className="grid grid-2">
+          {faqItems.map((item) => (
+            <article className="card" key={item.q}>
+              <strong>{item.q}</strong>
+              <p>{item.a}</p>
+            </article>
+          ))}
+        </div>
         <div className="button-row">
-          <Link className="button button-primary" href="/build">
-            Start Builder Intake
+          <Link className="button button-secondary" href="/docs/tokenomics-faq">
+            View full FAQ
           </Link>
-          <Link className="button button-secondary" href="/docs">
-            Explore Docs
+          <Link className="button button-primary" href="/docs">
+            Explore docs
           </Link>
         </div>
       </Section>

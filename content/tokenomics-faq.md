@@ -1,16 +1,45 @@
-# Tokenomics FAQ
+# Ryvra Tokenomics FAQ (v1)
 
-## What does PoT measure?
-PoT measures qualified transaction participation across approved Ryvra pathways.
+## What is Proof of Transaction (PoT)?
+PoT is Ryvra’s contribution framework. Eligible, finalized, policy-compliant transactions generate contribution points before TGE.
 
-## Is there a daily cap?
-Yes. Baseline accrual is capped at 2 points per day for each eligible account.
+## How do I earn points?
+By performing eligible transactions on Ryvra products/modules. Activity must pass quality and anti-abuse checks.
 
-## How does halving work?
-Emission weight decreases by epoch, using a proportional halving schedule to balance early and long-term participation.
+## Is there a daily earning cap?
+Yes. Base cap starts at **2 points/day/account**.
 
-## Does point activity guarantee token value?
-No. Points are an internal accounting mechanism and do not represent guaranteed financial outcomes.
+## What does “halved proportionally” mean?
+The daily max points cap decreases by half each epoch:
+2.0 → 1.0 → 0.5 → 0.25 ...
 
-## Are these parameters final?
-No. All tokenomics parameters are subject to governance decisions and legal review.
+## Are all transactions eligible?
+No. Transactions must meet policy requirements (valid execution, thresholds, compliance checks, and anti-abuse criteria).
+
+## Can points be removed?
+Yes. Ryvra can reduce or void points for behavior flagged as sybil, wash, spam, or manipulative.
+
+## When is TGE?
+Target is **Q4 2026**.
+
+## How are points converted at TGE?
+Using proportional allocation from the designated points conversion pool:
+user share = user eligible points / total eligible points.
+
+## Are points tokens today?
+No. Points are a pre-TGE program metric and not a token.
+
+## Will claims be fully unlocked at TGE?
+Final unlock/vesting mechanics will be published before TGE.
+
+## How does Ryvra prevent whales from dominating rewards?
+Through caps, anti-abuse controls, policy scoring constraints, and potential concentration limits.
+
+## Will policy parameters change?
+They may evolve. All material changes are versioned and publicly documented.
+
+## Is participation available globally?
+Participation may be restricted by jurisdiction and compliance requirements.
+
+## Where can I follow updates?
+Official Ryvra docs, announcements, and governance channels (to be published).
