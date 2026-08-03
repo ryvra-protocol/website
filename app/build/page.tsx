@@ -1,41 +1,52 @@
+import type { Metadata } from "next";
+import Link from "next/link";
 import { Section } from "@/components/Section";
+
+export const metadata: Metadata = {
+  title: "Build with Ryvra",
+  description:
+    "Production integration entry point for teams building on Ryvra Unified Assets and ERC-4337 capabilities.",
+  alternates: { canonical: "/build" },
+  openGraph: {
+    title: "Build with Ryvra",
+    description:
+      "Integrator entry point with prerequisites, supported flows, and escalation links.",
+    url: "https://ryvra.org/build",
+    type: "website",
+  },
+};
 
 export default function BuildPage() {
   return (
     <Section title="Build with Ryvra">
       <p className="lead">
-        We collaborate with teams building account-native products, payment
-        experiences, and market infrastructure on top of Ryvra modules.
+        Production integrations should follow the documented compatibility and
+        operations path for Unified Assets and ERC-4337 account abstraction.
       </p>
 
-      <div className="form-grid">
-        <label>
-          Organization / Team
-          <input className="input" placeholder="Your team name" />
-        </label>
-        <label>
-          Contact Email
-          <input className="input" type="email" placeholder="name@company.com" />
-        </label>
-        <label>
-          Integration Focus
-          <input
-            className="input"
-            placeholder="Accounts, Pay, Markets, or ecosystem partnership"
-          />
-        </label>
-        <label>
-          Project Overview
-          <textarea
-            className="textarea"
-            placeholder="Briefly describe your product, timeline, and support needed."
-          />
-        </label>
+      <div className="grid grid-2">
+        <article className="card">
+          <strong>Start integration</strong>
+          <p>Review prerequisites, supported flows, and environment assumptions.</p>
+          <div className="button-row">
+            <Link className="button button-primary" href="/docs/integrators-getting-started">
+              Integrator getting started
+            </Link>
+          </div>
+        </article>
+        <article className="card">
+          <strong>Validate compatibility</strong>
+          <p>Use compatibility matrix and API references before production cutover.</p>
+          <div className="button-row">
+            <Link className="button button-secondary" href="/docs/apis">
+              APIs and compatibility
+            </Link>
+          </div>
+        </article>
       </div>
 
-      <p className="disclaimer">
-        Placeholder form only. Backend intake, CRM routing, and anti-spam checks
-        are pending. For immediate contact, use ecosystem@ryvra.org (placeholder).
+      <p>
+        Integration and escalation contact: <a href="mailto:ecosystem@ryvra.org">ecosystem@ryvra.org</a>
       </p>
     </Section>
   );
