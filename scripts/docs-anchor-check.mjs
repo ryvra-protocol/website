@@ -1,4 +1,4 @@
-const { loadDocsModule } = require('./docs-validation-data.cjs');
+import { loadDocsModule } from './docs-validation-data.mjs';
 
 const docs = loadDocsModule();
 const docsPages = docs.docsPages;

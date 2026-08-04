@@ -1,11 +1,14 @@
-const fs = require('node:fs');
-const path = require('node:path');
-const vm = require('node:vm');
-const ts = require('typescript');
+import fs from 'node:fs';
+import path from 'node:path';
+import vm from 'node:vm';
+import { fileURLToPath } from 'node:url';
+import ts from 'typescript';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const docsFilePath = path.resolve(__dirname, '..', 'lib', 'docs.ts');
 
-function loadDocsModule() {
+export function loadDocsModule() {
   const source = fs.readFileSync(docsFilePath, 'utf8');
   const transpiled = ts.transpileModule(source, {
     compilerOptions: {
@@ -29,7 +32,3 @@ function loadDocsModule() {
   vm.runInNewContext(transpiled.outputText, context, { filename: docsFilePath });
   return moduleRef.exports;
 }
-
-module.exports = {
-  loadDocsModule,
-};

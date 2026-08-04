@@ -1,7 +1,10 @@
-const fs = require('node:fs');
-const path = require('node:path');
-const { loadDocsModule } = require('./docs-validation-data.cjs');
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { loadDocsModule } from './docs-validation-data.mjs';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const docs = loadDocsModule();
 const docsPages = docs.docsPages;
 const docsPageOrder = docs.docsPageOrder;
@@ -102,19 +105,19 @@ for (const page of docsPages) {
         errors.push(`Broken docs link ${link.href} referenced from ${page.href}#${heading.id}`);
       }
     }
+  }
 
-    const { previous, next } = getDocNeighbors(page.href);
-    const index = docsPageOrder.indexOf(page.href);
-    const expectedPrevious = docsPageOrder[index - 1];
-    const expectedNext = docsPageOrder[index + 1];
+  const { previous, next } = getDocNeighbors(page.href);
+  const index = docsPageOrder.indexOf(page.href);
+  const expectedPrevious = docsPageOrder[index - 1];
+  const expectedNext = docsPageOrder[index + 1];
 
-    if ((previous && previous.href) !== expectedPrevious) {
-      errors.push(`Previous-page sequence mismatch at route: ${page.href}`);
-    }
+  if ((previous && previous.href) !== expectedPrevious) {
+    errors.push(`Previous-page sequence mismatch at route: ${page.href}`);
+  }
 
-    if ((next && next.href) !== expectedNext) {
-      errors.push(`Next-page sequence mismatch at route: ${page.href}`);
-    }
+  if ((next && next.href) !== expectedNext) {
+    errors.push(`Next-page sequence mismatch at route: ${page.href}`);
   }
 }
 
