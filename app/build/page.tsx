@@ -29,8 +29,8 @@ export default function BuildPage() {
           <strong>Start integration</strong>
           <p>Review prerequisites, supported flows, and environment assumptions.</p>
           <div className="button-row">
-            <Link className="button button-primary" href="/docs/integrators-getting-started">
-              Integrator getting started
+            <Link className="button button-primary" href="/docs/getting-started">
+              Getting started
             </Link>
           </div>
         </article>
@@ -38,8 +38,8 @@ export default function BuildPage() {
           <strong>Validate compatibility</strong>
           <p>Use compatibility matrix and API references before production cutover.</p>
           <div className="button-row">
-            <Link className="button button-secondary" href="/docs/apis">
-              APIs and compatibility
+            <Link className="button button-secondary" href="/docs/developer-guide/api-overview">
+              API overview
             </Link>
           </div>
         </article>

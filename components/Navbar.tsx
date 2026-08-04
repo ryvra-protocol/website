@@ -2,11 +2,10 @@ import Link from "next/link";
 
 const links = [
   { href: "/docs", label: "Docs" },
-  { href: "/docs/architecture", label: "Architecture" },
-  { href: "/docs/apis", label: "APIs" },
-  { href: "/docs/operations", label: "Operations" },
+  { href: "/docs/getting-started", label: "Getting Started" },
+  { href: "/docs/user-guide", label: "User Guide" },
+  { href: "/docs/developer-guide", label: "Developer Guide" },
   { href: "/docs/release-notes", label: "Release Notes" },
-  { href: "/build", label: "Build" },
   { href: "https://github.com/ryvra-protocol", label: "GitHub" },
 ];
 
