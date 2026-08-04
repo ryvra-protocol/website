@@ -23,6 +23,8 @@ export type DocsPage = DocsSidebarItem & {
   description: string;
   metadataTitle?: string;
   metadataDescription?: string;
+  lastUpdated: string;
+  compatibilityWindow: string;
   parentHref?: string;
   calloutVariant: DocsCalloutVariant;
   calloutTitle: string;
@@ -36,6 +38,8 @@ type AuthoredDocContent = {
   description: string;
   metadataTitle?: string;
   metadataDescription?: string;
+  lastUpdated?: string;
+  compatibilityWindow?: string;
   calloutVariant?: DocsCalloutVariant;
   calloutTitle?: string;
   calloutBody?: string;
@@ -182,9 +186,9 @@ function getCalloutVariant(href: string): DocsCalloutVariant {
   return "info";
 }
 
-function getDocDescription(title: string): string {
-  return `Part A scaffold for ${title.toLowerCase()} documentation.`;
-}
+const docsPortalLastUpdated = "2026-08-04";
+const docsPortalCompatibilityWindow =
+  "Applies to the currently shipped Ryvra docs portal and interfaces published through August 2026.";
 
 function getDocLink(href: string): DocsSidebarItem {
   const title = docsSidebarTitleByHref.get(href);
@@ -193,36 +197,6 @@ function getDocLink(href: string): DocsSidebarItem {
   }
 
   return { href, title };
-}
-
-function getScaffoldHeadings(title: string): DocsHeading[] {
-  return [
-    {
-      id: "overview",
-      title: "Overview",
-      body: `Placeholder overview for ${title}. Detailed authored guidance will be added in a later documentation phase.`,
-    },
-    {
-      id: "planned-content",
-      title: "Planned Content",
-      body: "This section reserves structure for workflows, references, and examples while keeping Part A scoped to framework and information architecture.",
-    },
-    {
-      id: "status",
-      title: "Status",
-      body: "Part A scaffolding is active for navigation, metadata, breadcrumbs, and page linking. Final content authoring is intentionally deferred.",
-    },
-  ];
-}
-
-function getScaffoldContent(title: string): AuthoredDocContent {
-  return {
-    description: getDocDescription(title),
-    calloutTitle: "Part A scaffold notice",
-    calloutBody:
-      "This page currently contains IA and layout scaffolding only. Full authored content is intentionally deferred to a later phase.",
-    headings: getScaffoldHeadings(title),
-  };
 }
 
 const authoredDocsByHref: Record<string, AuthoredDocContent> = {
@@ -287,6 +261,131 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/developer-guide/payments-integration"),
           getDocLink("/docs/developer-guide/observability-and-runbooks"),
         ],
+      },
+    ],
+  },
+  "/docs/introduction": {
+    description:
+      "Understand documentation scope, terminology, and operational boundaries for the Ryvra user, merchant, and developer journeys.",
+    metadataTitle: "Introduction",
+    metadataDescription:
+      "Intro to Ryvra docs coverage, persona guides, compatibility boundaries, and rollout scope for the production docs portal.",
+    calloutVariant: "info",
+    calloutTitle: "Production documentation baseline",
+    calloutBody:
+      "Use this introduction to confirm what is shipped, who each guide is for, and where to find version and release updates.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "The docs portal provides production-ready guidance for user operations, merchant operations, and developer integrations.",
+      },
+      {
+        id: "what-is-shipped",
+        title: "What is shipped",
+        bullets: [
+          "User Guide for account setup, trading, transactions, liquidity or staking, and payments.",
+          "Merchant Guide for onboarding, checkout, invoicing, subscriptions, settlement, reconciliation, disputes, and compliance.",
+          "Developer Guide for architecture, APIs, authentication, events, retries, deployment, testing, and runbooks.",
+          "Reference pages for release notes and glossary definitions.",
+        ],
+      },
+      {
+        id: "terminology-baseline",
+        title: "Terminology baseline",
+        bullets: [
+          "Account wallet: the user-operated wallet context connected to a Ryvra account.",
+          "Merchant workspace: the merchant-facing operations context for payment and settlement workflows.",
+          "Integration client: the developer-operated service that calls Ryvra APIs and consumes Ryvra events.",
+          "Compatibility window: the period where documented behavior is expected to match shipped platform behavior.",
+        ],
+        links: [getDocLink("/docs/glossary")],
+      },
+      {
+        id: "compatibility-and-versioning",
+        title: "Compatibility and versioning",
+        body: "Compatibility windows and upgrade guidance are published in release notes and developer changelog pages.",
+        links: [getDocLink("/docs/release-notes"), getDocLink("/docs/developer-guide/changelog-and-versioning")],
+      },
+      {
+        id: "out-of-scope-boundaries",
+        title: "Out-of-scope boundaries",
+        bullets: [
+          "No speculative product commitments beyond currently documented shipped behavior.",
+          "No private merchant, legal, or support playbooks.",
+          "No source-of-truth replacement for contractual or compliance documentation.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [getDocLink("/docs/getting-started"), getDocLink("/docs/user-guide"), getDocLink("/docs/merchant-guide"), getDocLink("/docs/developer-guide")],
+      },
+    ],
+  },
+  "/docs/getting-started": {
+    description:
+      "Start quickly by selecting the right persona path, validating prerequisites, and confirming expected outcomes for your first Ryvra workflow.",
+    metadataTitle: "Getting Started",
+    metadataDescription:
+      "Getting started checklist for Ryvra docs users with prerequisites, first-step flows, expected outcomes, and recovery guidance.",
+    calloutVariant: "success",
+    calloutTitle: "Start with the right persona track",
+    calloutBody:
+      "Choose user, merchant, or developer guidance first to avoid mixing controls, assumptions, and operational expectations.",
+    headings: [
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Confirm your role for this session: user, merchant operator, or integration developer.",
+          "Use the official Ryvra domain and approved account access path.",
+          "Have access to the environment you need (account wallet, merchant workspace, or integration sandbox).",
+        ],
+      },
+      {
+        id: "step-by-step-start-flow",
+        title: "Step-by-step start flow",
+        steps: [
+          "Open the documentation landing page and choose your persona track.",
+          "Read the guide overview page for role-specific assumptions and boundaries.",
+          "Complete the role-specific prerequisites page before executing live actions.",
+          "Run one low-risk workflow end to end and verify terminal status.",
+          "Use release notes and glossary pages to validate current terminology and rollout scope.",
+        ],
+      },
+      {
+        id: "persona-routes",
+        title: "Persona routes",
+        links: [getDocLink("/docs/user-guide"), getDocLink("/docs/merchant-guide"), getDocLink("/docs/developer-guide")],
+      },
+      {
+        id: "expected-outcome",
+        title: "Expected outcome",
+        bullets: [
+          "You can identify the correct guide and complete first-step workflows without route ambiguity.",
+          "You understand the compatibility window and release-note location for updates.",
+          "You can escalate to role-specific troubleshooting guidance when an operation fails.",
+        ],
+      },
+      {
+        id: "common-failures",
+        title: "Common failures",
+        bullets: [
+          "Starting from the wrong persona guide and applying incorrect assumptions.",
+          "Skipping prerequisite checks and encountering preventable validation failures.",
+          "Using stale process assumptions without reviewing release notes or compatibility guidance.",
+        ],
+      },
+      {
+        id: "recovery-steps",
+        title: "Recovery steps",
+        steps: [
+          "Return to the documentation landing page and switch to the correct persona guide.",
+          "Re-run prerequisite checklists before repeating failed operations.",
+          "Validate latest guidance in release notes and relevant troubleshooting pages.",
+        ],
+        links: [getDocLink("/docs/release-notes"), getDocLink("/docs/developer-guide/troubleshooting"), getDocLink("/docs/merchant-guide/risk-compliance")],
       },
     ],
   },
@@ -3203,22 +3302,155 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
     ],
   },
+  "/docs/release-notes": {
+    description:
+      "Track shipped documentation portal updates, compatibility windows, and release boundaries for user, merchant, and developer guides.",
+    metadataTitle: "Release Notes",
+    metadataDescription:
+      "Release notes for the Ryvra docs portal rollout, including shipped scope, compatibility window, publish gates, and non-scope boundaries.",
+    calloutVariant: "note",
+    calloutTitle: "Docs portal rollout: Part D publish hardening",
+    calloutBody:
+      "This release finalizes publish-readiness hardening for the docs portal after merged User, Merchant, and Developer authored content.",
+    headings: [
+      {
+        id: "last-updated",
+        title: "Last updated",
+        body: "2026-08-04",
+      },
+      {
+        id: "release-summary",
+        title: "Release summary",
+        body: "Part D completes final hardening, QA coverage, and production publish readiness for the docs portal information architecture and authored guides.",
+      },
+      {
+        id: "shipped-in-this-rollout",
+        title: "Shipped in this rollout",
+        bullets: [
+          "Fully authored User, Merchant, and Developer guides across all live docs routes.",
+          "Normalized terminology, compatibility wording, and publish-boundary language.",
+          "Hardened navigation structure including sidebar grouping, breadcrumbs, previous/next continuity, and heading anchor integrity.",
+          "Repo-native docs link and anchor checks added to package scripts and CI validation workflow.",
+        ],
+      },
+      {
+        id: "compatibility-window",
+        title: "Compatibility window",
+        body: "These docs target the currently shipped Ryvra interfaces published through August 2026. Confirm newer behavior against subsequent release notes before operational rollout changes.",
+      },
+      {
+        id: "not-in-scope",
+        title: "Not in scope",
+        bullets: [
+          "No major documentation IA redesign beyond hardening and integrity fixes.",
+          "No speculative product roadmap commitments outside currently shipped docs coverage.",
+          "No replacement of legal, contractual, or private operational runbooks.",
+        ],
+      },
+      {
+        id: "publish-gates",
+        title: "Publish gates",
+        bullets: [
+          "Lint",
+          "Typecheck",
+          "Production build",
+          "Repo-native docs link validation",
+          "Repo-native docs anchor validation",
+        ],
+      },
+      {
+        id: "failure-and-recovery",
+        title: "Failure and recovery guidance",
+        steps: [
+          "If link or anchor validation fails, correct route references or heading IDs before publish.",
+          "If metadata checks fail, resolve missing or conflicting page metadata and regenerate build outputs.",
+          "If build or type checks fail, stop release promotion and re-run full validation gates after fixes.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [getDocLink("/docs/introduction"), getDocLink("/docs/getting-started"), getDocLink("/docs/developer-guide/changelog-and-versioning"), getDocLink("/docs/glossary")],
+      },
+    ],
+  },
+  "/docs/glossary": {
+    description:
+      "Canonical term definitions used across User, Merchant, and Developer documentation to keep operational meaning consistent.",
+    metadataTitle: "Glossary",
+    metadataDescription:
+      "Ryvra documentation glossary with standardized terminology for accounts, merchant operations, integrations, events, and compatibility windows.",
+    calloutVariant: "note",
+    calloutTitle: "Use these canonical definitions",
+    calloutBody:
+      "These definitions are the normalization baseline for all guides in this docs portal release.",
+    headings: [
+      {
+        id: "last-updated",
+        title: "Last updated",
+        body: "2026-08-04",
+      },
+      {
+        id: "account-wallet",
+        title: "Account wallet",
+        body: "The user-operated wallet context connected to a Ryvra account for trading, transfers, liquidity or staking, and payments.",
+      },
+      {
+        id: "merchant-workspace",
+        title: "Merchant workspace",
+        body: "The merchant operations context where teams configure checkout, invoicing, subscriptions, settlement, reconciliation, and disputes.",
+      },
+      {
+        id: "integration-client",
+        title: "Integration client",
+        body: "The developer-operated service or application that calls Ryvra APIs and consumes Ryvra webhooks and events.",
+      },
+      {
+        id: "idempotency-key",
+        title: "Idempotency key",
+        body: "A stable unique key supplied by clients to make retries safe and prevent duplicate effect creation for retried requests.",
+      },
+      {
+        id: "terminal-state",
+        title: "Terminal state",
+        body: "A workflow state that will not progress further without a new operator or client action, such as paid, failed, canceled, or expired.",
+      },
+      {
+        id: "compatibility-window",
+        title: "Compatibility window",
+        body: "The period where documented behavior is expected to align with currently shipped Ryvra interfaces before new releases introduce updates.",
+      },
+      {
+        id: "release-boundary",
+        title: "Release boundary",
+        body: "The explicit scope of what is shipped in the current docs release versus what is intentionally not included.",
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [getDocLink("/docs/release-notes"), getDocLink("/docs/getting-started"), getDocLink("/docs/developer-guide/rate-limits-idempotency")],
+      },
+    ],
+  },
 };
 
 export const docsPages: DocsPage[] = docsSidebarItems.map((item) => {
-  const authored = authoredDocsByHref[item.href] ?? getScaffoldContent(item.title);
+  const authored = authoredDocsByHref[item.href];
+  if (!authored) {
+    throw new Error(`Missing authored documentation content for route: ${item.href}`);
+  }
 
   return {
     ...item,
     description: authored.description,
     metadataTitle: authored.metadataTitle,
     metadataDescription: authored.metadataDescription,
+    lastUpdated: authored.lastUpdated ?? docsPortalLastUpdated,
+    compatibilityWindow: authored.compatibilityWindow ?? docsPortalCompatibilityWindow,
     parentHref: getParentHref(item.href),
     calloutVariant: authored.calloutVariant ?? getCalloutVariant(item.href),
-    calloutTitle: authored.calloutTitle ?? "Part A scaffold notice",
-    calloutBody:
-      authored.calloutBody ??
-      "This page currently contains IA and layout scaffolding only. Full authored content is intentionally deferred to a later phase.",
+    calloutTitle: authored.calloutTitle ?? "Summary",
+    calloutBody: authored.calloutBody ?? authored.description,
     headings: authored.headings,
   };
 });

@@ -301,6 +301,8 @@ a {
   border-radius: 1rem;
   background: var(--surface);
   padding: 0.9rem;
+  max-height: calc(100vh - 1.6rem);
+  overflow: auto;
 }
 
 .docs-toc-title {
@@ -342,6 +344,16 @@ a {
   margin: 0.85rem 0 0.6rem;
   font-size: clamp(1.6rem, 3vw, 2.2rem);
   line-height: 1.15;
+}
+
+.docs-page-meta {
+  margin-top: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.docs-page-meta p {
+  margin: 0.2rem 0;
 }
 
 .docs-callout {

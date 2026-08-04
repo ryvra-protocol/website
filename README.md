@@ -138,6 +138,8 @@ pnpm dev
 - `pnpm start` – run production server
 - `pnpm lint` – lint checks
 - `pnpm typecheck` – TypeScript type checks
+- `pnpm docs:link-check` – docs route and internal link integrity checks
+- `pnpm docs:anchor-check` – docs heading anchor normalization checks
 
 ---
 

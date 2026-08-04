@@ -37,3 +37,9 @@ jobs:
 
       - name: Build
         run: pnpm build
+
+      - name: Docs link check
+        run: pnpm docs:link-check
+
+      - name: Docs anchor check
+        run: pnpm docs:anchor-check
