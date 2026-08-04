@@ -32,14 +32,37 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
         <h1 className="docs-page-title">{page.title}</h1>
         <p className="lead">{page.description}</p>
 
-        <DocsCallout variant={page.calloutVariant} title="Part A scaffold notice">
-          This page currently contains IA and layout scaffolding only. Full authored content is intentionally deferred to a later phase.
+        <DocsCallout variant={page.calloutVariant} title={page.calloutTitle}>
+          {page.calloutBody}
         </DocsCallout>
 
         {page.headings.map((heading) => (
           <section key={heading.id} className="docs-section-block">
             <DocsHeading id={heading.id}>{heading.title}</DocsHeading>
-            <p>{heading.body}</p>
+            {heading.body ? <p>{heading.body}</p> : null}
+            {heading.steps && heading.steps.length > 0 ? (
+              <ol>
+                {heading.steps.map((step, index) => (
+                  <li key={`${heading.id}-step-${index}`}>{step}</li>
+                ))}
+              </ol>
+            ) : null}
+            {heading.bullets && heading.bullets.length > 0 ? (
+              <ul>
+                {heading.bullets.map((bullet, index) => (
+                  <li key={`${heading.id}-bullet-${index}`}>{bullet}</li>
+                ))}
+              </ul>
+            ) : null}
+            {heading.links && heading.links.length > 0 ? (
+              <ul>
+                {heading.links.map((link) => (
+                  <li key={`${heading.id}-${link.href}`}>
+                    <Link href={link.href}>{link.title}</Link>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </section>
         ))}
 
