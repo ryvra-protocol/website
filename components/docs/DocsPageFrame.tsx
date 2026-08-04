@@ -31,6 +31,14 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
 
         <h1 className="docs-page-title">{page.title}</h1>
         <p className="lead">{page.description}</p>
+        <div className="docs-page-meta" aria-label="Page update and compatibility metadata">
+          <p>
+            <strong>Last updated:</strong> {page.lastUpdated}
+          </p>
+          <p>
+            <strong>Compatibility window:</strong> {page.compatibilityWindow}
+          </p>
+        </div>
 
         <DocsCallout variant={page.calloutVariant} title={page.calloutTitle}>
           {page.calloutBody}

@@ -11,7 +11,7 @@ export function DocsHeading({ id, children, level = 2 }: DocsHeadingProps) {
 
   return (
     <Tag id={id} className={`docs-heading docs-heading-${level}`}>
-      <a className="docs-heading-anchor" href={`#${id}`} aria-label="Copy section link">
+      <a className="docs-heading-anchor" href={`#${id}`} aria-label="Copy section link" title="Copy link to this section">
         #
       </a>
       <span>{children}</span>

@@ -8,7 +8,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "docs:link-check": "node scripts/docs-link-check.mjs",
+    "docs:anchor-check": "node scripts/docs-anchor-check.mjs"
   },
   "dependencies": {
     "next": "16.2.10",
