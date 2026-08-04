@@ -119,8 +119,8 @@ export default function HomePage() {
           ))}
         </div>
         <div className="button-row">
-          <Link className="button button-secondary" href="/docs/tokenomics-faq">
-            View full FAQ
+          <Link className="button button-secondary" href="/docs/glossary">
+            View glossary
           </Link>
           <Link className="button button-primary" href="/docs">
             Explore docs

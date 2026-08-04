@@ -210,3 +210,248 @@ a {
     gap: 0.6rem;
   }
 }
+
+.docs-layout-shell {
+  display: grid;
+  grid-template-columns: 260px minmax(0, 1fr);
+  gap: 1rem;
+  padding: 1rem 0 1.5rem;
+}
+
+.docs-left-rail {
+  position: sticky;
+  top: 0.8rem;
+  align-self: start;
+  max-height: calc(100vh - 1.6rem);
+  overflow: auto;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+}
+
+.docs-sidebar {
+  padding: 0.9rem;
+}
+
+.docs-sidebar-group + .docs-sidebar-group {
+  margin-top: 0.9rem;
+}
+
+.docs-sidebar-group-title {
+  margin: 0 0 0.45rem;
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.docs-sidebar-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.25rem;
+}
+
+.docs-sidebar-link {
+  display: block;
+  border-radius: 0.5rem;
+  padding: 0.35rem 0.45rem;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.docs-sidebar-link:hover {
+  background: var(--surface-muted);
+  color: var(--foreground);
+}
+
+.docs-sidebar-link-active {
+  background: color-mix(in srgb, var(--accent) 16%, var(--surface));
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.docs-content-rail {
+  min-width: 0;
+}
+
+.docs-page-shell {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 220px;
+  gap: 1rem;
+  align-items: start;
+}
+
+.docs-article {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+  padding: 1.35rem;
+}
+
+.docs-right-rail {
+  position: sticky;
+  top: 0.8rem;
+}
+
+.docs-toc {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+  padding: 0.9rem;
+}
+
+.docs-toc-title {
+  margin: 0 0 0.5rem;
+  font-weight: 700;
+  font-size: 0.88rem;
+}
+
+.docs-toc ul {
+  margin: 0;
+  padding-left: 1rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.docs-toc li {
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+
+.docs-breadcrumbs ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.docs-breadcrumbs li + li::before {
+  content: "/";
+  margin: 0 0.25rem;
+  color: var(--border);
+}
+
+.docs-page-title {
+  margin: 0.85rem 0 0.6rem;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  line-height: 1.15;
+}
+
+.docs-callout {
+  border-radius: 0.8rem;
+  border: 1px solid var(--border);
+  padding: 0.85rem 0.95rem;
+  margin: 1rem 0;
+  background: var(--surface-muted);
+}
+
+.docs-callout-title {
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+}
+
+.docs-callout p {
+  margin: 0;
+}
+
+.docs-callout-info {
+  border-left: 4px solid #0ea5e9;
+}
+
+.docs-callout-warn {
+  border-left: 4px solid #f97316;
+}
+
+.docs-callout-success {
+  border-left: 4px solid #22c55e;
+}
+
+.docs-callout-note {
+  border-left: 4px solid #a855f7;
+}
+
+.docs-section-block + .docs-section-block {
+  margin-top: 1rem;
+}
+
+.docs-heading {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0;
+  scroll-margin-top: 5rem;
+}
+
+.docs-heading-2 {
+  font-size: 1.2rem;
+}
+
+.docs-heading-3 {
+  font-size: 1rem;
+}
+
+.docs-heading-anchor {
+  color: var(--muted);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+.docs-heading:hover .docs-heading-anchor,
+.docs-heading:focus-within .docs-heading-anchor {
+  opacity: 1;
+}
+
+.docs-pager {
+  margin-top: 1.3rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.7rem;
+}
+
+.docs-pager-link {
+  display: grid;
+  gap: 0.2rem;
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+  padding: 0.7rem 0.8rem;
+  background: var(--surface-muted);
+}
+
+.docs-pager-link span {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.docs-pager-link-next {
+  text-align: right;
+}
+
+@media (max-width: 1080px) {
+  .docs-page-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .docs-right-rail {
+    position: static;
+  }
+}
+
+@media (max-width: 900px) {
+  .docs-layout-shell {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .docs-left-rail {
+    position: static;
+    max-height: none;
+  }
+}
