@@ -231,11 +231,11 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       "Choose the right documentation path for using, operating, and integrating Ryvra Protocol.",
     metadataTitle: "Documentation",
     metadataDescription:
-      "Start from the right Ryvra docs path. User Guide covers trading, transactions, liquidity, staking, payments, and safety basics.",
+      "Choose your Ryvra docs path for users, merchants, or developers, with production guidance for operations and integrations.",
     calloutVariant: "info",
     calloutTitle: "Choose your track",
     calloutBody:
-      "If you are here to use Ryvra products directly, start with the User Guide. Merchant and Developer sections remain available for specialized workflows.",
+      "Start from the role that matches your immediate objective: using products, operating merchant flows, or integrating platform APIs.",
     headings: [
       {
         id: "choose-your-path",
@@ -264,6 +264,28 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/user-guide/send-transaction"),
           getDocLink("/docs/user-guide/liquidity-and-staking"),
           getDocLink("/docs/user-guide/send-payments"),
+        ],
+      },
+      {
+        id: "im-a-merchant-start-here",
+        title: "I’m a merchant: start here",
+        body: "The Merchant Guide focuses on onboarding, payment operations, settlement controls, reconciliation, and dispute handling.",
+        links: [
+          getDocLink("/docs/merchant-guide"),
+          getDocLink("/docs/merchant-guide/onboarding"),
+          getDocLink("/docs/merchant-guide/checkout-payment-links"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+        ],
+      },
+      {
+        id: "im-a-developer-start-here",
+        title: "I’m a developer: start here",
+        body: "The Developer Guide covers architecture, APIs, authentication, events, retries, deployment, and production runbooks.",
+        links: [
+          getDocLink("/docs/developer-guide"),
+          getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+          getDocLink("/docs/developer-guide/observability-and-runbooks"),
         ],
       },
     ],
@@ -1030,6 +1052,2154 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         title: "What should I do if I suspect phishing or wallet compromise?",
         body: "Revoke permissions if possible, move funds to safety, rotate credentials, and contact official support immediately.",
         links: [getDocLink("/docs/user-guide/security-best-practices")],
+      },
+    ],
+  },
+  "/docs/merchant-guide": {
+    description: "Operate Ryvra merchant flows from onboarding to settlement, reconciliation, and incident handling.",
+    metadataTitle: "Merchant Guide",
+    metadataDescription: "Production merchant playbook for onboarding, checkout, invoicing, subscriptions, payouts, disputes, reconciliation, and compliance operations.",
+    calloutVariant: "success",
+    calloutTitle: "Merchant operations start here",
+    calloutBody: "Use this guide as your day-to-day operating reference for running payment and settlement workflows safely in production.",
+    headings: [
+      {
+        id: "who-this-guide-is-for",
+        title: "Who this guide is for",
+        body: "This guide is for merchant operators, finance teams, and support leads responsible for payment acceptance and post-payment operations.",
+        bullets: [
+          "Merchant operations owners who run onboarding and go-live checklists.",
+          "Finance and reconciliation teams responsible for close accuracy.",
+          "Support and risk teams handling refund and dispute events.",
+        ],
+      },
+      {
+        id: "merchant-operating-lifecycle",
+        title: "Merchant operating lifecycle",
+        steps: [
+          "Complete account onboarding, access control, and settlement profile setup.",
+          "Launch acceptance channels such as checkout links, invoices, and subscriptions.",
+          "Monitor payment confirmations and exception queues throughout the day.",
+          "Run payout and settlement reviews, then complete reconciliation and close.",
+          "Handle refunds, disputes, and compliance escalations with evidence trails.",
+        ],
+      },
+      {
+        id: "start-paths",
+        title: "Start paths by role",
+        links: [
+          getDocLink("/docs/merchant-guide/onboarding"),
+          getDocLink("/docs/merchant-guide/checkout-payment-links"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+        ],
+      },
+      {
+        id: "go-live-readiness-signals",
+        title: "Go-live readiness signals",
+        bullets: [
+          "Merchant profile and settlement destination are approved.",
+          "Operational teams can confirm, refund, and reconcile a test transaction end to end.",
+          "Escalation contacts and incident response paths are documented and tested.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/overview"),
+          getDocLink("/docs/merchant-guide/merchant-faq"),
+          getDocLink("/docs/developer-guide"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/overview": {
+    description: "Understand the merchant operating model, responsibilities, and control points before processing production volume.",
+    metadataTitle: "Merchant Guide: Overview",
+    metadataDescription: "Purpose, prerequisites, workflow sequence, control outcomes, and escalation paths for Ryvra merchant operations.",
+    calloutVariant: "info",
+    calloutTitle: "Scope",
+    calloutBody: "Use this page to align merchant, finance, support, and engineering owners on shared operating expectations.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Defines the production operating boundary for payment acceptance, post-payment handling, settlement, and compliance response.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Approved merchant account with role-based operator access.",
+          "Configured settlement destination and statement details.",
+          "Documented support escalation path and incident contacts.",
+        ],
+      },
+      {
+        id: "step-by-step-procedure",
+        title: "Step-by-step operating procedure",
+        steps: [
+          "Onboard the account and verify readiness controls.",
+          "Enable payment collection channels for your business model.",
+          "Track payment states and exceptions in near real time.",
+          "Execute payout and end-of-day reconciliation checkpoints.",
+          "Run dispute and compliance escalations with complete evidence.",
+        ],
+      },
+      {
+        id: "expected-outcomes",
+        title: "Expected outcomes and confirmations",
+        bullets: [
+          "Payment, refund, and payout states are traceable with unique identifiers.",
+          "Daily close completes with no unresolved material variance.",
+          "Escalation paths are used consistently and within response windows.",
+        ],
+      },
+      {
+        id: "failure-states",
+        title: "Common failure states",
+        bullets: [
+          "Incomplete onboarding blocks payment or settlement activation.",
+          "Unmonitored webhook or queue failures delay confirmation updates.",
+          "Unreviewed exceptions create reconciliation drift.",
+        ],
+      },
+      {
+        id: "recovery-escalation",
+        title: "Recovery and escalation paths",
+        steps: [
+          "Pause impacted flow segment and preserve transaction context.",
+          "Triage by state, timestamp, and affected account scope.",
+          "Escalate with correlation IDs, event payload references, and operator notes.",
+        ],
+      },
+      {
+        id: "risk-compliance-notes",
+        title: "Risk and compliance notes",
+        bullets: [
+          "Use least-privilege access for high-impact actions like refunds and payout changes.",
+          "Retain operational evidence needed for audits and dispute response.",
+          "Escalate unusual activity immediately rather than processing around anomalies.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/onboarding"),
+          getDocLink("/docs/merchant-guide/payouts-settlement"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/developer-guide/api-overview"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/onboarding": {
+    description: "Complete merchant account onboarding, settlement setup, and launch readiness before taking production payments.",
+    metadataTitle: "Merchant Guide: Onboarding",
+    metadataDescription: "Production onboarding checklist covering account readiness, settlement assumptions, and go-live controls for merchants.",
+    calloutVariant: "success",
+    calloutTitle: "Launch gate",
+    calloutBody: "Do not process live traffic until every readiness checkpoint on this page is complete.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Covers merchant account readiness, operational ownership setup, settlement assumptions, and go-live decision gates.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Legal business profile and required verification artifacts are prepared.",
+          "Named operational owners exist for payments, finance close, and incident response.",
+          "Settlement destination accounts and payout currencies are confirmed internally.",
+        ],
+      },
+      {
+        id: "step-by-step-procedure",
+        title: "Step-by-step onboarding procedure",
+        steps: [
+          "Create merchant account and assign least-privilege roles for operations, finance, and support.",
+          "Complete verification workflow and resolve any pending data requests.",
+          "Configure settlement profile, payout schedule assumptions, and reconciliation contacts.",
+          "Register webhook endpoint and alert channels for payment and settlement events.",
+          "Run sandbox and low-risk production smoke tests across payment, refund, and payout flows.",
+          "Execute go-live checklist sign-off across merchant operations and engineering owners.",
+        ],
+      },
+      {
+        id: "expected-outcomes",
+        title: "Expected outcomes and confirmations",
+        bullets: [
+          "Account status is active for intended merchant capabilities.",
+          "Settlement profile validates and payout destination is accepted.",
+          "First controlled transaction flow is confirmed end to end.",
+        ],
+      },
+      {
+        id: "failure-states",
+        title: "Common failure states",
+        bullets: [
+          "Verification remains pending due to incomplete or mismatched business details.",
+          "Settlement destination fails validation or does not match approved entity data.",
+          "Webhook endpoint setup succeeds but event handling is not acknowledged in operations.",
+        ],
+      },
+      {
+        id: "recovery-escalation",
+        title: "Recovery and escalation paths",
+        steps: [
+          "Correct account or settlement data and re-run validation immediately.",
+          "Replay test transactions and verify event acknowledgements before reattempting go-live.",
+          "Escalate with merchant ID, request IDs, and failed checkpoint evidence if activation remains blocked.",
+        ],
+      },
+      {
+        id: "risk-compliance-notes",
+        title: "Risk and compliance notes",
+        bullets: [
+          "Do not share production credentials outside approved key-management controls.",
+          "Restrict who can modify payout destinations and refund permissions.",
+          "Maintain an auditable go-live checklist with date, owner, and approval trace.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/overview"),
+          getDocLink("/docs/merchant-guide/payouts-settlement"),
+          getDocLink("/docs/merchant-guide/risk-compliance"),
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/developer-guide/environments-and-deployment"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/checkout-payment-links": {
+    description: "Run checkout and payment-link workflows with clear confirmation handling, expiry behavior, and retry controls.",
+    metadataTitle: "Merchant Guide: Checkout and Payment Links",
+    metadataDescription: "Operational guide for creating payment links, managing expiry and retries, and confirming payments safely.",
+    calloutVariant: "info",
+    calloutTitle: "Payment collection",
+    calloutBody: "Treat each payment link as a controlled lifecycle with explicit expiry, retry, and confirmation rules.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Explains how to create and operate checkout or payment-link collection flows from creation through final confirmation.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Onboarding and settlement setup are complete for production use.",
+          "Order references and amount calculation rules are finalized before link creation.",
+          "Operators can access payment status queues and webhook monitoring dashboards.",
+        ],
+      },
+      {
+        id: "step-by-step-procedure",
+        title: "Step-by-step procedure",
+        steps: [
+          "Create checkout session or payment link with amount, currency, customer reference, and expiration.",
+          "Present link to customer through approved channel and store the generated payment identifier.",
+          "Monitor status transitions from created to pending, confirmed, failed, or expired.",
+          "On expiry, generate a replacement link tied to the same merchant order context when appropriate.",
+          "On payment confirmation, lock fulfillment to the confirmed payment identifier and timestamp.",
+        ],
+      },
+      {
+        id: "expected-outcomes",
+        title: "Expected outcomes and confirmations",
+        bullets: [
+          "Each checkout attempt has a unique payment reference and clear status history.",
+          "Expired links are not fulfilled and are replaced through controlled retry flow.",
+          "Confirmed payments are matched to order records before fulfillment release.",
+        ],
+      },
+      {
+        id: "failure-states",
+        title: "Common failure states",
+        bullets: [
+          "Customer attempts payment after link expiry window closes.",
+          "Duplicate customer submissions create multiple pending attempts for one order.",
+          "Webhook delivery delay causes temporary mismatch between UI and backend status.",
+        ],
+      },
+      {
+        id: "recovery-escalation",
+        title: "Recovery and escalation paths",
+        steps: [
+          "Use payment status endpoint and event history to resolve the current canonical state.",
+          "Reissue link with explicit expiry and customer communication when prior attempt expires or fails.",
+          "Escalate unresolved confirmation conflicts with payment IDs, event IDs, and order references.",
+        ],
+      },
+      {
+        id: "risk-compliance-notes",
+        title: "Risk and compliance notes",
+        bullets: [
+          "Set practical expiry windows to reduce stale-link misuse risk.",
+          "Do not accept fulfillment triggers from unverified external notifications.",
+          "Retain customer communication logs for dispute response and audit review.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/invoicing"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/developer-guide/rate-limits-idempotency"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/invoicing": {
+    description: "Manage invoice issuance, reminders, expiration, cancellation, and payment confirmation with clear lifecycle controls.",
+    metadataTitle: "Merchant Guide: Invoicing",
+    metadataDescription: "Invoice lifecycle operations including draft, issued, paid, expired, and canceled states with reminder and escalation guidance.",
+    calloutVariant: "info",
+    calloutTitle: "Invoice lifecycle control",
+    calloutBody: "Treat invoices as stateful records with explicit owner actions at each transition.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Covers merchant invoicing operations from draft creation through payment, expiration, cancellation, and closeout.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Invoice templates, tax display rules, and customer communication channels are approved.",
+          "Payment terms and reminder schedule policy are defined by operations.",
+          "Teams can monitor invoice status and related payment confirmations.",
+        ],
+      },
+      {
+        id: "step-by-step-procedure",
+        title: "Step-by-step procedure",
+        steps: [
+          "Create invoice with customer details, line items, due date, and reference identifier.",
+          "Issue invoice and deliver through approved communication channel.",
+          "Schedule reminders before due date and at grace-period checkpoints.",
+          "Track lifecycle transitions: draft, issued, viewed, partially paid, paid, expired, canceled.",
+          "Cancel or expire unpaid invoices based on policy, then reconcile final state in finance records.",
+        ],
+      },
+      {
+        id: "expected-outcomes",
+        title: "Expected outcomes and confirmations",
+        bullets: [
+          "Every invoice has an immutable identifier and full state history.",
+          "Reminder and expiration actions occur on policy-defined schedule.",
+          "Paid invoices map to settlement and accounting entries without ambiguity.",
+        ],
+      },
+      {
+        id: "failure-states",
+        title: "Common failure states",
+        bullets: [
+          "Invoice sent with incorrect amount or customer identifier.",
+          "Reminder automation is skipped, leading to missed collections.",
+          "Invoice appears paid in one system but open in another due to delayed confirmation ingestion.",
+        ],
+      },
+      {
+        id: "recovery-escalation",
+        title: "Recovery and escalation paths",
+        steps: [
+          "Void or cancel incorrect invoice and issue corrected replacement with cross-reference.",
+          "Backfill missed reminders and log manual outreach in customer record.",
+          "Escalate cross-system mismatches with invoice ID, payment ID, and settlement references.",
+        ],
+      },
+      {
+        id: "risk-compliance-notes",
+        title: "Risk and compliance notes",
+        bullets: [
+          "Do not edit paid invoice core fields without approved adjustment process.",
+          "Preserve invoice artifacts required for tax and audit retention windows.",
+          "Restrict cancellation rights to approved financial operators.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/checkout-payment-links"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/subscriptions": {
+    description: "Operate recurring billing with clear renewal behavior, dunning assumptions, and exception handling.",
+    metadataTitle: "Merchant Guide: Subscriptions",
+    metadataDescription: "Merchant subscription operations for setup, renewal, retry and dunning policy, and cancellation handling.",
+    calloutVariant: "info",
+    calloutTitle: "Recurring billing discipline",
+    calloutBody: "Define renewal and dunning behavior before launch so operators can respond consistently to failed renewals.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Describes operational control of subscription plans, customer enrollment, renewal cycles, and delinquency handling.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Plan catalog, billing intervals, and customer consent language are approved.",
+          "Retry cadence and dunning communication policy are documented.",
+          "Support team has access to subscription state and payment-attempt history.",
+        ],
+      },
+      {
+        id: "step-by-step-procedure",
+        title: "Step-by-step procedure",
+        steps: [
+          "Create subscription plan configuration with interval, amount, and renewal rules.",
+          "Enroll customer with explicit authorization and stored reference identifiers.",
+          "Monitor lifecycle transitions: pending, active, past_due, paused, canceled.",
+          "Apply dunning and retry policy for failed renewals within configured attempt window.",
+          "Suspend or cancel subscription when retries exhaust or customer requests termination.",
+        ],
+      },
+      {
+        id: "expected-outcomes",
+        title: "Expected outcomes and confirmations",
+        bullets: [
+          "Renewals post with traceable attempt numbers and timestamps.",
+          "Failed renewals enter policy-defined dunning flow automatically.",
+          "State transitions are reflected in customer access and finance reports.",
+        ],
+      },
+      {
+        id: "failure-states",
+        title: "Common failure states",
+        bullets: [
+          "Renewal attempt fails repeatedly due to insufficient balance or authorization issues.",
+          "Subscription remains active after cancellation request due to delayed state update.",
+          "Dunning notifications are sent out of sequence or not sent at all.",
+        ],
+      },
+      {
+        id: "recovery-escalation",
+        title: "Recovery and escalation paths",
+        steps: [
+          "Review attempt history and customer communication timeline before manual intervention.",
+          "Run controlled retry only within policy and preserve idempotent operation references.",
+          "Escalate unresolved renewal anomalies with subscription ID, attempt IDs, and webhook evidence.",
+        ],
+      },
+      {
+        id: "risk-compliance-notes",
+        title: "Risk and compliance notes",
+        bullets: [
+          "Capture customer consent and cancellation records for audit defensibility.",
+          "Avoid hidden retry behavior that differs from published billing terms.",
+          "Ensure pause/cancel actions are permissioned and fully logged.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/checkout-payment-links"),
+          getDocLink("/docs/merchant-guide/refunds-disputes"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/payouts-settlement": {
+    description: "Run payout and settlement operations with timing windows, reconciliation checkpoints, and exception controls.",
+    metadataTitle: "Merchant Guide: Payouts and Settlement",
+    metadataDescription: "Merchant payout and settlement operations covering timing windows, checkpoints, and exception management.",
+    calloutVariant: "success",
+    calloutTitle: "Cash movement controls",
+    calloutBody: "Use timing windows and checkpoint reviews to keep settlement and ledger records aligned.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Defines how merchants monitor settlement creation, payout execution windows, and exception resolution.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Verified payout destination and payout schedule are active.",
+          "Finance owners have access to settlement and payout reporting views.",
+          "Escalation process exists for bank or network-side payout exceptions.",
+        ],
+      },
+      {
+        id: "step-by-step-procedure",
+        title: "Step-by-step procedure",
+        steps: [
+          "Review settlement batches at each configured cut-off window.",
+          "Confirm included transactions, fees, and net amount before payout release.",
+          "Track payout states through queued, processing, paid, or exception.",
+          "Run checkpoint reconciliation between settlement batch totals and internal ledger totals.",
+          "Document and resolve any payout exceptions before closing period books.",
+        ],
+      },
+      {
+        id: "expected-outcomes",
+        title: "Expected outcomes and confirmations",
+        bullets: [
+          "Settlement batches are complete, balanced, and approved per schedule.",
+          "Payout records include expected timestamps and destination confirmations.",
+          "Any delayed or exception payouts are visible in an explicit queue.",
+        ],
+      },
+      {
+        id: "failure-states",
+        title: "Common failure states",
+        bullets: [
+          "Settlement totals do not match internal ledger due to missing events.",
+          "Payout enters exception state because destination or network acceptance fails.",
+          "Cut-off window is missed, delaying payout to next cycle.",
+        ],
+      },
+      {
+        id: "recovery-escalation",
+        title: "Recovery and escalation paths",
+        steps: [
+          "Reconcile affected batch at transaction level and isolate mismatched items.",
+          "Correct destination configuration or hold impacted funds per policy before retry.",
+          "Escalate unresolved payout exceptions with settlement ID, payout ID, and destination evidence.",
+        ],
+      },
+      {
+        id: "risk-compliance-notes",
+        title: "Risk and compliance notes",
+        bullets: [
+          "Limit who can edit payout destination and schedule settings.",
+          "Maintain dual review for manual payout exception overrides.",
+          "Retain settlement and payout evidence for financial and compliance audits.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/onboarding"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/merchant-guide/risk-compliance"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/refunds-disputes": {
+    description: "Execute refund and dispute workflows with clear operator actions, evidence handling, and resolution states.",
+    metadataTitle: "Merchant Guide: Refunds and Disputes",
+    metadataDescription: "Operational workflow for refunds and disputes, including evidence collection and final state resolution.",
+    calloutVariant: "warn",
+    calloutTitle: "High-impact operations",
+    calloutBody: "Refund and dispute actions directly affect funds movement and require strict evidence and approval controls.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Covers refund initiation, approval, execution, and dispute response from intake through final resolution state.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Refund authority matrix and approval thresholds are defined.",
+          "Dispute response owners and evidence retention locations are documented.",
+          "Operators can retrieve payment, invoice, fulfillment, and communication records.",
+        ],
+      },
+      {
+        id: "step-by-step-procedure",
+        title: "Step-by-step procedure",
+        steps: [
+          "Receive refund or dispute request and validate requestor identity and payment reference.",
+          "Review eligibility against merchant policy and transaction state.",
+          "For refunds, submit action and monitor states: requested, reviewing, approved, declined, completed.",
+          "For disputes, collect evidence pack and respond within required response window.",
+          "Track dispute states: opened, responded, under_review, won, lost, closed.",
+        ],
+      },
+      {
+        id: "expected-outcomes",
+        title: "Expected outcomes and confirmations",
+        bullets: [
+          "Each case has a complete timeline, owner, and final disposition state.",
+          "Evidence packages are complete and linked to case identifier.",
+          "Finance records reflect refunded amount, fees, and dispute adjustments.",
+        ],
+      },
+      {
+        id: "failure-states",
+        title: "Common failure states",
+        bullets: [
+          "Refund requested for ineligible or already-reversed transaction.",
+          "Dispute evidence submitted late or with missing fulfillment proof.",
+          "Case state remains unresolved due to missing ownership handoff.",
+        ],
+      },
+      {
+        id: "recovery-escalation",
+        title: "Recovery and escalation paths",
+        steps: [
+          "Re-open internal case review and reconcile requested action against payment truth source.",
+          "Supplement evidence package and resubmit when response window remains open.",
+          "Escalate high-value or repeat-pattern disputes immediately with full case audit trail.",
+        ],
+      },
+      {
+        id: "risk-compliance-notes",
+        title: "Risk and compliance notes",
+        bullets: [
+          "Enforce dual approval for refunds above defined threshold.",
+          "Preserve immutable case logs for audit and legal defensibility.",
+          "Escalate unusual dispute velocity or pattern shifts as fraud/compliance signals.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/invoicing"),
+          getDocLink("/docs/merchant-guide/risk-compliance"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/reconciliation-reporting": {
+    description: "Close merchant books with daily and period reconciliation workflows and clear mismatch diagnosis paths.",
+    metadataTitle: "Merchant Guide: Reconciliation and Reporting",
+    metadataDescription: "Daily and period-close reconciliation process with mismatch diagnosis, escalation, and reporting checkpoints.",
+    calloutVariant: "success",
+    calloutTitle: "Close confidence",
+    calloutBody: "Run reconciliation as a repeatable operational ritual with explicit stop/go checkpoints before close.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Defines how merchants reconcile transaction, settlement, payout, refund, and dispute data into period-close outputs.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Access to transaction exports, settlement reports, payout reports, and internal ledger extracts.",
+          "Documented tolerance policy for acceptable variances and escalation thresholds.",
+          "Named close owner and backup approver for each reporting period.",
+        ],
+      },
+      {
+        id: "step-by-step-procedure",
+        title: "Step-by-step procedure",
+        steps: [
+          "Run daily close by exporting net transaction and settlement datasets for the same cutoff window.",
+          "Match records by canonical IDs and verify gross, fee, net, and currency totals.",
+          "Investigate mismatches by category: missing event, delayed settlement, duplicate record, or state drift.",
+          "Document variance resolution and rerun checks until unresolved variance is within policy.",
+          "Complete period-close package with sign-off, exception notes, and retained evidence links.",
+        ],
+      },
+      {
+        id: "expected-outcomes",
+        title: "Expected outcomes and confirmations",
+        bullets: [
+          "Daily and period totals reconcile across merchant and platform records.",
+          "Unresolved variances are tracked with owner and target resolution timestamp.",
+          "Close package is reproducible for internal review and audit.",
+        ],
+      },
+      {
+        id: "failure-states",
+        title: "Common failure states",
+        bullets: [
+          "Dataset cutoff windows are inconsistent, causing false variance.",
+          "Missing webhook ingestion creates incomplete internal ledger states.",
+          "Manual adjustments are made without documented justification.",
+        ],
+      },
+      {
+        id: "recovery-escalation",
+        title: "Recovery and escalation paths",
+        steps: [
+          "Re-run exports with aligned cutoff windows and compare record counts first.",
+          "Trace mismatched IDs through event history to identify source-of-truth divergence.",
+          "Escalate material unresolved variance with reconciliation workbook and affected IDs.",
+        ],
+      },
+      {
+        id: "risk-compliance-notes",
+        title: "Risk and compliance notes",
+        bullets: [
+          "Never close period books while material unexplained variance remains.",
+          "Store reconciliation artifacts with tamper-evident retention controls.",
+          "Apply segregation of duties between preparer and approver where possible.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/payouts-settlement"),
+          getDocLink("/docs/merchant-guide/refunds-disputes"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/developer-guide/observability-and-runbooks"),
+          getDocLink("/docs/developer-guide/troubleshooting"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/risk-compliance": {
+    description: "Apply merchant risk and compliance controls, ownership boundaries, and escalation triggers across operations.",
+    metadataTitle: "Merchant Guide: Risk and Compliance",
+    metadataDescription: "Merchant responsibilities, operational controls, and escalation triggers for risk and compliance operations.",
+    calloutVariant: "warn",
+    calloutTitle: "Control discipline",
+    calloutBody: "Risk and compliance controls are part of every workflow, not an afterthought during incidents.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Defines merchant-side responsibilities for preventing misuse, containing incidents, and maintaining audit-ready evidence.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Documented policy for access control, transaction monitoring, and incident response.",
+          "Assigned owners for compliance operations and executive escalation.",
+          "Operational tooling for alerting, case management, and evidence retention.",
+        ],
+      },
+      {
+        id: "step-by-step-procedure",
+        title: "Step-by-step control procedure",
+        steps: [
+          "Review privileged access and high-risk permissions on a defined cadence.",
+          "Monitor payment, refund, and dispute patterns for unusual velocity or behavior.",
+          "Investigate alerts, classify severity, and open tracked cases for confirmed issues.",
+          "Escalate severe incidents immediately and execute containment actions.",
+          "Close cases only after root cause, remediation, and prevention actions are documented.",
+        ],
+      },
+      {
+        id: "expected-outcomes",
+        title: "Expected outcomes and confirmations",
+        bullets: [
+          "High-risk actions require proper approvals and audit logs.",
+          "Escalation thresholds are triggered consistently and on time.",
+          "Incident records include root cause and corrective action evidence.",
+        ],
+      },
+      {
+        id: "failure-states",
+        title: "Common failure states",
+        bullets: [
+          "Excessive operator privileges remain active without review.",
+          "Alert fatigue causes critical anomalies to be ignored or delayed.",
+          "Incident closure lacks documented remediation proof.",
+        ],
+      },
+      {
+        id: "recovery-escalation",
+        title: "Recovery and escalation paths",
+        steps: [
+          "Immediately revoke or reduce risky privileges tied to confirmed exposure.",
+          "Contain impacted workflows and preserve immutable evidence snapshots.",
+          "Escalate according to severity tier with executive and compliance stakeholders.",
+        ],
+      },
+      {
+        id: "risk-compliance-notes",
+        title: "Risk and compliance notes",
+        bullets: [
+          "Follow least-privilege and separation-of-duties principles for funds movement controls.",
+          "Maintain retention policies for records used in disputes, audits, and investigations.",
+          "Do not override controls without approved emergency change process and retrospective review.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/merchant-guide/onboarding"),
+          getDocLink("/docs/merchant-guide/refunds-disputes"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/developer-guide/observability-and-runbooks"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/merchant-faq": {
+    description: "Get concise answers to common merchant operations questions with links to the right detailed workflow pages.",
+    metadataTitle: "Merchant Guide: FAQ",
+    metadataDescription: "Merchant FAQ with quick operational answers and deep links to onboarding, payment, settlement, reconciliation, and integration guides.",
+    calloutVariant: "note",
+    calloutTitle: "Quick answers",
+    calloutBody: "Use this page for fast orientation, then follow linked pages for full operational procedures.",
+    headings: [
+      {
+        id: "faq-1",
+        title: "When is my merchant account ready for production traffic?",
+        body: "Production readiness requires approved account verification, settlement setup, event monitoring, and successful controlled test flows.",
+        links: [
+          getDocLink("/docs/merchant-guide/onboarding"),
+          getDocLink("/docs/merchant-guide/payouts-settlement"),
+        ],
+      },
+      {
+        id: "faq-2",
+        title: "What should I do when a payment link expires before customer completion?",
+        body: "Issue a new link tied to the same merchant order reference and keep fulfillment blocked until confirmed payment state is received.",
+        links: [
+          getDocLink("/docs/merchant-guide/checkout-payment-links"),
+          getDocLink("/docs/developer-guide/rate-limits-idempotency"),
+        ],
+      },
+      {
+        id: "faq-3",
+        title: "How should we handle invoice reminders and cancellations?",
+        body: "Use a defined reminder cadence, then expire or cancel by policy so finance and customer support records remain consistent.",
+        links: [
+          getDocLink("/docs/merchant-guide/invoicing"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+        ],
+      },
+      {
+        id: "faq-4",
+        title: "What happens when a subscription renewal fails?",
+        body: "The renewal should follow your configured retry and dunning policy, then pause or cancel after retry exhaustion.",
+        links: [
+          getDocLink("/docs/merchant-guide/subscriptions"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+        ],
+      },
+      {
+        id: "faq-5",
+        title: "How do we investigate payout exceptions?",
+        body: "Compare settlement batch totals against internal ledger records, isolate affected payouts, and escalate unresolved destination or network exceptions.",
+        links: [
+          getDocLink("/docs/merchant-guide/payouts-settlement"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+        ],
+      },
+      {
+        id: "faq-6",
+        title: "What evidence is required for dispute response?",
+        body: "Provide payment references, fulfillment proof, customer communication history, and policy context before response deadlines.",
+        links: [
+          getDocLink("/docs/merchant-guide/refunds-disputes"),
+          getDocLink("/docs/merchant-guide/risk-compliance"),
+        ],
+      },
+      {
+        id: "faq-7",
+        title: "Which metrics should we watch daily?",
+        body: "Track authorization success, confirmation delay, refund/dispute velocity, payout exception rate, and unresolved reconciliation variance.",
+        links: [
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/developer-guide/observability-and-runbooks"),
+        ],
+      },
+      {
+        id: "faq-8",
+        title: "When should merchant operations escalate to engineering?",
+        body: "Escalate immediately for persistent state mismatches, repeated event delivery failures, or controls that prevent safe customer-impacting actions.",
+        links: [
+          getDocLink("/docs/developer-guide/troubleshooting"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide": {
+    description: "Build and operate Ryvra integrations with clear lifecycle, error, deployment, and observability practices.",
+    metadataTitle: "Developer Guide",
+    metadataDescription: "Production integration reference for Ryvra architecture, APIs, auth, events, retries, deployment, testing, and operations.",
+    calloutVariant: "success",
+    calloutTitle: "Integration baseline",
+    calloutBody: "Use this guide to implement stable production integrations and to align engineering and operations ownership.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "This guide is for engineers integrating trading, payments, liquidity, and operational event workflows.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Merchant account readiness and environment access are in place.",
+          "Secure credential storage and rotation processes are defined.",
+          "Engineering and operations teams agree on incident and escalation ownership.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        body: "Ryvra integrations combine synchronous API requests for commands and asynchronous events for final state confirmation.",
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        bullets: [
+          "Client submits an idempotent request to create or modify state.",
+          "Platform returns immediate acceptance or validation failure.",
+          "Final or transitional state is observed through polling and/or webhook events.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Validation errors require request correction before retry.",
+          "Transient dependency or network failures can be retried with backoff.",
+          "Policy or compliance errors need operator intervention before reattempt.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Use stable idempotency keys per logical operation and bounded retry policies keyed by normalized error class.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Track request IDs, operation IDs, and event IDs across systems.",
+          "Alert on prolonged pending states and delivery retry exhaustion.",
+          "Keep runbooks for replay, reconciliation, and incident escalation.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/developer-guide/testing-sandbox"),
+          getDocLink("/docs/merchant-guide/overview"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/architecture-overview": {
+    description: "Understand Ryvra integration boundaries, ownership map, and state propagation paths before building workflows.",
+    metadataTitle: "Developer Guide: Architecture Overview",
+    metadataDescription: "Architecture boundaries and ownership map for client systems, Ryvra APIs, event pipelines, and merchant operations.",
+    calloutVariant: "info",
+    calloutTitle: "System boundaries first",
+    calloutBody: "Document boundaries and ownership before implementing endpoint-level integrations.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Describes functional boundaries and operational ownership across merchant systems and Ryvra platform components.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Defined service ownership for API client, event handler, and reconciliation jobs.",
+          "Shared glossary for IDs used across orders, payments, settlements, and events.",
+          "Incident routing path between merchant engineering and operations teams.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Command APIs create or mutate entities and return immediate execution context.",
+          "Read APIs expose current state projections for polling and diagnostics.",
+          "Event streams deliver asynchronous state transitions and retries.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Client submits command with idempotency key and correlation metadata.",
+          "Platform validates and records accepted operation state.",
+          "Downstream processing updates entity lifecycle states.",
+          "Merchant systems converge state through webhook ingestion and reconciliation polls.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Boundary mismatch: wrong owner handles failure class.",
+          "Integration gap: event not consumed or acknowledged.",
+          "State divergence: client projection differs from canonical platform state.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Retriable operations must preserve operation identity and use deterministic deduplication in all owner services.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Per-boundary dashboards for request acceptance, processing latency, and event lag.",
+          "Cross-system trace views keyed by correlation and request identifiers.",
+          "Ownership-aware incident templates for faster handoffs.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/developer-guide/observability-and-runbooks"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/api-overview": {
+    description: "Review API surface families, compatibility expectations, and response conventions before endpoint-level integration.",
+    metadataTitle: "Developer Guide: API Overview",
+    metadataDescription: "Ryvra API surface map, endpoint families, payload conventions, and compatibility expectations for production integrations.",
+    calloutVariant: "info",
+    calloutTitle: "Map the surface",
+    calloutBody: "Start by mapping endpoint families and ownership before implementing specific workflows.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Provides an API surface map and compatibility model for production integration planning.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Environment credentials are available for sandbox and production targets.",
+          "Service clients support retries, timeouts, and idempotency key headers.",
+          "Request/response schemas are validated before deployment.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Resource creation endpoints return identifiers and initial lifecycle state.",
+          "Read endpoints return latest observable state and timestamp metadata.",
+          "Action endpoints return accepted, rejected, or terminal outcome signals.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        bullets: [
+          "Intent creation captures desired operation context.",
+          "Processing stages update state until terminal success or failure.",
+          "Terminal states are consumed by merchant systems for fulfillment and accounting.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "4xx validation/authorization errors: fix request or credentials.",
+          "429 throttling responses: reduce request rate and back off.",
+          "5xx dependency/internal errors: retry with bounded strategy and alerting.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Attach idempotency keys to create and mutate operations, and retry only when failure class is explicitly transient.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Capture status code, error class, request ID, and latency for every call.",
+          "Track endpoint-level success and throttle rates by environment.",
+          "Correlate API operations with downstream webhook delivery outcomes.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/developer-guide/rate-limits-idempotency"),
+          getDocLink("/docs/developer-guide/changelog-and-versioning"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/authentication": {
+    description: "Implement production-safe authentication with secure credential handling and key rotation practices.",
+    metadataTitle: "Developer Guide: Authentication",
+    metadataDescription: "Auth model, API credential handling, signing practices, and key rotation guidance for Ryvra integrations.",
+    calloutVariant: "warn",
+    calloutTitle: "Protect credentials",
+    calloutBody: "Authentication failures are often security failures; treat credential lifecycle as a first-class operational control.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Covers credential provisioning, request authentication, secret storage, and rotation operations.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Centralized secrets manager with access logs and rotation workflow.",
+          "Environment-specific credentials separated by least privilege.",
+          "Runbook for compromised key response and emergency revocation.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Authenticated requests include required credentials and signature metadata.",
+          "Unauthorized responses indicate missing, invalid, or expired credentials.",
+          "Forbidden responses indicate valid credentials lacking required permission scope.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Provision credentials with environment scope and owner assignment.",
+          "Deploy credentials through secure secret distribution path.",
+          "Rotate keys on schedule with overlapping validity window and cutover verification.",
+          "Revoke old credentials and confirm no residual usage remains.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Invalid signature due to timestamp skew or signing mismatch.",
+          "Expired or revoked key still in use by one or more services.",
+          "Permission scope mismatch between endpoint and credential role.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Do not blindly retry unauthorized responses; first verify key validity, clock sync, and credential scope.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Alert on spikes in 401 and 403 responses by service and environment.",
+          "Track key-version usage to verify rotation cutovers.",
+          "Log authentication failures with sanitized context only.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/developer-guide/environments-and-deployment"),
+          getDocLink("/docs/developer-guide/troubleshooting"),
+          getDocLink("/docs/merchant-guide/risk-compliance"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/unified-assets": {
+    description: "Use canonical asset semantics and validation rules consistently across trading and payments workflows.",
+    metadataTitle: "Developer Guide: Unified Assets",
+    metadataDescription: "Canonical asset identity, denomination handling, and validation expectations for multi-workflow Ryvra integrations.",
+    calloutVariant: "info",
+    calloutTitle: "Canonical asset semantics",
+    calloutBody: "Normalize asset identifiers and precision rules before integrating any business flow.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Defines canonical asset identity, network context, and amount normalization requirements.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Internal asset catalog supports canonical IDs and display metadata.",
+          "Amount handling uses fixed-precision arithmetic and explicit rounding rules.",
+          "Validation layer rejects unsupported asset/network combinations.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Requests provide canonical asset codes and normalized amount fields.",
+          "Responses include accepted asset identifiers and precision context.",
+          "Validation failures return explicit field-level error pointers.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Resolve merchant-facing symbol to canonical asset identity.",
+          "Validate amount precision and network support before request submission.",
+          "Persist canonical identifiers for downstream reconciliation and reporting.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Unknown asset identifier or unsupported network mapping.",
+          "Amount precision exceeds allowed scale for target asset.",
+          "Asset temporarily unavailable for selected operation type.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Retry only after correcting validation issues or after asset availability recovers; preserve the same operation identity.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Track validation rejection rates by asset and network.",
+          "Monitor canonical mapping drift between internal and platform catalogs.",
+          "Audit amount-normalization behavior in reconciliation jobs.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/trading-integration"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/account-abstraction-erc4337": {
+    description: "Integrate ERC-4337 account abstraction flows with clear user operation lifecycle and fallback handling.",
+    metadataTitle: "Developer Guide: Account Abstraction ERC-4337",
+    metadataDescription: "ERC-4337 integration guidance for userOperation lifecycle, failure classes, and fallback controls.",
+    calloutVariant: "warn",
+    calloutTitle: "UserOperation lifecycle awareness",
+    calloutBody: "Track each userOperation end to end and plan fallback behavior for non-executable or delayed operations.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Covers userOperation submission, bundling lifecycle, confirmation, and fallback handling patterns.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Smart-account support and signer policies are implemented.",
+          "Gas and sponsorship assumptions are defined for target environment.",
+          "Monitoring exists for mempool acceptance and execution confirmations.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Submission requests return userOperation hash and acceptance context.",
+          "Status polling returns queued, bundled, executed, reverted, or dropped progression.",
+          "Terminal failures include executable context for corrective action.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Construct userOperation with validated nonce, gas, and call data.",
+          "Submit operation and persist operation hash for tracking.",
+          "Monitor inclusion lifecycle through bundler acceptance and on-chain execution.",
+          "Apply fallback handling when operation is dropped or non-executable.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Validation failure before bundling due to nonce, signature, or policy checks.",
+          "Bundling delay or drop due to market conditions or capacity limits.",
+          "Execution revert due to contract-level logic or state conditions.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Retain one logical operation identity and apply nonce-safe retry logic to avoid duplicate execution intent.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Track time from submission to inclusion and final execution status.",
+          "Alert on stuck queued operations beyond defined SLA windows.",
+          "Log userOperation hash, account identifier, and failure class for every terminal failure.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/developer-guide/troubleshooting"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/trading-integration": {
+    description: "Integrate trading workflows with explicit order lifecycle states and reconciliation hooks.",
+    metadataTitle: "Developer Guide: Trading Integration",
+    metadataDescription: "Order placement and lifecycle integration guide with failure taxonomy and reconciliation hooks for trading flows.",
+    calloutVariant: "info",
+    calloutTitle: "Order-state fidelity",
+    calloutBody: "Treat order state transitions as canonical signals for downstream fulfillment and reporting.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Explains trading request flow, order status progression, and close-loop reconciliation expectations.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Asset normalization and account entitlement checks are implemented.",
+          "Quote validity and slippage policy are defined in client logic.",
+          "Order status polling and event ingestion are both available.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Order create request returns order ID and initial accepted/rejected state.",
+          "Status requests expose current fill, cancellation, and terminal state context.",
+          "Execution and settlement-related events provide asynchronous updates.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Submit validated order intent with idempotency key and client reference.",
+          "Observe transition through pending, open, partially_filled, filled, canceled, or failed.",
+          "Reconcile final fill quantities, fees, and timestamps against internal ledger.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Validation failure for unsupported pair or order parameter.",
+          "Execution failure due to liquidity or market movement constraints.",
+          "Post-trade reconciliation mismatch due to delayed event consumption.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Retry submission only when no accepted order ID exists for the same logical trade intent.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Order acceptance rate, rejection reason distribution, and time-to-final-state.",
+          "Delta between API polled state and event-consumed state.",
+          "Reconciliation hooks that compare fill and fee totals by order ID.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/unified-assets"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/payments-integration": {
+    description: "Implement payment intent, initiation, and confirmation flows with webhook-driven state convergence.",
+    metadataTitle: "Developer Guide: Payments Integration",
+    metadataDescription: "Payment lifecycle integration guide for intent/initiate/confirm workflows and webhook interplay in production.",
+    calloutVariant: "success",
+    calloutTitle: "Lifecycle-first integration",
+    calloutBody: "Model payment flows as intent, initiation, and confirmation stages with asynchronous confirmation handling.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Covers payment request initiation, status confirmation, and post-confirmation operational handoff.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Merchant onboarding and settlement readiness are complete.",
+          "Client system stores canonical payment IDs and idempotency keys.",
+          "Webhook endpoint verification and replay handling are implemented.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Intent creation returns payment intent identifier and initial state.",
+          "Initiation returns checkout/authorization context for payer action.",
+          "Confirmation is consumed via status checks and webhook event convergence.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Create intent with amount, currency, merchant order reference, and idempotency key.",
+          "Initiate payment action and present customer flow context.",
+          "Track state transitions through pending, confirmed, failed, expired, or canceled.",
+          "Release fulfillment only after confirmed terminal state is verified.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Intent validation failure due to malformed amount or unsupported asset context.",
+          "Initiation failure due to payer authorization or session expiry.",
+          "Confirmation lag from delayed event delivery or unacknowledged webhook processing.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Use one idempotency key per logical merchant order action and avoid creating duplicate intents during uncertain network outcomes.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Track conversion by payment lifecycle stage and failure reason.",
+          "Monitor confirmation latency and webhook redelivery rates.",
+          "Correlate payment ID across merchant order, event stream, and settlement records.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/developer-guide/rate-limits-idempotency"),
+          getDocLink("/docs/merchant-guide/checkout-payment-links"),
+          getDocLink("/docs/merchant-guide/invoicing"),
+          getDocLink("/docs/merchant-guide/subscriptions"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/liquidity-staking-integration": {
+    description: "Integrate liquidity and staking workflows with clear state transitions and operational caveats.",
+    metadataTitle: "Developer Guide: Liquidity and Staking Integration",
+    metadataDescription: "Integration guidance for liquidity and staking lifecycle states, constraints, and recovery behavior.",
+    calloutVariant: "info",
+    calloutTitle: "State transition rigor",
+    calloutBody: "Model every supply, stake, unstake, and withdrawal operation as a tracked state transition.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Covers liquidity and staking action flows, lifecycle transitions, and practical constraints for production integrations.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Supported assets, pools, and staking products are mapped to canonical IDs.",
+          "Client UX communicates lockups, cooldowns, and withdrawal windows.",
+          "Reconciliation logic can track accrued rewards and principal transitions.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Action requests return operation ID and initial state context.",
+          "Status endpoints expose pending, active, cooling_down, withdrawable, completed outcomes.",
+          "Event notifications communicate milestone transitions and failures.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Submit liquidity or staking operation with validated asset/amount context.",
+          "Track operation through pending execution into active position state.",
+          "For exits, follow cooldown or unlock states before withdrawal completion.",
+          "Confirm terminal completion and reconcile balances and rewards.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Constraint violations such as minimum amounts or pool ratio limits.",
+          "State-dependent failures when attempting early withdrawal during lockup.",
+          "Reward accounting mismatch due to delayed state ingestion.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Retry only after verifying the current position state to avoid duplicate supply/stake operations.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Time to active and time to withdrawable by product type.",
+          "Failure rate by operation and constraint class.",
+          "Position-level reconciliation checks for principal and rewards.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/unified-assets"),
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/webhooks-events": {
+    description: "Consume Ryvra events reliably with verification, ordering assumptions, retry handling, and replay safety.",
+    metadataTitle: "Developer Guide: Webhooks and Events",
+    metadataDescription: "Webhook event types, signature verification, delivery ordering assumptions, and retry handling patterns.",
+    calloutVariant: "warn",
+    calloutTitle: "Events are operational truth signals",
+    calloutBody: "Webhook consumers must be idempotent, verifiable, and resilient to delayed or retried delivery.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Describes event consumption architecture, verification requirements, and delivery semantics for production use.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Public endpoint with secure transport and signature verification.",
+          "Event store that persists payload, signature metadata, and processing outcome.",
+          "Dead-letter or replay workflow for failed processing attempts.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Inbound event includes event ID, type, timestamp, and data payload.",
+          "Consumer must acknowledge accepted processing attempts promptly.",
+          "Non-acknowledged events are retried according to delivery policy.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Receive event and validate signature and basic schema.",
+          "Deduplicate using event ID and operation identity keys.",
+          "Apply business-state transition and persist processing result.",
+          "Acknowledge success or move failed event into controlled replay queue.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Signature verification failure due to secret mismatch or tampering.",
+          "Transient consumer outage causing repeated redelivery attempts.",
+          "Out-of-order delivery where later state arrives before earlier transition.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Consumers must be idempotent by event ID and operation key so replay and redelivery cannot create duplicate side effects.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Event delivery success, retry count, and acknowledgment latency by event type.",
+          "Dead-letter queue size and replay success ratio.",
+          "Correlation between webhook lag and merchant-facing state delays.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/payments-integration"),
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/developer-guide/rate-limits-idempotency"),
+          getDocLink("/docs/merchant-guide/refunds-disputes"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/error-model-and-retries": {
+    description: "Apply a normalized error model and retry matrix to prevent unsafe retries and improve reliability.",
+    metadataTitle: "Developer Guide: Error Model and Retries",
+    metadataDescription: "Normalized integration error classes with retry and escalation matrix for Ryvra production workflows.",
+    calloutVariant: "warn",
+    calloutTitle: "Retry with intent",
+    calloutBody: "Classify errors before retrying; unsafe retries can duplicate side effects or hide systemic faults.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Defines error classes and retry decisions shared across all integration flows.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Central error normalization layer maps endpoint-specific responses to shared classes.",
+          "Retry policy library supports jittered backoff and max-attempt caps.",
+          "Operations team receives alerts for repeated terminal classes.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Responses include status code, machine-readable error class, and request identifier.",
+          "Client records normalized class and retry decision for each failure.",
+          "Terminal classes trigger operator workflow instead of automatic retries.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        bullets: [
+          "Validation class: correct input before resubmission.",
+          "Auth class: rotate/fix credentials and retry after resolution.",
+          "Rate limit class: back off and retry with pacing control.",
+          "Transient platform class: bounded retries with alerting.",
+          "Compliance/policy class: manual review and escalation required.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Input/validation errors.",
+          "Authentication/authorization errors.",
+          "Rate limit and quota errors.",
+          "Transient dependency or infrastructure errors.",
+          "Terminal policy/compliance errors.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        steps: [
+          "Classify failure into normalized class before any retry action.",
+          "Retry only retryable classes with exponential backoff and jitter.",
+          "Preserve idempotency key and operation identity for all retries.",
+          "Escalate after max attempts or repeated terminal failures.",
+        ],
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Failure distribution by normalized class and endpoint family.",
+          "Retry success ratio and average attempts to recovery.",
+          "Top terminal classes requiring product or policy intervention.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/rate-limits-idempotency"),
+          getDocLink("/docs/developer-guide/troubleshooting"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/rate-limits-idempotency": {
+    description: "Use idempotency keys and throttling-aware request pacing to keep integrations safe under load.",
+    metadataTitle: "Developer Guide: Rate Limits and Idempotency",
+    metadataDescription: "Idempotency-key usage model and rate-limit backoff guidance for reliable Ryvra API integrations.",
+    calloutVariant: "warn",
+    calloutTitle: "Throughput with safety",
+    calloutBody: "Protect both your systems and customer outcomes by combining pacing controls with deterministic idempotency.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Defines how to prevent duplicate side effects and avoid throttling instability under production load.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Stable client-generated operation identifiers per business action.",
+          "Request queue or worker model supporting adaptive concurrency.",
+          "Clock and retry policy alignment across distributed services.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        bullets: [
+          "Mutating requests include idempotency key scoped to one logical operation.",
+          "Throttle responses signal temporary request-rate exhaustion.",
+          "Client retries maintain same idempotency key and adjusted pacing.",
+        ],
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Generate idempotency key before first attempt and persist with operation context.",
+          "Submit request through concurrency-controlled execution lane.",
+          "If throttled, delay next attempt using exponential backoff and jitter.",
+          "Reuse key until operation reaches terminal known outcome.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Duplicate request with changed payload under same key.",
+          "Burst traffic leading to sustained throttling and queue growth.",
+          "Uncertain request outcome due to timeout without response receipt.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        bullets: [
+          "Never rotate idempotency key while operation outcome remains unknown.",
+          "Cap retries and move unresolved operations to manual review queue.",
+          "Throttle retries globally when system-level 429 responses spike.",
+        ],
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "429 response rate, queue depth, and retry backlog by endpoint family.",
+          "Idempotency replay hit rate and duplicate-prevention effectiveness.",
+          "Percent of operations requiring manual resolution after retry exhaustion.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+          getDocLink("/docs/developer-guide/trading-integration"),
+          getDocLink("/docs/merchant-guide/checkout-payment-links"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/environments-and-deployment": {
+    description: "Plan environment usage and production rollout with clear promotion gates and rollback readiness.",
+    metadataTitle: "Developer Guide: Environments and Deployment",
+    metadataDescription: "Environment matrix and deployment checklist for sandbox, staging, and production Ryvra integrations.",
+    calloutVariant: "success",
+    calloutTitle: "Promote with gates",
+    calloutBody: "Advance integrations through environments only when functional, operational, and monitoring gates are met.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Covers environment separation, promotion criteria, and deployment risk controls for integrations.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Separate credentials and endpoints for sandbox, staging, and production.",
+          "Automated config validation to prevent cross-environment secret misuse.",
+          "Rollback and incident ownership defined before production deployment.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        body: "Endpoint and credential selection must be environment-specific and immutable for each deployment artifact.",
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Validate changes in sandbox with scenario checklist coverage.",
+          "Promote to staging and run end-to-end integration plus observability checks.",
+          "Run production readiness checklist with rollback rehearsal.",
+          "Deploy gradually and monitor key health indicators through stabilization window.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Environment misconfiguration causing auth or endpoint mismatch.",
+          "Missing feature flag or runtime dependency in higher environment.",
+          "Unexpected production-only latency or event volume behavior.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "During rollout, maintain idempotent operation handling so retried requests after rollback do not duplicate effects.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Environment-specific dashboards for success rate, latency, and event lag.",
+          "Canary cohort monitoring with automated rollback triggers.",
+          "Deployment timeline correlated with error-class and throughput changes.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/testing-sandbox"),
+          getDocLink("/docs/developer-guide/observability-and-runbooks"),
+          getDocLink("/docs/developer-guide/troubleshooting"),
+          getDocLink("/docs/merchant-guide/onboarding"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/testing-sandbox": {
+    description: "Run scenario-based testing in sandbox to validate lifecycle, failures, retries, and operational readiness before production.",
+    metadataTitle: "Developer Guide: Testing Sandbox",
+    metadataDescription: "Sandbox testing strategy and scenario checklist for validating Ryvra integrations before production rollout.",
+    calloutVariant: "success",
+    calloutTitle: "Test by scenario",
+    calloutBody: "Validate success and failure paths in sandbox using repeatable scenarios and explicit pass criteria.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Describes sandbox testing strategy for functional correctness and operational resilience.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Sandbox credentials and isolated test data generation are available.",
+          "Test harness can assert API responses and webhook side effects.",
+          "Scenario matrix includes happy path, edge case, and failure case coverage.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        body: "Each scenario should validate immediate API response semantics and eventual event-driven final-state convergence.",
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Execute happy-path scenario for each core workflow and verify terminal state.",
+          "Inject expected failures (validation, auth, transient, throttling) and verify handling.",
+          "Run replay/idempotency scenarios to prove duplicate-suppression behavior.",
+          "Confirm reconciliation and observability hooks record complete test traces.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Uncaught validation and schema mismatch paths.",
+          "Incorrect retry behavior for terminal error classes.",
+          "Webhook replay handling gaps causing duplicate side effects.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Include explicit tests for uncertain outcomes (timeouts) to verify safe retries with stable idempotency keys.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Per-scenario traces including request IDs and event IDs.",
+          "Test pass/fail metrics grouped by error class and workflow type.",
+          "Runbook validation evidence attached to scenario outcomes.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/developer-guide/rate-limits-idempotency"),
+          getDocLink("/docs/developer-guide/environments-and-deployment"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/observability-and-runbooks": {
+    description: "Operate integrations with actionable metrics, logs, alerts, and runbooks that support rapid incident response.",
+    metadataTitle: "Developer Guide: Observability and Runbooks",
+    metadataDescription: "Operational observability baseline for Ryvra integrations including metrics, logs, alerts, and incident runbooks.",
+    calloutVariant: "warn",
+    calloutTitle: "Operate by signal",
+    calloutBody: "Good integrations fail safely only when detection and response playbooks are already in place.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Defines monitoring and incident-response expectations for production integration ownership.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Centralized logging with correlation IDs preserved end to end.",
+          "Metrics pipeline tracking API, queue, and webhook health indicators.",
+          "On-call ownership and escalation matrix documented and tested.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        body: "Capture request status, latency, and normalized error class for all API interactions and event-processing attempts.",
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        bullets: [
+          "Ingest signals from request path, async processing, and reconciliation jobs.",
+          "Evaluate against thresholds and trigger alerts by severity tier.",
+          "Run incident playbook and close only after mitigation and verification.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Silent failures due to missing instrumentation fields.",
+          "Noisy alerts without action context causing fatigue.",
+          "Runbook gaps where remediation steps are unclear or outdated.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "Runbooks should specify when retries are safe, when to pause automation, and when manual intervention is mandatory.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Core metrics: success rate, latency, retry volume, event lag, dead-letter depth.",
+          "Core logs: request ID, idempotency key, operation ID, normalized error class.",
+          "Core alerts: prolonged pending states, sustained 429/5xx spikes, replay queue growth.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/troubleshooting"),
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/merchant-guide/risk-compliance"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/troubleshooting": {
+    description: "Diagnose common integration symptoms using a symptom-to-cause-to-action workflow.",
+    metadataTitle: "Developer Guide: Troubleshooting",
+    metadataDescription: "Troubleshooting matrix for common Ryvra integration symptoms, likely causes, and corrective actions.",
+    calloutVariant: "warn",
+    calloutTitle: "Diagnose systematically",
+    calloutBody: "Start with symptom classification, then validate probable causes before applying corrective action.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Provides an operational troubleshooting matrix for high-impact production integration issues.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Access to logs, metrics, event history, and reconciliation data.",
+          "Known-good baseline metrics and normal operating ranges.",
+          "Escalation contacts for engineering, merchant ops, and compliance.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        body: "Collect failing request samples with status codes, request IDs, latency, and normalized error classes before intervention.",
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        bullets: [
+          "Symptom: payments remain pending longer than expected | Probable cause: event ingestion lag | Corrective action: inspect webhook retries, replay failed events, and verify consumer acknowledgements.",
+          "Symptom: duplicate records in merchant system | Probable cause: non-idempotent replay handling | Corrective action: enforce event and request deduplication by stable keys.",
+          "Symptom: repeated unauthorized responses | Probable cause: expired or rotated credentials not deployed | Corrective action: verify key version rollout and revoke stale credentials.",
+          "Symptom: reconciliation variance grows daily | Probable cause: cutoff mismatch or missing terminal events | Corrective action: align windows and backfill missing state transitions.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Configuration faults (endpoints, credentials, feature flags).",
+          "Data integrity faults (schema mismatch, duplicate processing).",
+          "Dependency faults (throttling, latency spikes, transient outages).",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "During incidents, pause automatic retries for uncertain terminal classes until safe replay boundaries are confirmed.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Incident timeline with request and event correlation IDs.",
+          "Before/after metrics proving corrective action effectiveness.",
+          "Post-incident runbook updates to prevent recurrence.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/observability-and-runbooks"),
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/changelog-and-versioning": {
+    description: "Track release changes, compatibility expectations, and upgrade paths for production integrations.",
+    metadataTitle: "Developer Guide: Changelog and Versioning",
+    metadataDescription: "Versioning policy, compatibility windows, and upgrade guidance for Ryvra developer integrations.",
+    calloutVariant: "note",
+    calloutTitle: "Upgrade with intent",
+    calloutBody: "Use changelog signals and compatibility windows to schedule low-risk upgrades.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Defines how teams consume change information and maintain compatibility over time.",
+      },
+      {
+        id: "integration-prerequisites",
+        title: "Integration prerequisites",
+        bullets: [
+          "Dependency inventory and version ownership are documented.",
+          "Release evaluation process exists for functional and operational impact.",
+          "Staging validation plan is ready before production upgrades.",
+        ],
+      },
+      {
+        id: "request-response-patterns",
+        title: "Request and response patterns",
+        body: "Version-aware clients should validate changed fields, defaults, and enum expansions before rollout.",
+      },
+      {
+        id: "lifecycle-and-state-model",
+        title: "Lifecycle and state model",
+        steps: [
+          "Review changelog entries and classify changes by compatibility impact.",
+          "Validate affected workflows in sandbox and staging against target version.",
+          "Deploy with phased rollout and monitor key health indicators.",
+          "Complete upgrade sign-off only after stable post-deploy reconciliation.",
+        ],
+      },
+      {
+        id: "error-failure-taxonomy",
+        title: "Error and failure taxonomy",
+        bullets: [
+          "Breaking contract usage from outdated client assumptions.",
+          "Behavior drift from default value or processing-rule changes.",
+          "Operational regressions from insufficient observability during rollout.",
+        ],
+      },
+      {
+        id: "retry-idempotency-guidance",
+        title: "Retry and idempotency guidance",
+        body: "During upgrade windows, preserve idempotency key semantics so retried operations remain safe across version boundaries.",
+      },
+      {
+        id: "observability-debugging",
+        title: "Observability and debugging entry points",
+        bullets: [
+          "Version-tagged metrics to compare pre and post-upgrade behavior.",
+          "Release-specific dashboards for error class and latency shifts.",
+          "Rollback triggers tied to objective service-level thresholds.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/developer-guide/environments-and-deployment"),
+          getDocLink("/docs/developer-guide/testing-sandbox"),
+          getDocLink("/docs/developer-guide/troubleshooting"),
+        ],
       },
     ],
   },
