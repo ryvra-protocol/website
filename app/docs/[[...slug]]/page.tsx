@@ -12,6 +12,8 @@ type DocsRoutePageProps = {
   params: Promise<{ slug?: string[] }>;
 };
 
+const siteUrl = "https://ryvra.org";
+
 export async function generateMetadata({ params }: DocsRoutePageProps): Promise<Metadata> {
   const { slug } = await params;
   const href = resolveDocHrefFromSlug(slug);
@@ -24,15 +26,24 @@ export async function generateMetadata({ params }: DocsRoutePageProps): Promise<
     };
   }
 
+  const metadataTitle = page.metadataTitle ?? page.title;
+  const metadataDescription = page.metadataDescription ?? page.description;
+  const canonicalUrl = `${siteUrl}${page.href}`;
+
   return {
-    title: page.title,
-    description: page.description,
-    alternates: { canonical: page.href },
+    title: metadataTitle,
+    description: metadataDescription,
+    alternates: { canonical: canonicalUrl },
     openGraph: {
-      title: page.title,
-      description: page.description,
-      url: `https://ryvra.org${page.href}`,
+      title: metadataTitle,
+      description: metadataDescription,
+      url: canonicalUrl,
       type: "article",
+    },
+    twitter: {
+      card: "summary",
+      title: metadataTitle,
+      description: metadataDescription,
     },
   };
 }
