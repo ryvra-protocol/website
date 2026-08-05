@@ -72,17 +72,21 @@ a {
   text-transform: uppercase;
 }
 
-.nav-links,
-.footer-links {
+.nav-links {
   display: flex;
   gap: 0.8rem;
   flex-wrap: wrap;
 }
 
-.nav-link,
-.footer-link {
+.nav-link {
   color: var(--muted);
   font-size: 0.95rem;
+}
+
+.nav-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 0.45rem;
 }
 
 .section {
@@ -167,14 +171,99 @@ a {
 }
 
 .footer {
+  display: grid;
+  gap: 1.25rem;
+  padding: 1.6rem 0 2rem;
+  border-top: 1px solid var(--border);
+  margin-top: 1rem;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 1rem 1.25rem;
+}
+
+.footer-section {
+  min-width: 0;
+}
+
+.footer-heading {
+  margin: 0 0 0.45rem;
+  color: var(--foreground);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.footer-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.2rem;
+}
+
+.footer-link,
+.footer-legal-link {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.18rem 0.3rem;
+  border-radius: 0.45rem;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.footer-link:hover,
+.footer-legal-link:hover {
+  background: var(--surface-muted);
+  color: var(--foreground);
+}
+
+.footer-link:focus-visible,
+.footer-legal-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  background: var(--surface-muted);
+  color: var(--foreground);
+}
+
+.footer-legal {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.4rem 0 2rem;
+  gap: 0.8rem 1rem;
+  padding-top: 0.9rem;
   border-top: 1px solid var(--border);
-  margin-top: 1rem;
+}
+
+.footer-copyright {
+  margin: 0;
   color: var(--muted);
-  font-size: 0.9rem;
+  font-size: 0.88rem;
+}
+
+.footer-legal-links {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .form-grid {
@@ -264,9 +353,21 @@ a {
 
 @media (max-width: 700px) {
   .footer {
+    padding: 1.3rem 0 1.7rem;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 0.9rem;
+  }
+
+  .footer {
+    gap: 1rem;
+  }
+
+  .footer-legal {
     flex-direction: column;
     align-items: flex-start;
-    gap: 0.6rem;
   }
 }
 
