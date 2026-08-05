@@ -139,16 +139,17 @@ export function getBrandNarrativeDocument(): BrandNarrativeDocument {
   const markdown = readFileSync(contentPath, "utf8");
   const parsed = parseBrandNarrative(markdown);
   const sectionByTitle = new Map(parsed.sections.map((section) => [section.title, section]));
+  const sections = Object.entries(sectionHeadingMap).reduce(
+    (acc, [title, key]) => {
+      acc[key] = getRequiredSection(sectionByTitle, title as BrandNarrativeSectionTitle);
+      return acc;
+    },
+    {} as Record<BrandNarrativeSectionKey, BrandNarrativeSection>,
+  );
 
   return {
     title: parsed.title,
     intro: parsed.intro,
-    sections: {
-      mission: getRequiredSection(sectionByTitle, "Mission"),
-      problemFraming: getRequiredSection(sectionByTitle, "Problem Framing"),
-      differentiationPillars: getRequiredSection(sectionByTitle, "Differentiation Pillars"),
-      proofPoints: getRequiredSection(sectionByTitle, "Proof Points"),
-      audienceOutcomes: getRequiredSection(sectionByTitle, "Audience Outcomes"),
-    },
+    sections,
   };
 }
