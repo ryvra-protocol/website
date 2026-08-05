@@ -7,16 +7,24 @@ const faqItems = [
     a: "PoT is Ryvra’s contribution framework. Eligible, finalized, policy-compliant transactions generate contribution points before TGE.",
   },
   {
-    q: "How do I earn points?",
-    a: "By performing eligible transactions on Ryvra products/modules. Activity must pass quality and anti-abuse checks.",
+    q: "Are all transactions eligible?",
+    a: "No. Transactions must meet policy requirements (valid execution, thresholds, compliance checks, and anti-abuse criteria).",
   },
   {
     q: "Is there a daily earning cap?",
     a: "Yes. Base cap starts at 2 points/day/account.",
   },
   {
-    q: "What does halved proportionally mean?",
+    q: "What does “halved proportionally” mean?",
     a: "The daily max points cap decreases by half each epoch: 2.0 → 1.0 → 0.5 → 0.25 ...",
+  },
+  {
+    q: "How are points converted at TGE?",
+    a: "Using proportional allocation from the designated points conversion pool: user share = user eligible points / total eligible points.",
+  },
+  {
+    q: "Are points tokens today?",
+    a: "No. Points are a pre-TGE program metric and not a token.",
   },
 ];
 
@@ -24,27 +32,28 @@ export default function HomePage() {
   return (
     <>
       <Section className="hero" title="Ryvra Protocol">
-        <h1>Every transaction contributes.</h1>
+        <h1>Eligible transactions contribute.</h1>
         <p className="lead">
-          Ryvra is the Account Abstraction and Unified Assets protocol for
-          payments and markets—where verified transaction activity earns
-          contribution rewards through Proof of Transaction.
+          Ryvra is an account abstraction and unified asset protocol for
+          payments and markets. Eligible, finalized, policy-compliant
+          transactions can earn pre-TGE contribution points through Proof of
+          Transaction.
         </p>
         <div className="button-row">
           <Link className="button button-primary" href="/build">
             Build on Ryvra
           </Link>
-          <Link className="button button-secondary" href="/litepaper">
-            Read the Litepaper
+          <Link className="button button-secondary" href="/docs/getting-started">
+            Read docs
           </Link>
         </div>
       </Section>
 
       <Section title="Why Ryvra">
         <p className="lead">
-          Finance is fragmented by default. Ryvra unifies account execution,
-          asset state, and incentives into one programmable protocol so teams can
-          build reliable payment and market experiences on shared foundations.
+          Ryvra reduces integration fragmentation by standardizing account
+          execution, asset handling, and policy controls across protocol
+          modules.
         </p>
         <div className="grid grid-2">
           <article className="card">
@@ -57,11 +66,11 @@ export default function HomePage() {
           </article>
           <article className="card">
             <strong>Policy + Risk Hooks</strong>
-            <p>Compliance-ready controls and modular enforcement by product and region.</p>
+            <p>Compliance-aware controls and modular enforcement by product and region.</p>
           </article>
           <article className="card">
             <strong>PoT Rewards Engine</strong>
-            <p>Transparent accounting for contribution and reward distribution.</p>
+            <p>Transparent points accounting for contribution and allocation policy.</p>
           </article>
         </div>
       </Section>
@@ -94,18 +103,43 @@ export default function HomePage() {
 
       <Section title="Proof of Transaction (PoT)">
         <p className="lead">
-          Ryvra rewards eligible economic activity via Proof of Transaction.
-          Before TGE, users earn points under transparent caps and anti-abuse
-          rules.
+          Proof of Transaction rewards eligible economic activity with points
+          before TGE, under published caps and anti-abuse controls.
         </p>
         <ul>
-          <li>Base launch cap: 2 points/day/account.</li>
-          <li>Epoch model: cap halves proportionally over time.</li>
-          <li>Target TGE window: Q4 2026 (subject to updates).</li>
+          <li>Base launch cap: 2 points/day/account (maximum, not a guarantee).</li>
+          <li>Epoch model: daily_max(n) = 2 × (0.5)^n (proposed 90-day epochs).</li>
+          <li>As of 2026-08-04, target TGE window is Q4 2026 (subject to governance and legal review).</li>
         </ul>
+      </Section>
+
+      <Section title="Tokenomics Snapshot">
+        <p className="lead">
+          Compact reference to current public tokenomics parameters.
+        </p>
+        <div className="grid grid-2">
+          <article className="card">
+            <strong>Base cap</strong>
+            <p>2 points/day/account maximum during the initial epoch.</p>
+          </article>
+          <article className="card">
+            <strong>Proportional halving model</strong>
+            <p>daily_max(n) = 2 × (0.5)^n with proposed 90-day epochs.</p>
+          </article>
+          <article className="card">
+            <strong>Eligibility conditions</strong>
+            <p>Transactions must be finalized, policy-compliant, threshold-valid, and pass anti-abuse checks.</p>
+          </article>
+          <article className="card">
+            <strong>TGE proportional conversion</strong>
+            <p>user share = user eligible points / total eligible points from the designated conversion allocation.</p>
+          </article>
+        </div>
         <p className="disclaimer">
-          Tokenomics parameters may evolve through governance and legal review.
-          This content is informational and does not constitute investment advice.
+          Informational only. Not investment advice, an offer of securities, or
+          a promise of token value. Participation and claims may be restricted
+          by jurisdiction. Final parameters remain subject to governance and
+          legal review.
         </p>
       </Section>
 
