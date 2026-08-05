@@ -1,32 +1,17 @@
 import Link from "next/link";
+import { AllocationEnvelopeRangeBar } from "@/components/tokenomics/AllocationEnvelopeRangeBar";
+import { CapHalvingStepChart } from "@/components/tokenomics/CapHalvingStepChart";
+import { EligibilityFunnelDiagram } from "@/components/tokenomics/EligibilityFunnelDiagram";
 import { Section } from "@/components/Section";
-
-const faqItems = [
-  {
-    q: "What is Proof of Transaction (PoT)?",
-    a: "PoT is Ryvra’s contribution framework. Eligible, finalized, policy-compliant transactions generate contribution points before TGE.",
-  },
-  {
-    q: "Are all transactions eligible?",
-    a: "No. Transactions must meet policy requirements (valid execution, thresholds, compliance checks, and anti-abuse criteria).",
-  },
-  {
-    q: "Is there a daily earning cap?",
-    a: "Yes. Base cap starts at 2 points/day/account.",
-  },
-  {
-    q: "What does “halved proportionally” mean?",
-    a: "The daily max points cap decreases by half each epoch: 2.0 → 1.0 → 0.5 → 0.25 ...",
-  },
-  {
-    q: "How are points converted at TGE?",
-    a: "Using proportional allocation from the designated points conversion pool: user share = user eligible points / total eligible points.",
-  },
-  {
-    q: "Are points tokens today?",
-    a: "No. Points are a pre-TGE program metric and not a token.",
-  },
-];
+import { TgeConversionCard } from "@/components/tokenomics/TgeConversionCard";
+import {
+  TOKENOMICS_AS_OF_DATE,
+  TOKENOMICS_FAQ_ITEMS,
+  TOKENOMICS_GOVERNANCE_PARAMETERS,
+  TOKENOMICS_LEGAL_COMPLIANCE_CONSTRAINTS,
+  TOKENOMICS_POLICY_ASSUMPTIONS,
+  TOKENOMICS_VISUAL_DISCLOSURE,
+} from "@/lib/tokenomics";
 
 export default function HomePage() {
   return (
@@ -104,58 +89,93 @@ export default function HomePage() {
         </div>
       </Section>
 
-      <Section title="Proof of Transaction (PoT)">
+      <Section id="tokenomics-pot" title="Proof of Transaction (PoT)">
         <p className="lead">
           Proof of Transaction rewards eligible economic activity with points
           before TGE, under published caps and anti-abuse controls.
         </p>
         <ul>
-          <li>Base launch cap: 2 points/day/account (maximum, not a guarantee).</li>
-          <li>Epoch model: daily_max(n) = 2 × (0.5)^n (proposed 90-day epochs).</li>
-          <li>As of 2026-08-04, target TGE window is Q4 2026 (subject to governance and legal review).</li>
+          <li>{TOKENOMICS_POLICY_ASSUMPTIONS[0]}</li>
+          <li>{TOKENOMICS_POLICY_ASSUMPTIONS[1]}</li>
+          <li>
+            As of {TOKENOMICS_AS_OF_DATE}, the roadmap target references a Q4
+            2026 TGE window.
+          </li>
         </ul>
       </Section>
 
-      <Section title="Tokenomics Snapshot">
+      <Section id="tokenomics-snapshot" title="Tokenomics Snapshot">
         <p className="lead">
           Compact reference to current public tokenomics parameters.
         </p>
-        <div className="grid grid-2">
+        <div className="grid grid-3">
           <article className="card">
-            <strong>Base cap</strong>
-            <p>2 points/day/account maximum during the initial epoch.</p>
+            <strong>Current policy assumptions</strong>
+            <ul className="tokenomics-list">
+              {TOKENOMICS_POLICY_ASSUMPTIONS.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </article>
           <article className="card">
-            <strong>Proportional halving model</strong>
-            <p>daily_max(n) = 2 × (0.5)^n with proposed 90-day epochs.</p>
+            <strong>Governance-adjustable parameters</strong>
+            <ul className="tokenomics-list">
+              {TOKENOMICS_GOVERNANCE_PARAMETERS.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </article>
           <article className="card">
-            <strong>Eligibility conditions</strong>
-            <p>Transactions must be finalized, policy-compliant, threshold-valid, and pass anti-abuse checks.</p>
-          </article>
-          <article className="card">
-            <strong>TGE proportional conversion</strong>
-            <p>user share = user eligible points / total eligible points from the designated conversion allocation.</p>
+            <strong>Legal/compliance constraints</strong>
+            <ul className="tokenomics-list">
+              {TOKENOMICS_LEGAL_COMPLIANCE_CONSTRAINTS.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </article>
         </div>
         <p className="disclaimer">
-          Informational only. Not investment advice, an offer of securities, or
-          a promise of token value. Participation and claims may be restricted
-          by jurisdiction. Final parameters remain subject to governance and
-          legal review.
+          As of {TOKENOMICS_AS_OF_DATE}. {TOKENOMICS_VISUAL_DISCLOSURE}
         </p>
+        <div className="button-row">
+          <Link className="button button-secondary" href="#tokenomics-faq">
+            Jump to homepage FAQ
+          </Link>
+          <Link className="button button-secondary" href="/litepaper#tokenomics-faq">
+            Open litepaper FAQ view
+          </Link>
+        </div>
       </Section>
 
-      <Section title="Tokenomics FAQ">
+      <Section id="tokenomics-visuals" title="Tokenomics Visuals (Illustrative)">
+        <p className="lead">
+          Visual references for cap halving, eligibility funneling, proportional
+          conversion, and allocation envelopes.
+        </p>
+        <p className="disclaimer">
+          As of {TOKENOMICS_AS_OF_DATE}. {TOKENOMICS_VISUAL_DISCLOSURE}
+        </p>
+        <div className="tokenomics-visual-grid">
+          <CapHalvingStepChart />
+          <EligibilityFunnelDiagram />
+          <TgeConversionCard />
+          <AllocationEnvelopeRangeBar />
+        </div>
+      </Section>
+
+      <Section id="tokenomics-faq" title="Tokenomics FAQ">
         <div className="grid grid-2">
-          {faqItems.map((item) => (
-            <article className="card" key={item.q}>
-              <strong>{item.q}</strong>
-              <p>{item.a}</p>
+          {TOKENOMICS_FAQ_ITEMS.map((item) => (
+            <article className="card" key={item.question}>
+              <strong>{item.question}</strong>
+              <p>{item.answer}</p>
             </article>
           ))}
         </div>
         <div className="button-row">
+          <Link className="button button-secondary" href="/litepaper#tokenomics-visuals">
+            View tokenomics visuals on litepaper page
+          </Link>
           <Link className="button button-secondary" href="/docs/glossary">
             View glossary
           </Link>
