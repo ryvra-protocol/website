@@ -5,7 +5,7 @@ import { Section } from "@/components/Section";
 export const metadata: Metadata = {
   title: "Build with Ryvra",
   description:
-    "Production integration entry point for teams building on Ryvra Unified Assets and ERC-4337 capabilities.",
+    "Production integration entry point for teams building on Ryvra Unified Assets and EIP-4337 capabilities.",
   alternates: { canonical: "/build" },
   openGraph: {
     title: "Build with Ryvra",
@@ -21,7 +21,7 @@ export default function BuildPage() {
     <Section title="Build with Ryvra">
       <p className="lead">
         Production integrations should follow the documented compatibility and
-        operations path for Unified Assets and ERC-4337 account abstraction.
+        operations path for Unified Assets and EIP-4337 account abstraction.
       </p>
 
       <div className="grid grid-2">
