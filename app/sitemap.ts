@@ -4,7 +4,7 @@ import { docsPageOrder } from "@/lib/docs";
 const baseUrl = "https://ryvra.org";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const routes = ["", "/build", "/litepaper", ...docsPageOrder];
+  const routes = ["", "/brand", "/build", "/litepaper", ...docsPageOrder];
 
   return routes.map((route) => ({
     url: `${baseUrl}${route}`,

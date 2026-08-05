@@ -34,14 +34,17 @@ export default function HomePage() {
       <Section className="hero" title="Ryvra Protocol">
         <h1>Eligible transactions contribute.</h1>
         <p className="lead">
-          Ryvra is an account abstraction and unified asset protocol for
-          payments and markets. Eligible, finalized, policy-compliant
+          Ryvra is an EIP-4337 account abstraction and Unified Assets protocol
+          for payments and markets. Eligible, finalized, policy-compliant
           transactions can earn pre-TGE contribution points through Proof of
-          Transaction.
+          Transaction (PoT).
         </p>
         <div className="button-row">
           <Link className="button button-primary" href="/build">
             Build on Ryvra
+          </Link>
+          <Link className="button button-secondary" href="/brand">
+            Brand narrative
           </Link>
           <Link className="button button-secondary" href="/docs/getting-started">
             Read docs
@@ -61,7 +64,7 @@ export default function HomePage() {
             <p>Smart accounts, UserOps, session policies, and composable controls.</p>
           </article>
           <article className="card">
-            <strong>Unified Asset Model</strong>
+            <strong>Unified Assets</strong>
             <p>One canonical framework across stablecoins, crypto, RWAs, and metals.</p>
           </article>
           <article className="card">
