@@ -203,6 +203,65 @@ a {
   color: var(--muted);
 }
 
+.tokenomics-list {
+  margin: 0.65rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+
+.tokenomics-list li + li {
+  margin-top: 0.35rem;
+}
+
+.tokenomics-visual-grid {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 0.9rem;
+}
+
+.tokenomics-visual {
+  margin: 0;
+}
+
+.tokenomics-visual svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tokenomics-caption {
+  margin: 0.65rem 0 0;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.tokenomics-card-title {
+  font-weight: 700;
+}
+
+.tokenomics-formula {
+  margin: 0.65rem 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.88rem;
+  background: color-mix(in srgb, var(--surface) 70%, var(--surface-muted));
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  padding: 0.6rem 0.7rem;
+  overflow-wrap: anywhere;
+}
+
+.tokenomics-mono-list {
+  margin: 0;
+  padding-left: 1rem;
+  color: var(--muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.84rem;
+}
+
+.tokenomics-mono-list li + li {
+  margin-top: 0.25rem;
+}
+
 @media (max-width: 700px) {
   .footer {
     flex-direction: column;
