@@ -9,7 +9,15 @@ export type AllocationEnvelopeRange = {
   max: number;
 };
 
+export type TokenomicsKeyParameter = {
+  label: string;
+  detail: string;
+};
+
 export const TOKENOMICS_AS_OF_DATE = "2026-08-05";
+export const TOKENOMICS_LITEPAPER_STATUS = "Public Draft — Non-binding";
+export const TOKENOMICS_LITEPAPER_VERSION = "v1.0";
+export const TOKENOMICS_CANONICAL_SOURCE_PATH = "lib/tokenomics.ts";
 
 export const TOKENOMICS_CAP_HALVING_STEPS = [
   { epoch: 0, dailyMax: 2.0 },
@@ -118,3 +126,36 @@ export const TOKENOMICS_ALLOCATION_ENVELOPE_RANGES: readonly AllocationEnvelopeR
 
 export const TOKENOMICS_VISUAL_DISCLOSURE =
   "Illustrative and non-final. Informational only, not investment advice, not an offer or solicitation, and not a guarantee of token issuance, value, or return.";
+
+export const TOKENOMICS_KEY_PARAMETERS: readonly TokenomicsKeyParameter[] = [
+  {
+    label: "Daily cap",
+    detail: "2.0 points/day/account maximum in epoch 0 under current public assumptions.",
+  },
+  {
+    label: "Halving rule",
+    detail:
+      "Illustrative cap schedule follows daily_max(n) = 2 × (0.5)^n (2.0 → 1.0 → 0.5 → 0.25).",
+  },
+  {
+    label: "Eligibility",
+    detail:
+      "Transactions must finalize, satisfy policy thresholds, and remain compliance-aligned before point accrual.",
+  },
+  {
+    label: "Anti-abuse controls",
+    detail:
+      "Policy can reduce, delay, or void points for sybil, wash, spam, manipulative, or otherwise non-compliant behavior.",
+  },
+  {
+    label: "Conversion framework",
+    detail:
+      `Proportional snapshot conversion uses ${TOKENOMICS_TGE_FORMULA} with governance-defined allocation inputs.`,
+  },
+] as const;
+
+export const TOKENOMICS_CONVERSION_POLICY_DISCLOSURE =
+  "Legal/policy disclosure: conversion inputs, eligible-point snapshots, and any issuance mechanics are non-final and require governance plus legal/compliance approval.";
+
+export const TOKENOMICS_ALLOCATION_POLICY_DISCLOSURE =
+  "Legal/policy disclosure: allocation envelopes are illustrative only and may change after governance decisions and legal/compliance review.";
