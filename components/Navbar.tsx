@@ -5,10 +5,11 @@ const links = [
   { href: "/brand", label: "Brand" },
   { href: "/founder", label: "Founder" },
   { href: "/docs", label: "Docs" },
-  { href: "/docs/rfc-index", label: "RFCs" },
-  { href: "/docs/developer-guide/api-sdk-onboarding", label: "API + SDK" },
-  { href: "/docs/governance-and-security-model", label: "Security Model" },
-  { href: "/docs/developer-guide", label: "Developer Guide" },
+  { href: "/docs/user-guide", label: "For Users" },
+  { href: "/docs/merchant-guide", label: "For Merchants" },
+  { href: "/docs/developer-guide", label: "For Developers" },
+  { href: "/docs/tokenomics", label: "Tokenomics" },
+  { href: "/docs/security-and-risk", label: "Security & Risk" },
   { href: "https://github.com/ryvra-protocol", label: "GitHub" },
 ];
 

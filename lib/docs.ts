@@ -51,33 +51,35 @@ export const docsSidebarGroups: DocsSidebarGroup[] = [
     title: "Overview",
     items: [
       { href: "/docs", title: "Documentation" },
-      { href: "/docs/introduction", title: "Introduction" },
+      { href: "/docs/introduction", title: "What is Ryvra?" },
       { href: "/docs/getting-started", title: "Getting Started" },
-      { href: "/docs/rfc-index", title: "RFC Index" },
-      { href: "/docs/governance-and-security-model", title: "Governance and Security Model" },
-      { href: "/docs/audit-and-provenance", title: "Audit and Provenance" },
+      { href: "/docs/docs-ia-v2", title: "Docs IA v2 Audit" },
     ],
   },
   {
-    title: "User Guide",
+    title: "For Users",
     items: [
-      { href: "/docs/user-guide", title: "User Guide" },
-      { href: "/docs/user-guide/accounts-and-wallets", title: "Accounts and Wallets" },
-      { href: "/docs/user-guide/buy-sell-trade", title: "Buy, Sell, and Trade" },
-      { href: "/docs/user-guide/send-transaction", title: "Send Transaction" },
+      { href: "/docs/user-guide", title: "For Users" },
+      { href: "/docs/user-guide/accounts-and-wallets", title: "Account and Security Basics" },
+      { href: "/docs/user-guide/send-transaction", title: "Payments and Transfers" },
+      { href: "/docs/user-guide/buy-sell-trade", title: "Markets Basics" },
       { href: "/docs/user-guide/liquidity-and-staking", title: "Liquidity and Staking" },
       { href: "/docs/user-guide/send-payments", title: "Send Payments" },
-      { href: "/docs/user-guide/fees-limits-and-risks", title: "Fees, Limits, and Risks" },
+      { href: "/docs/user-guide/fees-limits-and-risks", title: "Safety Controls and Support" },
       { href: "/docs/user-guide/security-best-practices", title: "Security Best Practices" },
       { href: "/docs/user-guide/faq", title: "FAQ" },
     ],
   },
   {
-    title: "Merchant Guide",
+    title: "For Merchants",
     items: [
-      { href: "/docs/merchant-guide", title: "Merchant Guide" },
-      { href: "/docs/merchant-guide/overview", title: "Overview" },
-      { href: "/docs/merchant-guide/onboarding", title: "Onboarding" },
+      { href: "/docs/merchant-guide", title: "For Merchants" },
+      { href: "/docs/merchant-guide/overview", title: "Why Ryvra for Merchants" },
+      { href: "/docs/merchant-guide/onboarding", title: "Merchant Onboarding" },
+      {
+        href: "/docs/merchant-guide/payouts-and-collections-workflows",
+        title: "Payouts and Collections Workflows",
+      },
       {
         href: "/docs/merchant-guide/checkout-payment-links",
         title: "Checkout and Payment Links",
@@ -85,29 +87,41 @@ export const docsSidebarGroups: DocsSidebarGroup[] = [
       { href: "/docs/merchant-guide/invoicing", title: "Invoicing" },
       { href: "/docs/merchant-guide/subscriptions", title: "Subscriptions" },
       { href: "/docs/merchant-guide/payouts-settlement", title: "Payouts and Settlement" },
+      {
+        href: "/docs/merchant-guide/treasury-and-reconciliation-basics",
+        title: "Treasury and Reconciliation Basics",
+      },
       { href: "/docs/merchant-guide/refunds-disputes", title: "Refunds and Disputes" },
       {
         href: "/docs/merchant-guide/reconciliation-reporting",
         title: "Reconciliation and Reporting",
       },
-      { href: "/docs/merchant-guide/risk-compliance", title: "Risk and Compliance" },
+      { href: "/docs/merchant-guide/risk-compliance", title: "Risk and Compliance Controls" },
+      { href: "/docs/merchant-guide/operational-checklists", title: "Operational Checklists" },
       { href: "/docs/merchant-guide/merchant-faq", title: "Merchant FAQ" },
     ],
   },
   {
-    title: "Developer Guide",
+    title: "For Developers",
     items: [
-      { href: "/docs/developer-guide", title: "Developer Guide" },
+      { href: "/docs/developer-guide", title: "For Developers" },
       {
         href: "/docs/developer-guide/architecture-overview",
         title: "Architecture Overview",
       },
       {
         href: "/docs/developer-guide/api-sdk-onboarding",
-        title: "API and SDK Onboarding",
+        title: "Quickstart: SDK + Gateway Flow",
       },
-      { href: "/docs/developer-guide/api-overview", title: "API Overview" },
-      { href: "/docs/developer-guide/authentication", title: "Authentication" },
+      { href: "/docs/developer-guide/financial-intent-model", title: "FinancialIntent Model" },
+      { href: "/docs/developer-guide/api-overview", title: "API References and Examples" },
+      { href: "/docs/developer-guide/authentication", title: "Auth, Mandate, and Capability Flow" },
+      { href: "/docs/developer-guide/policy-risk-integration", title: "Policy and Risk Integration" },
+      { href: "/docs/developer-guide/ledger-settlement-integration", title: "Ledger and Settlement Integration" },
+      {
+        href: "/docs/developer-guide/private-execution-perps-integration-points",
+        title: "Private Execution and Perps Integration Points",
+      },
       { href: "/docs/developer-guide/unified-assets", title: "Unified Assets" },
       {
         href: "/docs/developer-guide/account-abstraction-erc4337",
@@ -135,7 +149,7 @@ export const docsSidebarGroups: DocsSidebarGroup[] = [
         href: "/docs/developer-guide/environments-and-deployment",
         title: "Environments and Deployment",
       },
-      { href: "/docs/developer-guide/testing-sandbox", title: "Testing Sandbox" },
+      { href: "/docs/developer-guide/testing-sandbox", title: "Testing and Sandbox Guidance" },
       {
         href: "/docs/developer-guide/observability-and-runbooks",
         title: "Observability and Runbooks",
@@ -148,8 +162,35 @@ export const docsSidebarGroups: DocsSidebarGroup[] = [
     ],
   },
   {
+    title: "Tokenomics",
+    items: [
+      { href: "/docs/tokenomics", title: "Tokenomics" },
+      {
+        href: "/docs/tokenomics/detailed-tokenomics-specification",
+        title: "Detailed Tokenomics Specification",
+      },
+    ],
+  },
+  {
+    title: "Security & Risk",
+    items: [
+      { href: "/docs/security-and-risk", title: "Security and Risk" },
+      { href: "/docs/governance-and-security-model", title: "Governance and Security Model" },
+      { href: "/docs/audit-and-provenance", title: "Audit and Provenance" },
+      { href: "/docs/support-and-escalation", title: "Support and Escalation" },
+    ],
+  },
+  {
+    title: "RFC / Technical Specs",
+    items: [
+      { href: "/docs/rfc-technical-specs", title: "RFC / Technical Specs" },
+      { href: "/docs/rfc-index", title: "RFC Index" },
+    ],
+  },
+  {
     title: "Reference",
     items: [
+      { href: "/docs/writing-style-and-templates", title: "Writing Style and Templates" },
       { href: "/docs/release-notes", title: "Release Notes" },
       { href: "/docs/glossary", title: "Glossary" },
     ],
@@ -160,7 +201,7 @@ const docsSidebarItems = docsSidebarGroups.flatMap((group) => group.items);
 
 const docsSidebarTitleByHref = new Map(docsSidebarItems.map((item) => [item.href, item.title]));
 
-const userGuideItems = docsSidebarGroups.find((group) => group.title === "User Guide")?.items ?? [];
+const userGuideItems = docsSidebarGroups.find((group) => group.title === "For Users")?.items ?? [];
 
 export const docsPageOrder = docsSidebarItems.map((item) => item.href);
 
@@ -209,14 +250,14 @@ function getDocLink(href: string): DocsSidebarItem {
 const authoredDocsByHref: Record<string, AuthoredDocContent> = {
   "/docs": {
     description:
-      "Choose the right documentation path for understanding Ryvra architecture, authority, and production integration workflows.",
+      "Start with the audience track that matches your role, then move into tokenomics, security, or technical specs only when you need more depth.",
     metadataTitle: "Documentation",
     metadataDescription:
       "Choose your Ryvra docs path for users, merchants, or developers, with production guidance for operations and integrations.",
     calloutVariant: "info",
-    calloutTitle: "Start with the authority model",
+    calloutTitle: "Natural language first, spec second",
     calloutBody:
-      "Start from the role that matches your objective, then validate authority, governance, and provenance expectations before enabling automation.",
+      "Start from the role that matches your objective, then use the linked advanced pages only when you need exact protocol, security, or tokenomics details.",
     headings: [
       {
         id: "choose-your-path",
@@ -226,17 +267,19 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/user-guide"),
           getDocLink("/docs/merchant-guide"),
           getDocLink("/docs/developer-guide"),
-          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/tokenomics"),
+          getDocLink("/docs/security-and-risk"),
+          getDocLink("/docs/rfc-technical-specs"),
         ],
       },
       {
         id: "im-a-user-start-here",
         title: "I’m a user: start here",
-        body: "The User Guide is designed for people moving assets, trading, staking, and making payments from an account wallet.",
+        body: "The user track explains account safety, payments, transfers, markets basics, and support in plain language before deeper concepts.",
         bullets: [
-          "Set up and secure your account first.",
-          "Use step-by-step guides for trading, transactions, liquidity, and payments.",
-          "Review fees, limits, and risks before high-value actions.",
+          "Start with account and security basics.",
+          "Use the workflow pages for payments, transfers, and markets.",
+          "Check safety controls and support before retrying blocked or failed actions.",
         ],
         links: [getDocLink("/docs/user-guide")],
       },
@@ -255,31 +298,35 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       {
         id: "im-a-merchant-start-here",
         title: "I’m a merchant: start here",
-        body: "The Merchant Guide focuses on onboarding, payment operations, settlement controls, reconciliation, and dispute handling.",
+        body: "The merchant track focuses on business outcomes, onboarding, collections, payouts, treasury, reconciliation, and operational controls.",
         links: [
           getDocLink("/docs/merchant-guide"),
           getDocLink("/docs/merchant-guide/onboarding"),
-          getDocLink("/docs/merchant-guide/checkout-payment-links"),
-          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/merchant-guide/payouts-and-collections-workflows"),
+          getDocLink("/docs/merchant-guide/treasury-and-reconciliation-basics"),
         ],
       },
       {
         id: "im-a-developer-start-here",
         title: "I’m a developer: start here",
-        body: "The Developer Guide covers architecture, APIs, SDK onboarding, authentication, events, retries, deployment, and production runbooks.",
+        body: "The developer track keeps technical depth, but starts with architecture, quickstart, FinancialIntent, and policy or settlement concepts before advanced specs.",
         links: [
           getDocLink("/docs/developer-guide"),
           getDocLink("/docs/developer-guide/api-sdk-onboarding"),
-          getDocLink("/docs/developer-guide/api-overview"),
-          getDocLink("/docs/developer-guide/payments-integration"),
-          getDocLink("/docs/developer-guide/observability-and-runbooks"),
+          getDocLink("/docs/developer-guide/financial-intent-model"),
+          getDocLink("/docs/developer-guide/ledger-settlement-integration"),
+          getDocLink("/docs/rfc-technical-specs"),
         ],
       },
       {
         id: "source-of-truth-resources",
         title: "Source-of-truth resources",
-        body: "Use these pages for the canonical website messaging framework and production integration references.",
+        body: "Use these pages when you need canonical security, provenance, RFC, or migration detail.",
         links: [
+          getDocLink("/docs/docs-ia-v2"),
+          getDocLink("/docs/tokenomics"),
+          getDocLink("/docs/security-and-risk"),
+          getDocLink("/docs/rfc-technical-specs"),
           getDocLink("/docs/rfc-index"),
           getDocLink("/docs/governance-and-security-model"),
           getDocLink("/docs/audit-and-provenance"),
@@ -289,55 +336,51 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
   },
   "/docs/introduction": {
     description:
-      "Understand documentation scope, terminology, operational boundaries, and bounded-autonomy principles for Ryvra workflows.",
-    metadataTitle: "Introduction",
+      "Ryvra is programmable financial infrastructure where AI can suggest actions, but governed systems decide what is allowed and deterministic systems execute the result.",
+    metadataTitle: "What is Ryvra?",
     metadataDescription:
-      "Intro to Ryvra docs coverage, persona guides, compatibility boundaries, and rollout scope for the production docs portal.",
+      "Plain-language introduction to Ryvra, its bounded-autonomy model, and why authority, settlement, and provenance matter.",
     calloutVariant: "info",
-    calloutTitle: "Production documentation baseline",
+    calloutTitle: "Think in layers",
     calloutBody:
-      "Use this introduction to confirm what is shipped, who each guide is for, and where authority, provenance, and versioned controls are documented.",
+      "Ryvra separates proposal, authorization, execution, and settlement so automation can help without silently holding unrestricted financial authority.",
     headings: [
       {
-        id: "purpose-and-scope",
-        title: "Purpose and scope",
-        body: "The docs portal provides production-ready guidance for user operations, merchant operations, developer integrations, and Ryvra’s bounded-autonomy control model.",
+        id: "summary",
+        title: "Summary",
+        body: "Ryvra is built so automation can propose financial workflows while identity, mandates, policy, risk, and deterministic execution systems keep authority visible and reviewable.",
       },
       {
-        id: "what-is-shipped",
-        title: "What is shipped",
+        id: "audience",
+        title: "Audience",
+        body: "New readers, partners, and reviewers who need the simplest explanation before opening deeper guides or specs.",
+      },
+      {
+        id: "core-ideas",
+        title: "Core ideas",
         bullets: [
-          "User Guide for account setup, trading, transactions, liquidity or staking, and payments.",
-          "Merchant Guide for onboarding, checkout, invoicing, subscriptions, settlement, reconciliation, disputes, and compliance.",
-          "Developer Guide for architecture, API and SDK onboarding, authentication, events, retries, deployment, testing, and runbooks.",
-          "Reference pages for RFCs, governance and security, audit and provenance, release notes, and glossary definitions.",
+          "AI proposes; it does not self-authorize.",
+          "Identity, mandates, policy, and risk define what may happen.",
+          "Deterministic payment, market, and treasury systems execute only after approval.",
+          "Ledger and settlement publish final truth for balances and workflow outcomes.",
         ],
       },
       {
-        id: "terminology-baseline",
-        title: "Terminology baseline",
+        id: "why-people-use-ryvra",
+        title: "Why people use Ryvra",
         bullets: [
-          "Account wallet: the user-operated wallet context connected to a Ryvra account.",
-          "Merchant workspace: the merchant-facing operations context for payment and settlement workflows.",
-          "Integration client: the developer-operated service that calls Ryvra APIs and consumes Ryvra events.",
-          "Bounded autonomy: AI can propose, but authorization and final execution stay inside governed Ryvra systems.",
-          "Compatibility window: the period where documented behavior is expected to match shipped platform behavior.",
+          "Users get clearer controls around payments, transfers, and market actions.",
+          "Merchants get safer automation for collections, payouts, treasury, and reconciliation workflows.",
+          "Developers get one control model across multiple financial modules.",
         ],
-        links: [getDocLink("/docs/glossary")],
       },
       {
-        id: "compatibility-and-versioning",
-        title: "Compatibility and versioning",
-        body: "Compatibility windows and upgrade guidance are published in release notes and developer changelog pages.",
-        links: [getDocLink("/docs/release-notes"), getDocLink("/docs/developer-guide/changelog-and-versioning")],
-      },
-      {
-        id: "out-of-scope-boundaries",
-        title: "Out-of-scope boundaries",
+        id: "what-to-read-next",
+        title: "What to read next",
         bullets: [
-          "No speculative product commitments beyond currently documented shipped behavior.",
-          "No private merchant, legal, or support playbooks.",
-          "No source-of-truth replacement for contractual or compliance documentation.",
+          "Use the audience track that matches your role for the plain-language walkthrough.",
+          "Use tokenomics and security pages for cross-cutting policy and risk context.",
+          "Use the RFC / Technical Specs layer when you need exact architecture wording.",
         ],
       },
       {
@@ -345,23 +388,24 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         title: "Related docs",
         links: [
           getDocLink("/docs/getting-started"),
-          getDocLink("/docs/rfc-index"),
-          getDocLink("/docs/governance-and-security-model"),
-          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/user-guide"),
+          getDocLink("/docs/merchant-guide"),
+          getDocLink("/docs/developer-guide"),
+          getDocLink("/docs/rfc-technical-specs"),
         ],
       },
     ],
   },
   "/docs/getting-started": {
     description:
-      "Start with the correct authority model, choose the right persona path, and validate the controls around your first Ryvra workflow.",
+      "Choose the right audience track, complete the minimum safety checks, and avoid jumping into advanced specs before you need them.",
     metadataTitle: "Getting Started",
     metadataDescription:
       "Getting started checklist for Ryvra docs users with prerequisites, first-step flows, expected outcomes, and recovery guidance.",
     calloutVariant: "success",
-    calloutTitle: "Start with control boundaries",
+    calloutTitle: "Start with your role",
     calloutBody:
-      "Choose the right persona track and confirm who proposes, who authorizes, and which deterministic systems execute before you go live.",
+      "Pick the user, merchant, or developer track first. Then use tokenomics, security, and spec pages only when they answer a real question you have.",
     headings: [
       {
         id: "prerequisites",
@@ -387,12 +431,13 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "persona-routes",
-        title: "Persona routes",
+        title: "Audience-first routes",
         links: [
           getDocLink("/docs/user-guide"),
           getDocLink("/docs/merchant-guide"),
           getDocLink("/docs/developer-guide"),
-          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/tokenomics"),
+          getDocLink("/docs/security-and-risk"),
         ],
       },
       {
@@ -400,7 +445,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         title: "Expected outcome",
         bullets: [
           "You can identify the correct guide and complete first-step workflows without route ambiguity.",
-          "You understand the authority model, compatibility window, and source-of-truth docs for updates.",
+          "You know when to stay in the plain-language track and when to open the deeper specification layer.",
           "You can escalate to role-specific troubleshooting guidance when an operation fails or must be suspended.",
         ],
       },
@@ -410,7 +455,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         bullets: [
           "Starting from the wrong persona guide and applying incorrect assumptions.",
           "Skipping prerequisite checks and encountering preventable validation failures.",
-          "Using stale process assumptions without reviewing release notes or compatibility guidance.",
+          "Opening jargon-heavy material too early and missing the simpler workflow explanation.",
         ],
       },
       {
@@ -419,11 +464,11 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         steps: [
           "Return to the documentation landing page and switch to the correct persona guide.",
           "Re-run prerequisite checklists before repeating failed operations.",
-          "Validate latest guidance in governance, provenance, release notes, and relevant troubleshooting pages.",
+          "Validate latest guidance in tokenomics, security, release notes, and relevant troubleshooting pages.",
         ],
         links: [
-          getDocLink("/docs/governance-and-security-model"),
-          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/tokenomics"),
+          getDocLink("/docs/security-and-risk"),
           getDocLink("/docs/release-notes"),
           getDocLink("/docs/developer-guide/troubleshooting"),
         ],
@@ -432,10 +477,74 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "source-of-truth-docs",
         title: "Source-of-truth docs",
         links: [
+          getDocLink("/docs/docs-ia-v2"),
+          getDocLink("/docs/rfc-technical-specs"),
           getDocLink("/docs/rfc-index"),
-          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
           getDocLink("/docs/governance-and-security-model"),
           getDocLink("/docs/audit-and-provenance"),
+        ],
+      },
+    ],
+  },
+  "/docs/docs-ia-v2": {
+    description:
+      "Audit of the previous documentation structure and the reasoning behind the audience-first redesign.",
+    metadataTitle: "Docs IA v2 Audit",
+    metadataDescription:
+      "As-is documentation map, quality scoring, duplication notes, and migration rationale for the Ryvra docs IA v2 rollout.",
+    calloutVariant: "note",
+    calloutTitle: "What changed",
+    calloutBody:
+      "IA v2 keeps technical depth but moves readers through plain-language audience tracks before sending them to advanced specs.",
+    headings: [
+      {
+        id: "key-findings",
+        title: "Key findings",
+        bullets: [
+          "Security and provenance topics were important but fragmented across overview and developer pages.",
+          "Tokenomics lived outside the docs portal, which made it harder to discover in the main navigation.",
+          "RFC-heavy material appeared too early for first-time readers.",
+          "Merchant documentation had strong procedures, but weaker business-value framing and checklist discovery.",
+        ],
+      },
+      {
+        id: "as-is-map",
+        title: "As-Is map",
+        bullets: [
+          "`lib/docs.ts` → `/docs`, `/docs/introduction`, `/docs/getting-started`, `/docs/rfc-index`, `/docs/governance-and-security-model`, `/docs/audit-and-provenance` — audience: mixed — quality: clarity 3/5, completeness 4/5, freshness 3/5.",
+          "`lib/docs.ts` → `/docs/user-guide/*` — audience: user — quality: clarity 4/5, completeness 4/5, freshness 3/5.",
+          "`lib/docs.ts` → `/docs/merchant-guide/*` — audience: merchant — quality: clarity 4/5, completeness 4/5, freshness 3/5.",
+          "`lib/docs.ts` → `/docs/developer-guide/*` — audience: developer — quality: clarity 3/5, completeness 4/5, freshness 4/5.",
+          "`app/litepaper/page.tsx`, `content/litepaper-tokenomics.md`, `content/tokenomics-faq.md`, `lib/tokenomics.ts` — audience: mixed/tokenomics — quality: clarity 3/5, completeness 4/5, freshness 4/5.",
+        ],
+      },
+      {
+        id: "gaps",
+        title: "Gaps and duplication",
+        bullets: [
+          "Duplicate safety language existed across user transaction, payment, and security pages.",
+          "Merchant payout and reconciliation guidance overlapped but did not lead with treasury-close language.",
+          "Developer retry, policy, and event concepts were distributed across several pages instead of one onboarding path.",
+          "Beginner explanations for tokenomics, governance, and confidentiality terms were too thin.",
+        ],
+      },
+      {
+        id: "migration-plan",
+        title: "Migration and redirect plan",
+        bullets: [
+          "The new sidebar leads with Users, Merchants, Developers, Tokenomics, Security and Risk, and RFC / Technical Specs.",
+          "Existing detailed routes stay live so current links continue to work.",
+          "New overview pages link readers into existing deep pages instead of replacing them with less detailed copies.",
+          "Release notes document the IA v2 rollout so external readers can understand the change.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/release-notes"),
+          getDocLink("/docs/writing-style-and-templates"),
+          getDocLink("/docs/rfc-technical-specs"),
         ],
       },
     ],
@@ -451,6 +560,24 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
     calloutBody:
       "Use this page as the documentation index for the architecture and control model that website messaging should follow.",
     headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Developers, reviewers, and advanced readers who need the deeper architecture and source-of-truth map rather than the introductory explanation.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Read the audience-specific overview page first when possible.",
+          "Know which architecture, governance, or execution topic you need to verify.",
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "This page is the jump-off point for the deepest public material in the portal. It keeps advanced topics available without forcing first-time readers to start here.",
+      },
       {
         id: "how-to-use-this-index",
         title: "How to use this index",
@@ -488,6 +615,11 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/developer-guide/authentication"),
         ],
       },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/rfc-technical-specs")],
+      },
     ],
   },
   "/docs/governance-and-security-model": {
@@ -501,6 +633,24 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
     calloutBody:
       "Ryvra does not give AI unrestricted wallet keys or self-modifying policy authority. Authorization stays in governed control systems.",
     headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Users, merchants, developers, and reviewers who need the core trust-boundary explanation behind the simpler audience pages.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Know which workflow or control boundary you are reviewing.",
+          "Read the audience-first guide for your role if you need a simpler introduction first.",
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "Ryvra is built so software can help propose financial actions without silently becoming the authority that approves them.",
+      },
       {
         id: "core-principles",
         title: "Core principles",
@@ -540,6 +690,11 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/rfc-index"),
         ],
       },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/rfc-index"), getDocLink("/docs/security-and-risk")],
+      },
     ],
   },
   "/docs/audit-and-provenance": {
@@ -553,6 +708,24 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
     calloutBody:
       "Every workflow should preserve the link from who proposed an action to how it was authorized, executed, settled, and, if needed, suspended.",
     headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Operators, developers, merchants, and reviewers who need to trace a workflow from proposal to final settlement and any later intervention.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Know which workflow or incident you are trying to trace.",
+          "Have access to the request, event, or settlement references used by your systems.",
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "When money moves, teams need a clear record of what was requested, who approved it, what executed, what the final result was, and whether anyone stepped in later.",
+      },
       {
         id: "provenance-lifecycle",
         title: "Provenance lifecycle",
@@ -594,23 +767,28 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/rfc-index"),
         ],
       },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/rfc-index"), getDocLink("/docs/security-and-risk")],
+      },
     ],
   },
   "/docs/user-guide": {
     description:
-      "Learn how to set up wallets, trade, send transactions, manage liquidity or staking, and make payments safely on Ryvra.",
-    metadataTitle: "User Guide: Overview",
+      "Use the user track to understand Ryvra in plain language, starting with account safety and the everyday tasks most people care about first.",
+    metadataTitle: "For Users",
     metadataDescription:
-      "User documentation for account setup, trading, transactions, liquidity and staking, payments, fees, security, and troubleshooting paths.",
+      "User documentation for account safety, payments and transfers, markets basics, support, and common Ryvra questions.",
     calloutVariant: "success",
-    calloutTitle: "Start with account setup",
+    calloutTitle: "Simple first",
     calloutBody:
-      "Complete the accounts and wallets checklist before your first trade, transfer, liquidity action, or payment.",
+      "Learn the action, then the term. You should not need to read an RFC before understanding a common user workflow.",
     headings: [
       {
         id: "who-this-guide-is-for",
         title: "Who this guide is for",
-        body: "This guide is for end users who operate a Ryvra account wallet to move funds, trade assets, provide liquidity, stake, and send payments.",
+        body: "This guide is for people using Ryvra directly for payments, transfers, market actions, and account-level safety decisions.",
       },
       {
         id: "quick-start-paths",
@@ -618,10 +796,10 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         body: "Use the path that matches what you need to do right now.",
         links: [
           getDocLink("/docs/user-guide/accounts-and-wallets"),
-          getDocLink("/docs/user-guide/buy-sell-trade"),
           getDocLink("/docs/user-guide/send-transaction"),
-          getDocLink("/docs/user-guide/liquidity-and-staking"),
-          getDocLink("/docs/user-guide/send-payments"),
+          getDocLink("/docs/user-guide/buy-sell-trade"),
+          getDocLink("/docs/user-guide/fees-limits-and-risks"),
+          getDocLink("/docs/user-guide/faq"),
         ],
       },
       {
@@ -1362,12 +1540,12 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
     ],
   },
   "/docs/merchant-guide": {
-    description: "Operate Ryvra merchant flows from onboarding to settlement, reconciliation, and incident handling.",
-    metadataTitle: "Merchant Guide",
-    metadataDescription: "Production merchant playbook for onboarding, checkout, invoicing, subscriptions, payouts, disputes, reconciliation, and compliance operations.",
+    description: "Use the merchant track to understand business outcomes, onboarding, collections, payouts, treasury, reconciliation, and operational controls.",
+    metadataTitle: "For Merchants",
+    metadataDescription: "Production merchant playbook for onboarding, business value, collections, payouts, treasury, reconciliation, operational controls, and FAQ guidance.",
     calloutVariant: "success",
-    calloutTitle: "Merchant operations start here",
-    calloutBody: "Use this guide as your day-to-day operating reference for running payment and settlement workflows safely in production.",
+    calloutTitle: "Operate with clear owners",
+    calloutBody: "Merchant success depends as much on role clarity and reconciliation discipline as it does on the underlying integration.",
     headings: [
       {
         id: "who-this-guide-is-for",
@@ -1394,10 +1572,12 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "start-paths",
         title: "Start paths by role",
         links: [
+          getDocLink("/docs/merchant-guide/overview"),
           getDocLink("/docs/merchant-guide/onboarding"),
+          getDocLink("/docs/merchant-guide/payouts-and-collections-workflows"),
+          getDocLink("/docs/merchant-guide/treasury-and-reconciliation-basics"),
+          getDocLink("/docs/merchant-guide/operational-checklists"),
           getDocLink("/docs/merchant-guide/checkout-payment-links"),
-          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
-          getDocLink("/docs/developer-guide/payments-integration"),
         ],
       },
       {
@@ -1421,82 +1601,63 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
     ],
   },
   "/docs/merchant-guide/overview": {
-    description: "Understand the merchant operating model, responsibilities, and control points before processing production volume.",
-    metadataTitle: "Merchant Guide: Overview",
-    metadataDescription: "Purpose, prerequisites, workflow sequence, control outcomes, and escalation paths for Ryvra merchant operations.",
+    description: "Understand the merchant value proposition in practical terms: controlled collections, programmable payouts, clearer reconciliation, and safer automation boundaries.",
+    metadataTitle: "Merchant Guide: Why Ryvra for Merchants",
+    metadataDescription: "Business-focused merchant overview covering Ryvra's operational value, control model, and where it fits in payment and treasury workflows.",
     calloutVariant: "info",
-    calloutTitle: "Scope",
-    calloutBody: "Use this page to align merchant, finance, support, and engineering owners on shared operating expectations.",
+    calloutTitle: "Business-first framing",
+    calloutBody: "Start with outcomes and controls, then move to implementation detail once the operating model makes sense.",
     headings: [
       {
-        id: "purpose-and-scope",
-        title: "Purpose and scope",
-        body: "Defines the production operating boundary for payment acceptance, post-payment handling, settlement, and compliance response.",
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Merchant decision-makers and operators evaluating Ryvra.",
       },
       {
         id: "prerequisites",
         title: "Prerequisites",
         bullets: [
-          "Approved merchant account with role-based operator access.",
-          "Configured settlement destination and statement details.",
-          "Documented support escalation path and incident contacts.",
+          "Know whether you are evaluating Ryvra or preparing for launch.",
+          "Identify the owners for operations, finance close, and incident response.",
         ],
       },
       {
-        id: "step-by-step-procedure",
-        title: "Step-by-step operating procedure",
-        steps: [
-          "Onboard the account and verify readiness controls.",
-          "Enable payment collection channels for your business model.",
-          "Track payment states and exceptions in near real time.",
-          "Execute payout and end-of-day reconciliation checkpoints.",
-          "Run dispute and compliance escalations with complete evidence.",
-        ],
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "Ryvra helps merchants automate money movement without losing operational control. It is designed to make approvals, limits, and final records explicit rather than hidden in ad hoc workflows.",
       },
       {
-        id: "expected-outcomes",
-        title: "Expected outcomes and confirmations",
+        id: "business-outcomes",
+        title: "Business outcomes",
         bullets: [
-          "Payment, refund, and payout states are traceable with unique identifiers.",
-          "Daily close completes with no unresolved material variance.",
-          "Escalation paths are used consistently and within response windows.",
+          "Faster collections and payout workflows with clearer status tracking.",
+          "Shared control logic across checkout, payouts, treasury, and settlement-sensitive actions.",
+          "Better reconciliation because workflows keep references, statuses, and final-state evidence together.",
+          "Safer automation because policy and risk controls can stop actions before execution.",
         ],
       },
       {
-        id: "failure-states",
-        title: "Common failure states",
+        id: "implementation-prerequisites-and-risks",
+        title: "Implementation prerequisites and risk notes",
         bullets: [
-          "Incomplete onboarding blocks payment or settlement activation.",
-          "Unmonitored webhook or queue failures delay confirmation updates.",
-          "Unreviewed exceptions create reconciliation drift.",
+          "You still need named internal owners for operations, finance, and incident response.",
+          "No merchant should assume optimistic local status is the final source of truth.",
+          "Live credentials, payout destinations, and refund authority need restricted ownership.",
         ],
       },
       {
-        id: "recovery-escalation",
-        title: "Recovery and escalation paths",
-        steps: [
-          "Pause impacted flow segment and preserve transaction context.",
-          "Triage by state, timestamp, and affected account scope.",
-          "Escalate with correlation IDs, event payload references, and operator notes.",
-        ],
-      },
-      {
-        id: "risk-compliance-notes",
-        title: "Risk and compliance notes",
-        bullets: [
-          "Use least-privilege access for high-impact actions like refunds and payout changes.",
-          "Retain operational evidence needed for audits and dispute response.",
-          "Escalate unusual activity immediately rather than processing around anomalies.",
-        ],
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/rfc-index"), getDocLink("/docs/governance-and-security-model")],
       },
       {
         id: "related-docs",
         title: "Related docs",
         links: [
           getDocLink("/docs/merchant-guide/onboarding"),
-          getDocLink("/docs/merchant-guide/payouts-settlement"),
-          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
-          getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/merchant-guide/payouts-and-collections-workflows"),
+          getDocLink("/docs/merchant-guide/treasury-and-reconciliation-basics"),
+          getDocLink("/docs/merchant-guide/operational-checklists"),
         ],
       },
     ],
@@ -1580,6 +1741,138 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/merchant-guide/risk-compliance"),
           getDocLink("/docs/developer-guide/authentication"),
           getDocLink("/docs/developer-guide/environments-and-deployment"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/payouts-and-collections-workflows": {
+    description:
+      "Use this page to understand how merchant collections and payouts fit together before you dive into individual checkout, invoice, subscription, or settlement procedures.",
+    metadataTitle: "Merchant Guide: Payouts and Collections Workflows",
+    metadataDescription:
+      "Merchant overview for collections, payouts, exceptions, and the deeper workflow guides that support daily operations.",
+    calloutVariant: "info",
+    calloutTitle: "Track both directions of money movement",
+    calloutBody:
+      "Collections and payouts have different operational owners, but both depend on clear lifecycle states, approvals, and final settlement records.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Merchant operators and finance teams that need a simple map of how inbound and outbound money movement work on Ryvra.",
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "Use this page to understand the full operating loop first: collect money, confirm the final state, pay out safely, then reconcile what happened.",
+      },
+      {
+        id: "step-by-step",
+        title: "Step-by-step",
+        steps: [
+          "Start with the checkout, invoice, or subscription guide that matches how you collect money.",
+          "Use the payouts and settlement guide to understand when outbound movement should happen.",
+          "Route refunds, disputes, and unresolved exceptions into the risk and support workflows instead of treating them as normal retries.",
+        ],
+      },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/rfc-index"), getDocLink("/docs/developer-guide/payments-integration")],
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/merchant-guide/checkout-payment-links"),
+          getDocLink("/docs/merchant-guide/invoicing"),
+          getDocLink("/docs/merchant-guide/subscriptions"),
+          getDocLink("/docs/merchant-guide/payouts-settlement"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/treasury-and-reconciliation-basics": {
+    description:
+      "Understand how settlement, treasury movement, and reconciliation fit together so finance and operations teams close on final state rather than guesswork.",
+    metadataTitle: "Merchant Guide: Treasury and Reconciliation Basics",
+    metadataDescription:
+      "Merchant guide to treasury, settlement, reconciliation, and daily close expectations across Ryvra workflows.",
+    calloutVariant: "info",
+    calloutTitle: "Close on what is final",
+    calloutBody:
+      "Treasury decisions should follow terminal settlement state and preserved references, not optimistic local views.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Merchant finance, treasury, and operations teams that need a shared mental model before reading the detailed settlement or reconciliation procedures.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Know which payout destinations and currencies matter to your workflow.",
+          "Have access to the references generated by payment, payout, and settlement events.",
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "Treasury tells you where value should land. Reconciliation proves whether it did. Both depend on treating final settlement state as the source of truth.",
+      },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/audit-and-provenance"), getDocLink("/docs/developer-guide/payments-integration")],
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/merchant-guide/payouts-settlement"),
+          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/merchant-guide/risk-compliance"),
+        ],
+      },
+    ],
+  },
+  "/docs/merchant-guide/operational-checklists": {
+    description:
+      "Use these checklists to keep launch, daily operations, and escalation handling consistent across merchant teams.",
+    metadataTitle: "Merchant Guide: Operational Checklists",
+    metadataDescription:
+      "Merchant checklists for onboarding, daily close, exception handling, and support escalation in the Ryvra docs portal.",
+    calloutVariant: "note",
+    calloutTitle: "Operational discipline matters",
+    calloutBody:
+      "Clear checklists reduce avoidable mistakes during launch, close, and exception handling.",
+    headings: [
+      {
+        id: "go-live-checklist",
+        title: "Go-live checklist",
+        bullets: [
+          "Verification completed and owners assigned.",
+          "Payout destinations, alerts, and escalation contacts reviewed.",
+          "Test transactions completed across core workflows.",
+        ],
+      },
+      {
+        id: "daily-operations-checklist",
+        title: "Daily operations checklist",
+        bullets: [
+          "Review pending versus terminal states.",
+          "Investigate exceptions before close.",
+          "Confirm reconciliation references for closed items.",
+        ],
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/merchant-guide/onboarding"),
+          getDocLink("/docs/merchant-guide/treasury-and-reconciliation-basics"),
+          getDocLink("/docs/support-and-escalation"),
         ],
       },
     ],
@@ -2239,10 +2532,10 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
   },
   "/docs/developer-guide": {
     description: "Build and operate Ryvra integrations with clear authority boundaries, lifecycle controls, deployment discipline, and observability.",
-    metadataTitle: "Developer Guide",
+    metadataTitle: "For Developers",
     metadataDescription: "Production integration reference for Ryvra architecture, API and SDK onboarding, auth, events, retries, deployment, testing, and operations.",
     calloutVariant: "success",
-    calloutTitle: "Integration baseline",
+    calloutTitle: "Concise but technical",
     calloutBody: "Use this guide to implement bounded autonomous-finance integrations with explicit ownership, policy, and finality semantics.",
     headings: [
       {
@@ -2303,9 +2596,11 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         links: [
           getDocLink("/docs/developer-guide/architecture-overview"),
           getDocLink("/docs/developer-guide/api-sdk-onboarding"),
+          getDocLink("/docs/developer-guide/financial-intent-model"),
+          getDocLink("/docs/developer-guide/policy-risk-integration"),
+          getDocLink("/docs/developer-guide/ledger-settlement-integration"),
           getDocLink("/docs/developer-guide/api-overview"),
-          getDocLink("/docs/governance-and-security-model"),
-          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/rfc-technical-specs"),
         ],
       },
     ],
@@ -2386,6 +2681,11 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/audit-and-provenance"),
         ],
       },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/rfc-index"), getDocLink("/docs/rfc-technical-specs")],
+      },
     ],
   },
   "/docs/developer-guide/api-sdk-onboarding": {
@@ -2434,6 +2734,186 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/developer-guide/architecture-overview"),
           getDocLink("/docs/developer-guide/api-overview"),
           getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/governance-and-security-model"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/financial-intent-model": {
+    description:
+      "FinancialIntent is the product-level model for describing what you want to happen, under which controls, and which identifiers downstream systems will need later.",
+    metadataTitle: "Developer Guide: FinancialIntent Model",
+    metadataDescription:
+      "Developer guide to the FinancialIntent model, including why it exists, what context it needs, and how it links to settlement and policy checks.",
+    calloutVariant: "info",
+    calloutTitle: "Intent is not final state",
+    calloutBody:
+      "A FinancialIntent describes the requested outcome and authority context; settlement later determines the final recorded result.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Developers modeling Ryvra workflows before they connect them to payments, market actions, or treasury logic.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Understand the architecture overview and first onboarding flow.",
+          "Know the business reference and downstream systems that need to observe the result.",
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "A FinancialIntent is the governed description of what should happen if the request passes identity, mandate, policy, and risk checks.",
+      },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/developer-guide/architecture-overview"), getDocLink("/docs/rfc-index")],
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/developer-guide/policy-risk-integration"),
+          getDocLink("/docs/developer-guide/ledger-settlement-integration"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/policy-risk-integration": {
+    description:
+      "Use this page to understand how policy and independent risk decisions fit into the Ryvra request lifecycle and how clients should react to those decisions.",
+    metadataTitle: "Developer Guide: Policy and Risk Integration",
+    metadataDescription:
+      "Developer guide to Ryvra policy and risk integration, including reason-code thinking, retry boundaries, and related deep references.",
+    calloutVariant: "warn",
+    calloutTitle: "Do not treat denials as noise",
+    calloutBody:
+      "A blocked request is usually telling you something important about scope, policy, or risk that needs review.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Developers and technical operators implementing approval logic around Ryvra workflows.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Authentication and mandate context is already available to the request.",
+          "Your client can preserve decision identifiers and classify retryable versus non-retryable outcomes.",
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "A request can be valid and still be the wrong thing to do. Policy and risk make that decision explicit before money moves.",
+      },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/governance-and-security-model"), getDocLink("/docs/rfc-index")],
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/developer-guide/error-model-and-retries"),
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/audit-and-provenance"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/ledger-settlement-integration": {
+    description:
+      "Integrate ledger and settlement outputs so downstream systems know when a workflow is still in progress, when it is final, and what to reconcile later.",
+    metadataTitle: "Developer Guide: Ledger and Settlement Integration",
+    metadataDescription:
+      "Developer guide to Ryvra settlement-aware integrations, terminal states, and the references needed for reconciliation and support.",
+    calloutVariant: "info",
+    calloutTitle: "Final state is a contract",
+    calloutBody:
+      "Downstream systems should act on canonical terminal outcomes, not on optimistic local assumptions.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Developers building fulfillment, accounting, or reconciliation-sensitive integrations.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "Your client stores request, event, and business references.",
+          "Downstream systems know which state transitions are safe to act on.",
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "Settlement is where a requested workflow becomes a final recorded financial outcome that other systems can trust.",
+      },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/audit-and-provenance"), getDocLink("/docs/rfc-index")],
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/developer-guide/payments-integration"),
+          getDocLink("/docs/developer-guide/testing-sandbox"),
+          getDocLink("/docs/merchant-guide/treasury-and-reconciliation-basics"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/private-execution-perps-integration-points": {
+    description:
+      "Understand how confidential execution and private perps extension points fit into the same authority, policy, and settlement model as the rest of Ryvra.",
+    metadataTitle: "Developer Guide: Private Execution and Perps Integration Points",
+    metadataDescription:
+      "Developer guide to confidentiality-sensitive Ryvra integrations and the advanced references that support them.",
+    calloutVariant: "info",
+    calloutTitle: "Private does not mean opaque",
+    calloutBody:
+      "Sensitive processing can stay protected while the overall workflow still remains governable and auditable.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Developers evaluating confidential execution or private perps integrations.",
+      },
+      {
+        id: "prerequisites",
+        title: "Prerequisites",
+        bullets: [
+          "You already understand the normal control, execution, and settlement flow.",
+          "You know which data must stay protected and which outputs still need to remain observable.",
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "Private execution changes where sensitive state is processed, not who has authority to approve or investigate the workflow.",
+      },
+      {
+        id: "deep-spec-link",
+        title: "Deep spec link",
+        links: [getDocLink("/docs/rfc-index"), getDocLink("/docs/audit-and-provenance")],
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/developer-guide/account-abstraction-erc4337"),
+          getDocLink("/docs/developer-guide/architecture-overview"),
           getDocLink("/docs/governance-and-security-model"),
         ],
       },
@@ -3566,16 +4046,258 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
     ],
   },
+  "/docs/tokenomics": {
+    description:
+      "Tokenomics docs now start with a plain-language overview and then point to the detailed specification and existing litepaper materials.",
+    metadataTitle: "Tokenomics",
+    metadataDescription:
+      "Audience-first Ryvra tokenomics documentation covering plain-language framing, deeper specification detail, and disclosure boundaries.",
+    calloutVariant: "note",
+    calloutTitle: "Confirmed versus future parameters",
+    calloutBody:
+      "This section separates what Ryvra has published publicly today from what remains illustrative, governance-controlled, or not yet public.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Readers who need tokenomics context without starting from formulas or research-style language.",
+      },
+      {
+        id: "what-to-read-first",
+        title: "What to read first",
+        links: [
+          getDocLink("/docs/tokenomics/detailed-tokenomics-specification"),
+          getDocLink("/docs/glossary"),
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "The clearest public tokenomics material today is the pre-TGE Proof of Transaction program. It awards contribution points, not tokens, while final issuance terms remain subject to governance and legal review.",
+      },
+      {
+        id: "source-of-truth",
+        title: "Source of truth",
+        body: "Current public tokenomics wording is anchored in `/litepaper`, `lib/tokenomics.ts`, and the mirrored markdown files under `content/`.",
+      },
+    ],
+  },
+  "/docs/tokenomics/detailed-tokenomics-specification": {
+    description:
+      "Detailed tokenomics specification for the currently public Ryvra assumptions, formulas, adjustable parameters, and disclosure boundaries.",
+    metadataTitle: "Tokenomics: Detailed Specification",
+    metadataDescription:
+      "Detailed Ryvra tokenomics specification covering public assumptions, public formulas, governance-controlled parameters, and disclosure boundaries.",
+    calloutVariant: "warn",
+    calloutTitle: "Do not infer unpublished values",
+    calloutBody:
+      "Where Ryvra has not published a parameter, this page says so directly instead of filling the gap with speculation.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Researchers, developers, investors, and advanced readers who need structured tokenomics detail.",
+      },
+      {
+        id: "confirmed-public-parameters",
+        title: "Confirmed public parameters",
+        bullets: [
+          "Proof of Transaction awards points for eligible, finalized, policy-compliant activity before any token generation event.",
+          "The current public assumptions include an illustrative epoch-0 daily cap, a halving-style cap schedule, anti-abuse controls, and a proportional future conversion framework.",
+          "Points are not tokens today and do not represent token ownership before final issuance terms are published.",
+        ],
+      },
+      {
+        id: "future-or-governance-controlled-parameters",
+        title: "Future or governance-controlled parameters",
+        bullets: [
+          "Epoch timing, thresholds, and anti-abuse tuning.",
+          "Any final supply model, emissions schedule, unlock design, or vesting schedule not yet published as final public information.",
+          "Allocation details beyond the existing illustrative envelope ranges.",
+        ],
+      },
+      {
+        id: "token-utility-and-disclosures",
+        title: "Token utility, governance role, and disclosures",
+        bullets: [
+          "Public materials frame the token around future network participation, ecosystem alignment, and governance, but final utility terms are not yet published in a binding form.",
+          "Participation and claiming may depend on jurisdiction and compliance requirements.",
+          "Nothing on this page is investment advice or a promise of token issuance, value, or returns.",
+        ],
+      },
+      {
+        id: "glossary-and-source-materials",
+        title: "Glossary and source materials",
+        links: [
+          getDocLink("/docs/glossary"),
+          getDocLink("/docs/rfc-technical-specs"),
+        ],
+      },
+    ],
+  },
+  "/docs/security-and-risk": {
+    description:
+      "Security and risk docs explain the trust model, audit expectations, and support paths that apply across users, merchants, and developers.",
+    metadataTitle: "Security and Risk",
+    metadataDescription:
+      "Cross-audience Ryvra security and risk documentation covering governance, audit and provenance, and support escalation flows.",
+    calloutVariant: "warn",
+    calloutTitle: "Cross-cutting controls",
+    calloutBody:
+      "These pages explain why Ryvra may approve, reject, pause, or require review for a workflow and how humans stay in the loop.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Any reader who needs cross-cutting trust, risk, or escalation context.",
+      },
+      {
+        id: "what-you-will-find",
+        title: "What you will find",
+        links: [
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/support-and-escalation"),
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "Security and risk topics show why Ryvra may slow down, block, or require human review for sensitive workflows. These controls are part of how the system stays governable.",
+      },
+    ],
+  },
+  "/docs/support-and-escalation": {
+    description:
+      "Use this page to understand when to escalate, what evidence to collect, and how support, operators, and engineers should cooperate during a Ryvra incident or exception.",
+    metadataTitle: "Support and Escalation",
+    metadataDescription:
+      "Cross-audience support and escalation guide for Ryvra incidents, blocked workflows, and evidence-based investigation.",
+    calloutVariant: "warn",
+    calloutTitle: "Bring evidence, not guesses",
+    calloutBody:
+      "Fast escalations are useful only when the receiving team can trace the workflow from the details you provide.",
+    headings: [
+      {
+        id: "what-to-collect",
+        title: "What to collect",
+        bullets: [
+          "Request, event, and settlement references when available.",
+          "Time of the issue, current visible status, and intended outcome.",
+          "Screenshots, logs, or notes that explain what changed.",
+        ],
+      },
+      {
+        id: "when-to-escalate",
+        title: "When to escalate",
+        bullets: [
+          "A high-value workflow is blocked or stuck without a clear reason.",
+          "There is a mismatch between local state and canonical final state.",
+          "A security issue, suspected abuse, or unauthorized action may be involved.",
+        ],
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/developer-guide/troubleshooting"),
+        ],
+      },
+    ],
+  },
+  "/docs/rfc-technical-specs": {
+    description:
+      "This section keeps the deeper, source-of-truth architecture and specification material available without forcing first-time readers to start here.",
+    metadataTitle: "RFC / Technical Specs",
+    metadataDescription:
+      "Advanced Ryvra technical specifications covering architecture, settlement, confidentiality, and the existing RFC-heavy source material.",
+    calloutVariant: "note",
+    calloutTitle: "Advanced layer",
+    calloutBody:
+      "Use these pages when you need the exact architecture or trust-boundary framing rather than the introductory explanation.",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Developers, reviewers, researchers, and advanced readers who need canonical wording.",
+      },
+      {
+        id: "spec-index",
+        title: "Specification index",
+        links: [
+          getDocLink("/docs/rfc-index"),
+          getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+        ],
+      },
+      {
+        id: "in-plain-english",
+        title: "In plain English",
+        body: "These pages keep technical depth available, but they are intentionally one layer deeper in the navigation so new readers do not start with jargon-heavy material.",
+      },
+    ],
+  },
+  "/docs/writing-style-and-templates": {
+    description:
+      "Writing guide for Ryvra documentation pages, including the standard page template and the natural-language-first rules used in IA v2.",
+    metadataTitle: "Writing Style and Templates",
+    metadataDescription:
+      "Ryvra docs writing guide covering standard page sections, terminology rules, and audience-first content patterns.",
+    calloutVariant: "note",
+    calloutTitle: "Write for the reader's task",
+    calloutBody:
+      "Every page should help the right audience complete a job before it asks them to learn internal terminology.",
+    headings: [
+      {
+        id: "standard-template",
+        title: "Standard template",
+        bullets: [
+          "Summary",
+          "Audience",
+          "Prerequisites",
+          "In plain English",
+          "Step-by-step",
+          "Troubleshooting",
+          "Related pages",
+          "Last updated",
+          "Source of truth",
+        ],
+      },
+      {
+        id: "writing-rules",
+        title: "Writing rules",
+        bullets: [
+          "Use short paragraphs and action-oriented headings.",
+          "Reduce acronyms or define them the first time they appear.",
+          "Explain concepts before introducing protocol terms.",
+          "Link to deep specs instead of front-loading jargon into overview pages.",
+          "Use consistent terminology across users, merchants, developers, tokenomics, and security pages.",
+        ],
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/docs-ia-v2"),
+          getDocLink("/docs/glossary"),
+          getDocLink("/docs/release-notes"),
+        ],
+      },
+    ],
+  },
   "/docs/release-notes": {
     description:
-      "Track shipped documentation portal updates, compatibility windows, and release boundaries for user, merchant, and developer guides.",
+      "Track the Docs IA v2 rollout, including audience-first navigation, tokenomics additions, glossary expansion, and the migration rationale.",
     metadataTitle: "Release Notes",
     metadataDescription:
       "Release notes for the Ryvra docs portal rollout, including shipped scope, compatibility window, publish gates, and non-scope boundaries.",
     calloutVariant: "note",
-    calloutTitle: "Docs portal rollout: Part D publish hardening",
+    calloutTitle: "Docs IA v2",
     calloutBody:
-      "This release finalizes publish-readiness hardening for the docs portal after merged User, Merchant, and Developer authored content.",
+      "This release moves the docs portal to audience-first navigation with natural-language overviews, advanced spec layering, tokenomics coverage, and retained deep links.",
     headings: [
       {
         id: "last-updated",
@@ -3585,16 +4307,16 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       {
         id: "release-summary",
         title: "Release summary",
-        body: "Part D completes final hardening, QA coverage, and production publish readiness for the docs portal information architecture and authored guides.",
+        body: "Docs IA v2 reorganizes the public portal around reader intent instead of legacy guide silos while preserving technical depth and detailed workflow pages.",
       },
       {
         id: "shipped-in-this-rollout",
         title: "Shipped in this rollout",
         bullets: [
-          "Fully authored User, Merchant, and Developer guides across all live docs routes.",
-          "Normalized terminology, compatibility wording, and publish-boundary language.",
-          "Hardened navigation structure including sidebar grouping, breadcrumbs, previous/next continuity, and heading anchor integrity.",
-          "Repo-native docs link and anchor checks added to package scripts and CI validation workflow.",
+          "Audience-first navigation for Users, Merchants, Developers, Tokenomics, Security and Risk, and RFC / Technical Specs.",
+          "New natural-language overview pages for tokenomics, security and risk, merchant operating context, and developer onboarding context.",
+          "Expanded glossary entries for core Ryvra terms used across tracks.",
+          "Docs IA v2 audit and writing-template guidance added to the portal.",
         ],
       },
       {
@@ -3606,9 +4328,9 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "not-in-scope",
         title: "Not in scope",
         bullets: [
-          "No major documentation IA redesign beyond hardening and integrity fixes.",
-          "No speculative product roadmap commitments outside currently shipped docs coverage.",
-          "No replacement of legal, contractual, or private operational runbooks.",
+          "No unpublished token supply, emissions, or vesting terms were invented to fill disclosure gaps.",
+          "No private merchant, legal, or contractual runbooks were added to public docs.",
+          "Existing detailed workflow pages remain available and were not removed from the portal.",
         ],
       },
       {
@@ -3640,59 +4362,83 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
   },
   "/docs/glossary": {
     description:
-      "Canonical term definitions used across User, Merchant, and Developer documentation to keep operational meaning consistent.",
+      "Canonical term definitions used across user, merchant, developer, tokenomics, and security documentation to keep operational meaning consistent.",
     metadataTitle: "Glossary",
     metadataDescription:
-      "Ryvra documentation glossary with standardized terminology for accounts, merchant operations, integrations, events, and compatibility windows.",
+      "Ryvra documentation glossary with standardized terminology for mandates, capabilities, policy versions, financial intent, provenance, settlement, and confidentiality-sensitive workflows.",
     calloutVariant: "note",
     calloutTitle: "Use these canonical definitions",
     calloutBody:
       "These definitions are the normalization baseline for all guides in this docs portal release.",
     headings: [
       {
+        id: "summary",
+        title: "Summary",
+        body: "Use these definitions whenever a term appears in more than one audience track so readers do not have to guess whether the meaning changed.",
+      },
+      {
+        id: "mandate",
+        title: "Mandate",
+        body: "The scoped authority record that defines what a principal, operator, or governed runtime is allowed to request or approve.",
+      },
+      {
+        id: "capability",
+        title: "Capability",
+        body: "The product or workflow surface that a caller may access when the rest of the authority checks are also satisfied.",
+      },
+      {
+        id: "policy-version",
+        title: "Policy version",
+        body: "The named ruleset or revision that explains how a workflow was evaluated at a specific moment in time.",
+      },
+      {
+        id: "risk-assessment",
+        title: "Risk assessment",
+        body: "The independent evaluation that decides whether a valid request should proceed, be blocked, or be routed for review.",
+      },
+      {
+        id: "authorization",
+        title: "Authorization",
+        body: "The governed decision that a specific request may advance toward execution under the documented identity, mandate, policy, and risk context.",
+      },
+      {
+        id: "financial-intent",
+        title: "Financial intent",
+        body: "The structured request describing the financial outcome being asked for, together with the references and constraints needed to judge it safely.",
+      },
+      {
+        id: "provenance",
+        title: "Provenance",
+        body: "The evidence chain that links an original request to its approvals, execution steps, final state, and any later intervention.",
+      },
+      {
+        id: "reservation",
+        title: "Reservation",
+        body: "A temporary hold or protected allocation of capacity, balance, or workflow state before a terminal outcome is recorded.",
+      },
+      {
+        id: "settlement",
+        title: "Settlement",
+        body: "The stage where the workflow reaches a final recorded financial outcome that downstream systems can reconcile against.",
+      },
+      {
+        id: "confidentiality-private-execution",
+        title: "Confidentiality and private execution",
+        body: "Protected processing for sensitive financial state that preserves the same governance, risk, and finality expectations used in the rest of Ryvra.",
+      },
+      {
+        id: "related-pages",
+        title: "Related pages",
+        links: [
+          getDocLink("/docs/tokenomics"),
+          getDocLink("/docs/developer-guide/financial-intent-model"),
+          getDocLink("/docs/governance-and-security-model"),
+        ],
+      },
+      {
         id: "last-updated",
         title: "Last updated",
-        body: "2026-08-04",
-      },
-      {
-        id: "account-wallet",
-        title: "Account wallet",
-        body: "The user-operated wallet context connected to a Ryvra account for trading, transfers, liquidity or staking, and payments.",
-      },
-      {
-        id: "merchant-workspace",
-        title: "Merchant workspace",
-        body: "The merchant operations context where teams configure checkout, invoicing, subscriptions, settlement, reconciliation, and disputes.",
-      },
-      {
-        id: "integration-client",
-        title: "Integration client",
-        body: "The developer-operated service or application that calls Ryvra APIs and consumes Ryvra webhooks and events.",
-      },
-      {
-        id: "idempotency-key",
-        title: "Idempotency key",
-        body: "A stable unique key supplied by clients to make retries safe and prevent duplicate effect creation for retried requests.",
-      },
-      {
-        id: "terminal-state",
-        title: "Terminal state",
-        body: "A workflow state that will not progress further without a new operator or client action, such as paid, failed, canceled, or expired.",
-      },
-      {
-        id: "compatibility-window",
-        title: "Compatibility window",
-        body: "The period where documented behavior is expected to align with currently shipped Ryvra interfaces before new releases introduce updates.",
-      },
-      {
-        id: "release-boundary",
-        title: "Release boundary",
-        body: "The explicit scope of what is shipped in the current docs release versus what is intentionally not included.",
-      },
-      {
-        id: "related-docs",
-        title: "Related docs",
-        links: [getDocLink("/docs/release-notes"), getDocLink("/docs/getting-started"), getDocLink("/docs/developer-guide/rate-limits-idempotency")],
+        body: "2026-09-11",
       },
     ],
   },

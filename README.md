@@ -49,13 +49,15 @@ Avoid copy that implies:
 
 ## Source-of-truth documentation links
 
-- RFC index: `/docs/rfc-index`
-- API and SDK onboarding: `/docs/developer-guide/api-sdk-onboarding`
-- Governance and security model: `/docs/governance-and-security-model`
-- Audit and provenance: `/docs/audit-and-provenance`
-- Architecture overview: `/docs/developer-guide/architecture-overview`
+- Docs home: `/docs`
+- Users track: `/docs/user-guide`
+- Merchants track: `/docs/merchant-guide`
+- Developers track: `/docs/developer-guide`
+- Tokenomics: `/docs/tokenomics`
+- Security and risk: `/docs/security-and-risk`
+- RFC / technical specs: `/docs/rfc-technical-specs`
 
-These docs routes are the canonical source for website messaging about architecture, authority, and trust boundaries.
+These docs routes are the canonical public-navigation layer for website messaging about architecture, authority, tokenomics, and trust boundaries.
 
 ---
 
@@ -108,4 +110,6 @@ These docs routes are the canonical source for website messaging about architect
 
 - Homepage and capability pages should use natural language and compliance-friendly wording.
 - Update `/content/brand-narrative.md` when messaging framework changes.
-- Update `/lib/docs.ts` when source-of-truth documentation routes or CTA targets change.
+- Update `/lib/docs.ts` when audience tracks, glossary terms, tokenomics links, or CTA targets change.
+- Keep the docs portal in a “natural language first, spec second” structure.
+- Check `/docs/docs-ia-v2` and `/docs/writing-style-and-templates` before making larger documentation IA changes.
