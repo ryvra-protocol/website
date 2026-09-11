@@ -1,12 +1,13 @@
 import Link from "next/link";
 
 const links = [
+  { href: "/capabilities", label: "Capabilities" },
   { href: "/brand", label: "Brand" },
   { href: "/docs", label: "Docs" },
-  { href: "/docs/getting-started", label: "Getting Started" },
-  { href: "/docs/user-guide", label: "User Guide" },
+  { href: "/docs/rfc-index", label: "RFCs" },
+  { href: "/docs/developer-guide/api-sdk-onboarding", label: "API + SDK" },
+  { href: "/docs/governance-and-security-model", label: "Security Model" },
   { href: "/docs/developer-guide", label: "Developer Guide" },
-  { href: "/docs/release-notes", label: "Release Notes" },
   { href: "https://github.com/ryvra-protocol", label: "GitHub" },
 ];
 

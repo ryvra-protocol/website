@@ -5,7 +5,7 @@ import { Section } from "@/components/Section";
 export const metadata: Metadata = {
   title: "Build with Ryvra",
   description:
-    "Production integration entry point for teams building on Ryvra Unified Assets and EIP-4337 capabilities.",
+    "Production integration entry point for teams building bounded autonomous-finance workflows on Ryvra.",
   alternates: { canonical: "/build" },
   openGraph: {
     title: "Build with Ryvra",
@@ -20,26 +20,50 @@ export default function BuildPage() {
   return (
     <Section title="Build with Ryvra">
       <p className="lead">
-        Production integrations should follow the documented compatibility and
-        operations path for Unified Assets and EIP-4337 account abstraction.
+        Build bounded autonomous-finance products on top of Ryvra’s control plane,
+        execution plane, and ledger-backed settlement model.
       </p>
 
       <div className="grid grid-2">
         <article className="card">
           <strong>Start integration</strong>
-          <p>Review prerequisites, supported flows, and environment assumptions.</p>
+          <p>Review API and SDK onboarding, environment assumptions, and first safe workflows.</p>
           <div className="button-row">
-            <Link className="button button-primary" href="/docs/getting-started">
-              Getting started
+            <Link className="button button-primary" href="/docs/developer-guide/api-sdk-onboarding">
+              API + SDK onboarding
             </Link>
           </div>
         </article>
         <article className="card">
-          <strong>Validate compatibility</strong>
-          <p>Use compatibility matrix and API references before production cutover.</p>
+          <strong>Validate control model</strong>
+          <p>Review authority boundaries, security constraints, and governance expectations before production cutover.</p>
           <div className="button-row">
-            <Link className="button button-secondary" href="/docs/developer-guide/api-overview">
-              API overview
+            <Link className="button button-secondary" href="/docs/governance-and-security-model">
+              Governance + security model
+            </Link>
+          </div>
+        </article>
+      </div>
+
+      <div className="grid grid-2">
+        <article className="card">
+          <strong>Study the architecture</strong>
+          <p>Use the architecture overview and RFC index to align internal design and review paths.</p>
+          <div className="button-row">
+            <Link className="button button-secondary" href="/docs/developer-guide/architecture-overview">
+              Architecture overview
+            </Link>
+            <Link className="button button-secondary" href="/docs/rfc-index">
+              RFC index
+            </Link>
+          </div>
+        </article>
+        <article className="card">
+          <strong>Prepare enterprise operations</strong>
+          <p>Understand provenance, auditability, suspension, and emergency control patterns before go-live.</p>
+          <div className="button-row">
+            <Link className="button button-secondary" href="/docs/audit-and-provenance">
+              Audit + provenance
             </Link>
           </div>
         </article>

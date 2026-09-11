@@ -318,6 +318,66 @@ a {
   display: block;
 }
 
+.architecture-list-grid {
+  margin-top: 1rem;
+}
+
+.diagram-card {
+  margin: 1rem 0 0;
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface-muted);
+  padding: 1rem;
+}
+
+.diagram-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.diagram-shell {
+  fill: color-mix(in srgb, var(--surface) 84%, var(--accent) 16%);
+  stroke: var(--border);
+  stroke-width: 2;
+}
+
+.diagram-boundary {
+  fill: color-mix(in srgb, var(--accent) 20%, var(--surface) 80%);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.diagram-panel {
+  fill: var(--surface);
+  stroke: var(--border);
+  stroke-width: 2;
+}
+
+.diagram-layer {
+  fill: color-mix(in srgb, var(--accent) 14%, var(--surface) 86%);
+  stroke: var(--accent);
+  stroke-width: 2;
+}
+
+.diagram-line {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.diagram-label,
+.diagram-heading {
+  fill: var(--foreground);
+  font-weight: 700;
+}
+
+.diagram-copy {
+  fill: var(--muted);
+  font-size: 0.95rem;
+}
+
 .tokenomics-caption {
   margin: 0.65rem 0 0;
   color: var(--muted);

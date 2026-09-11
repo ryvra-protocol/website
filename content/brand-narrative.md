@@ -1,50 +1,52 @@
 # Ryvra Brand Narrative
 
-Ryvra aligns account execution and asset movement so every qualified transaction can contribute measurable utility across products and markets.
+Ryvra is programmable financial infrastructure for bounded autonomous finance.
+
+AI can propose work, but Ryvra authorizes through identity, mandates, policy, and risk, while deterministic systems execute and ledger plus settlement provide truth and finality.
 
 ## Mission
 
-Ryvra’s mission is to reduce structural fragmentation in global finance by standardizing how smart accounts, Unified Assets, and policy controls operate together.
+Ryvra’s mission is to make programmable finance safe enough for real-world operators by separating agent proposals from financial authority, binding every workflow to governed controls, and preserving deterministic finality.
 
 ## Problem Framing
 
-- Financial systems still split users across incompatible account models, fragmented asset rails, and inconsistent risk controls.
-- Developers repeatedly rebuild account security, settlement policy, and asset handling instead of focusing on product outcomes.
-- Merchants and institutions need a programmable, auditable transaction layer that can operate consistently across jurisdictions and use cases.
+- Financial automation is advancing faster than financial control systems, creating pressure to hand unsafe authority to AI.
+- Teams need programmable payments, markets, and treasury workflows without introducing opaque execution or unauditable state changes.
+- Institutions need one control model across identity, mandates, policy, risk, settlement, and provenance instead of fragmented product-by-product guardrails.
 
 ## Differentiation Pillars
 
-### EIP-4337 account foundation
+### Governed autonomous-finance model
 
-- Ryvra uses EIP-4337 smart accounts to unify user operations, session permissions, and execution policy under one programmable account surface.
+- Ryvra supports bounded autonomy: agents can propose intents, but governed systems decide what is authorized and deterministic systems decide what is executed.
 
-### Unified Assets operating model
+### Control plane and execution plane separation
 
-- Ryvra applies Unified Assets so stablecoins, crypto, RWAs, and metals can follow one canonical lifecycle for custody, movement, and settlement controls.
+- Ryvra separates the control plane for identity, mandates, policy, and risk from the execution plane for accounts, markets, and pay, with the Agent Gateway as the boundary between them.
 
-### Proof of Transaction (PoT) contribution layer
+### Ledger, settlement, and confidentiality
 
-- Ryvra uses Proof of Transaction (PoT) to measure finalized, policy-compliant activity through transparent contribution accounting before TGE.
+- Ryvra anchors balances and terminal state in shared ledger and settlement systems while extending the architecture with confidential execution for sensitive financial state and private perps.
 
 ## Proof Points
 
-- Shared account and asset primitives reduce duplicate integrations across payment and market modules.
-- Policy-versioned transaction controls support compliance-aware rollout by product and region.
-- Published PoT rules and cap mechanics make contribution criteria auditable.
+- Ryvra makes authority legible with explicit prohibitions against unrestricted AI wallet keys and AI self-policy modification.
+- Deterministic risk, replay controls, rate controls, spend controls, and kill switches operate independently of agent reasoning.
+- Provenance and auditability are carried from proposal through authorization, execution, settlement, and operator intervention.
 
 ## Audience Outcomes
 
-### Users
+### Enterprises
 
-- Fewer account handoffs between products and clearer transaction-state expectations.
-- Consistent contribution visibility through Proof of Transaction (PoT) policy outputs.
-
-### Merchants
-
-- One integration path for collections, payouts, and treasury movement across Unified Assets.
-- Better operational control with programmable policy hooks and risk thresholds.
+- Deploy agent-assisted financial workflows with human governance, policy versioning, and emergency suspension controls intact.
+- Preserve audit-ready evidence and compliance-friendly explanations for every automated action.
 
 ### Developers
 
-- Faster shipping with reusable EIP-4337 account flows and Unified Assets abstractions.
-- Lower maintenance overhead from standardized execution, policy, and contribution primitives.
+- Build against consistent primitives for identity, mandates, policy, risk, and deterministic execution instead of inventing custom agent safeguards.
+- Onboard faster with clear API, SDK, governance, and provenance paths.
+
+### Operators
+
+- Use one trust model across agentic payments, agentic markets, autonomous treasury, and confidential execution extensions.
+- Reconcile final outcomes against ledger and settlement truth instead of opaque runtime state.

@@ -5,13 +5,13 @@ import { Navbar } from "@/components/Navbar";
 
 const siteName = "Ryvra";
 const siteDescription =
-  "Ryvra is a unified account and asset protocol designed to reduce financial fragmentation and align network participation through Proof of Transaction (PoT).";
+  "Ryvra is programmable financial infrastructure where AI proposes, Ryvra authorizes, and deterministic systems execute with ledger-backed finality.";
 const siteUrl = "https://ryvra.org";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "Ryvra | Every transaction contributes.",
+    default: "Ryvra | Programmable financial infrastructure",
     template: `%s | ${siteName}`,
   },
   description: siteDescription,

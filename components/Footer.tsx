@@ -7,7 +7,7 @@ type FooterLinkItem = {
 
 type FooterSection = {
   id: string;
-  title: "About" | "Products" | "Services" | "Learn" | "Team" | "Community";
+  title: "About" | "Products" | "Platform" | "Learn" | "Team" | "Community";
   links: FooterLinkItem[];
 };
 
@@ -17,29 +17,29 @@ const footerSections: FooterSection[] = [
     title: "About",
     links: [
       { href: "/brand", label: "Brand" },
-      { href: "/brand#mission", label: "Mission" },
-      { href: "/litepaper", label: "Litepaper" },
-      { href: "/build", label: "Contact" },
+      { href: "/brand#mission", label: "Messaging framework" },
+      { href: "/docs/rfc-index", label: "RFC Index" },
+      { href: "/build", label: "Build with Ryvra" },
     ],
   },
   {
     id: "products",
     title: "Products",
     links: [
-      { href: "/docs/user-guide/accounts-and-wallets", label: "Accounts" },
-      { href: "/docs/user-guide/send-payments", label: "Pay" },
-      { href: "/docs/user-guide/buy-sell-trade", label: "Markets" },
-      { href: "/build", label: "Build" },
+      { href: "/capabilities/agent-gateway", label: "Agent Gateway" },
+      { href: "/capabilities/agent-runtime", label: "Agent Runtime" },
+      { href: "/capabilities/agent-sdk", label: "Agent SDK" },
+      { href: "/capabilities/private-execution", label: "Private Execution" },
     ],
   },
   {
-    id: "services",
-    title: "Services",
+    id: "platform",
+    title: "Platform",
     links: [
-      { href: "/docs/merchant-guide", label: "Merchant Docs" },
-      { href: "/docs/developer-guide", label: "Developer Docs" },
-      { href: "/build", label: "Integrations" },
-      { href: "/docs/merchant-guide/merchant-faq", label: "Support" },
+      { href: "/capabilities/agentic-payments", label: "Agentic Payments" },
+      { href: "/capabilities/agentic-markets", label: "Agentic Markets" },
+      { href: "/capabilities/autonomous-treasury", label: "Autonomous Treasury" },
+      { href: "/capabilities/private-perps", label: "Private Perps" },
     ],
   },
   {
@@ -47,9 +47,9 @@ const footerSections: FooterSection[] = [
     title: "Learn",
     links: [
       { href: "/docs", label: "Docs Home" },
-      { href: "/docs/getting-started", label: "Getting Started" },
-      { href: "/docs/glossary", label: "Glossary" },
-      { href: "/docs/release-notes", label: "Release Notes" },
+      { href: "/docs/developer-guide/api-sdk-onboarding", label: "API + SDK Onboarding" },
+      { href: "/docs/governance-and-security-model", label: "Governance + Security" },
+      { href: "/docs/audit-and-provenance", label: "Audit + Provenance" },
     ],
   },
   {
