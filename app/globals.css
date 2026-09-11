@@ -170,6 +170,81 @@ a {
   color: var(--muted);
 }
 
+.founder-hero {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.founder-profile-layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 320px) minmax(0, 1fr);
+  gap: 1.25rem;
+  align-items: start;
+}
+
+.founder-photo-shell {
+  width: 100%;
+}
+
+.founder-photo {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+  background: var(--surface-muted);
+  object-fit: cover;
+  display: block;
+}
+
+.founder-photo-placeholder {
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  color: var(--muted);
+  text-align: center;
+  font-weight: 600;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--surface-muted) 84%, var(--accent) 16%), var(--surface));
+}
+
+.founder-profile-copy {
+  min-width: 0;
+}
+
+.founder-name {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.founder-role {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.founder-bio {
+  margin-top: 0.75rem;
+}
+
+.founder-quote {
+  margin: 0.85rem 0 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
+}
+
+.founder-profile-links {
+  margin: 0;
+  padding-left: 1.1rem;
+  color: var(--muted);
+}
+
+.founder-profile-links li + li {
+  margin-top: 0.35rem;
+}
+
 .footer {
   display: grid;
   gap: 1.25rem;
@@ -417,6 +492,10 @@ a {
 }
 
 @media (max-width: 700px) {
+  .founder-profile-layout {
+    grid-template-columns: 1fr;
+  }
+
   .footer {
     padding: 1.3rem 0 1.7rem;
   }

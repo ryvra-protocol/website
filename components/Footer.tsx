@@ -57,7 +57,7 @@ const footerSections: FooterSection[] = [
   {
     id: "team",
     title: "Team",
-    links: [{ href: "/founder", label: "Umar Rabiu — Founder & CEO" }],
+    links: [{ href: "/founder", label: "Founder" }],
   },
   {
     id: "community",
