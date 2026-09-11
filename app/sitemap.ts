@@ -12,7 +12,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/capabilities",
     "/litepaper",
     "/founder",
-    "/team",
     "/privacy",
     "/terms",
     ...allCapabilityLinks.map((link) => link.href),

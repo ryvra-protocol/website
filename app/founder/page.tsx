@@ -53,8 +53,14 @@ export default function FounderPage() {
         <ul>
           {profileLinks.map((link) => (
             <li key={link.label}>
-              <a href={link.href} target="_blank" rel="noopener noreferrer">
-                {link.label} (opens in new tab)
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${link.label} (opens in new tab)`}
+              >
+                {link.label}
+                <span aria-hidden="true"> ↗</span>
               </a>
             </li>
           ))}
