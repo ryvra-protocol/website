@@ -27,7 +27,7 @@ export const metadata: Metadata = {
     title: `Ryvra | ${metadataTitle}`,
     description: metadataDescription,
     url: canonicalUrl,
-    type: "profile",
+    type: "website",
   },
 };
 
@@ -54,7 +54,7 @@ export default function FounderPage() {
           {profileLinks.map((link) => (
             <li key={link.label}>
               <a href={link.href} target="_blank" rel="noopener noreferrer">
-                {link.label}
+                {link.label} (opens in new tab)
               </a>
             </li>
           ))}

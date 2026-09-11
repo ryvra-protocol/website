@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { Section } from "@/components/Section";
+import { redirect } from "next/navigation";
 
 const siteUrl = "https://ryvra.org";
 const metadataTitle = "Team";
@@ -20,12 +19,5 @@ export const metadata: Metadata = {
 };
 
 export default function TeamPage() {
-  return (
-    <Section title="Team">
-      <p className="lead">Team content has moved to the founder profile.</p>
-      <p>
-        Visit <Link href="/founder">/founder</Link> for current leadership details.
-      </p>
-    </Section>
-  );
+  redirect("/founder");
 }
