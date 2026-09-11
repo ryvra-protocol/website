@@ -74,8 +74,11 @@ export function PlatformArchitectureDiagram() {
         <text x="380" y="358" textAnchor="middle" className="diagram-heading">
           Ledger + Settlement truth layer
         </text>
-        <text x="380" y="378" textAnchor="middle" className="diagram-copy">
-          Final balances, reconciliation, provenance, and terminal state
+        <text x="380" y="376" textAnchor="middle" className="diagram-copy">
+          Final balances, reconciliation, provenance
+        </text>
+        <text x="380" y="394" textAnchor="middle" className="diagram-copy">
+          and terminal state
         </text>
 
         <rect x="552" y="28" width="168" height="76" rx="18" className="diagram-shell" />

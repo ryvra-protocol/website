@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { CapabilityPage } from "@/components/CapabilityPage";
 import { capabilityPageBySlug, capabilityPages } from "@/lib/capabilities";
 
-export async function generateStaticParams() {
+export function generateStaticParams() {
   return capabilityPages.map((page) => ({ slug: page.slug }));
 }
 

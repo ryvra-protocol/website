@@ -56,7 +56,7 @@ export function ProvenanceLifecycleDiagram() {
           Suspension, spend caps, replay and rate controls
         </text>
         <text x="380" y="234" textAnchor="middle" className="diagram-copy">
-          plus kill switch operate across the full lifecycle.
+          plus kill switches operate across the full lifecycle.
         </text>
         <path d="M160 124H180" className="diagram-line" />
         <path d="M310 124H330" className="diagram-line" />
