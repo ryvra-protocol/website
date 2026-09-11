@@ -33,7 +33,7 @@ export default function FounderPage() {
       <Section className="hero founder-hero" title="Founder & CEO">
         <p className="lead">Technical Founder at Ryvra</p>
         <div className="founder-profile-layout">
-          <div className="founder-photo-shell" aria-label="Founder profile photo">
+          <div className="founder-photo-shell">
             {founderImageSrc ? (
               <Image
                 src={founderImageSrc}
@@ -44,7 +44,11 @@ export default function FounderPage() {
                 priority
               />
             ) : (
-              <div className="founder-photo founder-photo-placeholder">
+              <div
+                className="founder-photo founder-photo-placeholder"
+                role="img"
+                aria-label="Profile photo placeholder. Replace with founder image."
+              >
                 <span>Profile photo (replace with founder image)</span>
               </div>
             )}
@@ -89,8 +93,9 @@ export default function FounderPage() {
         </div>
       </Section>
 
-      <Section title="Approach">
+      <Section title="Learning approach">
         <article className="card">
+          <p>His learning approach is grounded in execution:</p>
           <p>
             I learned primarily by building: taking ideas from architecture and prototypes through
             implementation, debugging, deployment, and iteration.
