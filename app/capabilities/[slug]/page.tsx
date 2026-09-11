@@ -3,15 +3,13 @@ import { notFound } from "next/navigation";
 import { CapabilityPage } from "@/components/CapabilityPage";
 import { capabilityPageBySlug, capabilityPages } from "@/lib/capabilities";
 
-type CapabilityRouteProps = {
-  params: Promise<{ slug: string }>;
-};
-
 export async function generateStaticParams() {
   return capabilityPages.map((page) => ({ slug: page.slug }));
 }
 
-export async function generateMetadata({ params }: CapabilityRouteProps): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: PageProps<"/capabilities/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const page = capabilityPageBySlug.get(slug);
 
@@ -26,7 +24,9 @@ export async function generateMetadata({ params }: CapabilityRouteProps): Promis
   };
 }
 
-export default async function CapabilityRoutePage({ params }: CapabilityRouteProps) {
+export default async function CapabilityRoutePage({
+  params,
+}: PageProps<"/capabilities/[slug]">) {
   const { slug } = await params;
   const page = capabilityPageBySlug.get(slug);
 
