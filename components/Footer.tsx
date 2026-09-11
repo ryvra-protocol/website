@@ -40,6 +40,8 @@ const footerSections: FooterSection[] = [
       { href: "/capabilities/agentic-markets", label: "Agentic Markets" },
       { href: "/capabilities/autonomous-treasury", label: "Autonomous Treasury" },
       { href: "/capabilities/private-perps", label: "Private Perps" },
+      { href: "/docs/developer-guide", label: "Developer Docs" },
+      { href: "/docs/merchant-guide/merchant-faq", label: "Support" },
     ],
   },
   {
