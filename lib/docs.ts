@@ -53,6 +53,9 @@ export const docsSidebarGroups: DocsSidebarGroup[] = [
       { href: "/docs", title: "Documentation" },
       { href: "/docs/introduction", title: "Introduction" },
       { href: "/docs/getting-started", title: "Getting Started" },
+      { href: "/docs/rfc-index", title: "RFC Index" },
+      { href: "/docs/governance-and-security-model", title: "Governance and Security Model" },
+      { href: "/docs/audit-and-provenance", title: "Audit and Provenance" },
     ],
   },
   {
@@ -98,6 +101,10 @@ export const docsSidebarGroups: DocsSidebarGroup[] = [
       {
         href: "/docs/developer-guide/architecture-overview",
         title: "Architecture Overview",
+      },
+      {
+        href: "/docs/developer-guide/api-sdk-onboarding",
+        title: "API and SDK Onboarding",
       },
       { href: "/docs/developer-guide/api-overview", title: "API Overview" },
       { href: "/docs/developer-guide/authentication", title: "Authentication" },
@@ -202,20 +209,25 @@ function getDocLink(href: string): DocsSidebarItem {
 const authoredDocsByHref: Record<string, AuthoredDocContent> = {
   "/docs": {
     description:
-      "Choose the right documentation path for using, operating, and integrating Ryvra Protocol.",
+      "Choose the right documentation path for understanding Ryvra architecture, authority, and production integration workflows.",
     metadataTitle: "Documentation",
     metadataDescription:
       "Choose your Ryvra docs path for users, merchants, or developers, with production guidance for operations and integrations.",
     calloutVariant: "info",
-    calloutTitle: "Choose your track",
+    calloutTitle: "Start with the authority model",
     calloutBody:
-      "Start from the role that matches your immediate objective: using products, operating merchant flows, or integrating platform APIs.",
+      "Start from the role that matches your objective, then validate authority, governance, and provenance expectations before enabling automation.",
     headings: [
       {
         id: "choose-your-path",
         title: "Choose your path",
         body: "Pick the path that matches your role and current task.",
-        links: [getDocLink("/docs/user-guide"), getDocLink("/docs/merchant-guide"), getDocLink("/docs/developer-guide")],
+        links: [
+          getDocLink("/docs/user-guide"),
+          getDocLink("/docs/merchant-guide"),
+          getDocLink("/docs/developer-guide"),
+          getDocLink("/docs/governance-and-security-model"),
+        ],
       },
       {
         id: "im-a-user-start-here",
@@ -254,31 +266,42 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       {
         id: "im-a-developer-start-here",
         title: "I’m a developer: start here",
-        body: "The Developer Guide covers architecture, APIs, authentication, events, retries, deployment, and production runbooks.",
+        body: "The Developer Guide covers architecture, APIs, SDK onboarding, authentication, events, retries, deployment, and production runbooks.",
         links: [
           getDocLink("/docs/developer-guide"),
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
           getDocLink("/docs/developer-guide/api-overview"),
           getDocLink("/docs/developer-guide/payments-integration"),
           getDocLink("/docs/developer-guide/observability-and-runbooks"),
+        ],
+      },
+      {
+        id: "source-of-truth-resources",
+        title: "Source-of-truth resources",
+        body: "Use these pages for the canonical website messaging framework and production integration references.",
+        links: [
+          getDocLink("/docs/rfc-index"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
         ],
       },
     ],
   },
   "/docs/introduction": {
     description:
-      "Understand documentation scope, terminology, and operational boundaries for the Ryvra user, merchant, and developer journeys.",
+      "Understand documentation scope, terminology, operational boundaries, and bounded-autonomy principles for Ryvra workflows.",
     metadataTitle: "Introduction",
     metadataDescription:
       "Intro to Ryvra docs coverage, persona guides, compatibility boundaries, and rollout scope for the production docs portal.",
     calloutVariant: "info",
     calloutTitle: "Production documentation baseline",
     calloutBody:
-      "Use this introduction to confirm what is shipped, who each guide is for, and where to find version and release updates.",
+      "Use this introduction to confirm what is shipped, who each guide is for, and where authority, provenance, and versioned controls are documented.",
     headings: [
       {
         id: "purpose-and-scope",
         title: "Purpose and scope",
-        body: "The docs portal provides production-ready guidance for user operations, merchant operations, and developer integrations.",
+        body: "The docs portal provides production-ready guidance for user operations, merchant operations, developer integrations, and Ryvra’s bounded-autonomy control model.",
       },
       {
         id: "what-is-shipped",
@@ -286,8 +309,8 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         bullets: [
           "User Guide for account setup, trading, transactions, liquidity or staking, and payments.",
           "Merchant Guide for onboarding, checkout, invoicing, subscriptions, settlement, reconciliation, disputes, and compliance.",
-          "Developer Guide for architecture, APIs, authentication, events, retries, deployment, testing, and runbooks.",
-          "Reference pages for release notes and glossary definitions.",
+          "Developer Guide for architecture, API and SDK onboarding, authentication, events, retries, deployment, testing, and runbooks.",
+          "Reference pages for RFCs, governance and security, audit and provenance, release notes, and glossary definitions.",
         ],
       },
       {
@@ -297,6 +320,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           "Account wallet: the user-operated wallet context connected to a Ryvra account.",
           "Merchant workspace: the merchant-facing operations context for payment and settlement workflows.",
           "Integration client: the developer-operated service that calls Ryvra APIs and consumes Ryvra events.",
+          "Bounded autonomy: AI can propose, but authorization and final execution stay inside governed Ryvra systems.",
           "Compatibility window: the period where documented behavior is expected to match shipped platform behavior.",
         ],
         links: [getDocLink("/docs/glossary")],
@@ -319,20 +343,25 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       {
         id: "related-docs",
         title: "Related docs",
-        links: [getDocLink("/docs/getting-started"), getDocLink("/docs/user-guide"), getDocLink("/docs/merchant-guide"), getDocLink("/docs/developer-guide")],
+        links: [
+          getDocLink("/docs/getting-started"),
+          getDocLink("/docs/rfc-index"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+        ],
       },
     ],
   },
   "/docs/getting-started": {
     description:
-      "Start quickly by selecting the right persona path, validating prerequisites, and confirming expected outcomes for your first Ryvra workflow.",
+      "Start with the correct authority model, choose the right persona path, and validate the controls around your first Ryvra workflow.",
     metadataTitle: "Getting Started",
     metadataDescription:
       "Getting started checklist for Ryvra docs users with prerequisites, first-step flows, expected outcomes, and recovery guidance.",
     calloutVariant: "success",
-    calloutTitle: "Start with the right persona track",
+    calloutTitle: "Start with control boundaries",
     calloutBody:
-      "Choose user, merchant, or developer guidance first to avoid mixing controls, assumptions, and operational expectations.",
+      "Choose the right persona track and confirm who proposes, who authorizes, and which deterministic systems execute before you go live.",
     headings: [
       {
         id: "prerequisites",
@@ -341,6 +370,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           "Confirm your role for this session: user, merchant operator, or integration developer.",
           "Use the official Ryvra domain and approved account access path.",
           "Have access to the environment you need (account wallet, merchant workspace, or integration sandbox).",
+          "Understand that AI may propose work, but authorization stays in Ryvra control systems and finality stays in ledger and settlement.",
         ],
       },
       {
@@ -348,24 +378,30 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         title: "Step-by-step start flow",
         steps: [
           "Open the documentation landing page and choose your persona track.",
-          "Read the guide overview page for role-specific assumptions and boundaries.",
+          "Read the guide overview page for role-specific assumptions, authority boundaries, and safety controls.",
+          "Review governance and security guidance before enabling any autonomous-finance workflow.",
           "Complete the role-specific prerequisites page before executing live actions.",
-          "Run one low-risk workflow end to end and verify terminal status.",
-          "Use release notes and glossary pages to validate current terminology and rollout scope.",
+          "Run one low-risk workflow end to end and verify terminal status against ledger and settlement outputs.",
+          "Use the RFC index and glossary to validate current terminology, interfaces, and rollout scope.",
         ],
       },
       {
         id: "persona-routes",
         title: "Persona routes",
-        links: [getDocLink("/docs/user-guide"), getDocLink("/docs/merchant-guide"), getDocLink("/docs/developer-guide")],
+        links: [
+          getDocLink("/docs/user-guide"),
+          getDocLink("/docs/merchant-guide"),
+          getDocLink("/docs/developer-guide"),
+          getDocLink("/docs/governance-and-security-model"),
+        ],
       },
       {
         id: "expected-outcome",
         title: "Expected outcome",
         bullets: [
           "You can identify the correct guide and complete first-step workflows without route ambiguity.",
-          "You understand the compatibility window and release-note location for updates.",
-          "You can escalate to role-specific troubleshooting guidance when an operation fails.",
+          "You understand the authority model, compatibility window, and source-of-truth docs for updates.",
+          "You can escalate to role-specific troubleshooting guidance when an operation fails or must be suspended.",
         ],
       },
       {
@@ -383,9 +419,180 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         steps: [
           "Return to the documentation landing page and switch to the correct persona guide.",
           "Re-run prerequisite checklists before repeating failed operations.",
-          "Validate latest guidance in release notes and relevant troubleshooting pages.",
+          "Validate latest guidance in governance, provenance, release notes, and relevant troubleshooting pages.",
         ],
-        links: [getDocLink("/docs/release-notes"), getDocLink("/docs/developer-guide/troubleshooting"), getDocLink("/docs/merchant-guide/risk-compliance")],
+        links: [
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/release-notes"),
+          getDocLink("/docs/developer-guide/troubleshooting"),
+        ],
+      },
+      {
+        id: "source-of-truth-docs",
+        title: "Source-of-truth docs",
+        links: [
+          getDocLink("/docs/rfc-index"),
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+        ],
+      },
+    ],
+  },
+  "/docs/rfc-index": {
+    description:
+      "Use the RFC index as the source-of-truth map for Ryvra architecture, authority, execution, settlement, and confidentiality concepts.",
+    metadataTitle: "RFC Index",
+    metadataDescription:
+      "Ryvra RFC index covering architecture, agent gateway boundaries, authority model, settlement, confidentiality, and audit concepts.",
+    calloutVariant: "note",
+    calloutTitle: "Canonical architecture references",
+    calloutBody:
+      "Use this page as the documentation index for the architecture and control model that website messaging should follow.",
+    headings: [
+      {
+        id: "how-to-use-this-index",
+        title: "How to use this index",
+        body: "Start with the authority and architecture references, then move into execution, confidentiality, and operational evidence concepts.",
+      },
+      {
+        id: "core-rfcs",
+        title: "Core RFC references",
+        body: "These linked pages are the current canonical references for the RFC topics reflected in website messaging and implementation planning.",
+        links: [
+          getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
+          getDocLink("/docs/developer-guide/api-overview"),
+        ],
+      },
+      {
+        id: "recommended-reading-order",
+        title: "Recommended reading order",
+        links: [
+          getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
+        ],
+      },
+      {
+        id: "implementation-guides",
+        title: "Implementation guides",
+        links: [
+          getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/developer-guide/payments-integration"),
+          getDocLink("/docs/developer-guide/trading-integration"),
+          getDocLink("/docs/developer-guide/authentication"),
+        ],
+      },
+    ],
+  },
+  "/docs/governance-and-security-model": {
+    description:
+      "Understand Ryvra’s governance and security model for bounded autonomy, policy control, deterministic risk, and emergency intervention.",
+    metadataTitle: "Governance and Security Model",
+    metadataDescription:
+      "Ryvra governance and security model covering bounded autonomy, mandates, policy control, risk, kill switches, and operator authority.",
+    calloutVariant: "warn",
+    calloutTitle: "Authority is programmable, not unrestricted",
+    calloutBody:
+      "Ryvra does not give AI unrestricted wallet keys or self-modifying policy authority. Authorization stays in governed control systems.",
+    headings: [
+      {
+        id: "core-principles",
+        title: "Core principles",
+        bullets: [
+          "AI can propose an intent, but Ryvra systems authorize whether it may proceed.",
+          "Authority is issued through verified identity, mandates, policy, and independent risk.",
+          "Ledger and settlement define final state and audit truth.",
+          "Human-governed suspension and kill-switch controls remain available at all times.",
+        ],
+      },
+      {
+        id: "explicit-prohibitions",
+        title: "Explicit prohibitions",
+        bullets: [
+          "No unrestricted AI wallet keys.",
+          "No AI self-policy modification.",
+          "No opaque execution path without provenance and final state records.",
+        ],
+      },
+      {
+        id: "control-surfaces",
+        title: "Control surfaces",
+        bullets: [
+          "Independent deterministic risk engine before execution.",
+          "Replay, rate, spend, and scope controls at ingress and execution boundaries.",
+          "Suspension, revocation, and emergency stop controls for operator intervention.",
+          "Versioned policy and mandate artifacts for review and rollback.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/rfc-index"),
+        ],
+      },
+    ],
+  },
+  "/docs/audit-and-provenance": {
+    description:
+      "Use Ryvra’s provenance model to trace proposals, authorizations, deterministic execution, settlement, and emergency intervention paths.",
+    metadataTitle: "Audit and Provenance",
+    metadataDescription:
+      "Ryvra audit and provenance concepts for proposal lineage, policy evidence, settlement truth, replay safety, and emergency controls.",
+    calloutVariant: "note",
+    calloutTitle: "Keep the evidence chain intact",
+    calloutBody:
+      "Every workflow should preserve the link from who proposed an action to how it was authorized, executed, settled, and, if needed, suspended.",
+    headings: [
+      {
+        id: "provenance-lifecycle",
+        title: "Provenance lifecycle",
+        steps: [
+          "Bind the originating principal and runtime to a verified identity context.",
+          "Record mandate and policy versions used during authorization.",
+          "Capture deterministic execution identifiers and downstream effects.",
+          "Publish terminal balance and settlement state to the shared truth layer.",
+          "Retain suspension, override, or kill-switch events alongside the original flow.",
+        ],
+      },
+      {
+        id: "minimum-evidence-set",
+        title: "Minimum evidence set",
+        bullets: [
+          "Intent or proposal ID.",
+          "Identity and mandate reference.",
+          "Policy and risk decision outputs.",
+          "Execution, event, and settlement identifiers.",
+          "Operator intervention history where applicable.",
+        ],
+      },
+      {
+        id: "why-it-matters",
+        title: "Why it matters",
+        bullets: [
+          "Supports internal review, audit, reconciliation, and dispute handling.",
+          "Makes bounded autonomy legible to enterprise and regulatory stakeholders.",
+          "Prevents opaque execution claims by anchoring state changes to evidence.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/developer-guide/observability-and-runbooks"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/rfc-index"),
+        ],
       },
     ],
   },
@@ -2031,17 +2238,17 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
     ],
   },
   "/docs/developer-guide": {
-    description: "Build and operate Ryvra integrations with clear lifecycle, error, deployment, and observability practices.",
+    description: "Build and operate Ryvra integrations with clear authority boundaries, lifecycle controls, deployment discipline, and observability.",
     metadataTitle: "Developer Guide",
-    metadataDescription: "Production integration reference for Ryvra architecture, APIs, auth, events, retries, deployment, testing, and operations.",
+    metadataDescription: "Production integration reference for Ryvra architecture, API and SDK onboarding, auth, events, retries, deployment, testing, and operations.",
     calloutVariant: "success",
     calloutTitle: "Integration baseline",
-    calloutBody: "Use this guide to implement stable production integrations and to align engineering and operations ownership.",
+    calloutBody: "Use this guide to implement bounded autonomous-finance integrations with explicit ownership, policy, and finality semantics.",
     headings: [
       {
         id: "purpose-and-scope",
         title: "Purpose and scope",
-        body: "This guide is for engineers integrating trading, payments, liquidity, and operational event workflows.",
+        body: "This guide is for engineers integrating trading, payments, treasury, confidentiality, and operational event workflows.",
       },
       {
         id: "integration-prerequisites",
@@ -2050,6 +2257,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           "Merchant account readiness and environment access are in place.",
           "Secure credential storage and rotation processes are defined.",
           "Engineering and operations teams agree on incident and escalation ownership.",
+          "The authority model for agents, operators, and deterministic services is documented before implementation begins.",
         ],
       },
       {
@@ -2061,9 +2269,9 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "lifecycle-and-state-model",
         title: "Lifecycle and state model",
         bullets: [
-          "Client submits an idempotent request to create or modify state.",
-          "Platform returns immediate acceptance or validation failure.",
-          "Final or transitional state is observed through polling and/or webhook events.",
+          "Client or agent submits an idempotent request to create or modify state.",
+          "Platform returns immediate acceptance or validation failure after mandate, policy, and risk checks.",
+          "Final or transitional state is observed through polling and/or webhook events and reconciled against ledger and settlement truth.",
         ],
       },
       {
@@ -2094,96 +2302,150 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         title: "Related docs",
         links: [
           getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
           getDocLink("/docs/developer-guide/api-overview"),
-          getDocLink("/docs/developer-guide/testing-sandbox"),
-          getDocLink("/docs/merchant-guide/overview"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
         ],
       },
     ],
   },
   "/docs/developer-guide/architecture-overview": {
-    description: "Understand Ryvra integration boundaries, ownership map, and state propagation paths before building workflows.",
+    description: "Understand Ryvra control-plane, execution-plane, and settlement boundaries before building agentic finance workflows.",
     metadataTitle: "Developer Guide: Architecture Overview",
-    metadataDescription: "Architecture boundaries and ownership map for client systems, Ryvra APIs, event pipelines, and merchant operations.",
+    metadataDescription: "Ryvra architecture boundaries for agent gateway, control plane, execution plane, confidential execution, and settlement truth.",
     calloutVariant: "info",
     calloutTitle: "System boundaries first",
-    calloutBody: "Document boundaries and ownership before implementing endpoint-level integrations.",
+    calloutBody: "Document who can propose, who can authorize, and which deterministic systems execute before implementing endpoint-level integrations.",
     headings: [
       {
         id: "purpose-and-scope",
         title: "Purpose and scope",
-        body: "Describes functional boundaries and operational ownership across merchant systems and Ryvra platform components.",
+        body: "Describes functional boundaries and operational ownership across the agent gateway, control plane, execution plane, and settlement truth layer.",
       },
       {
-        id: "integration-prerequisites",
-        title: "Integration prerequisites",
+        id: "control-plane",
+        title: "Control plane",
         bullets: [
-          "Defined service ownership for API client, event handler, and reconciliation jobs.",
-          "Shared glossary for IDs used across orders, payments, settlements, and events.",
-          "Incident routing path between merchant engineering and operations teams.",
+          "Identity binds requests to a verified principal or governed runtime.",
+          "Mandates scope what can be proposed and what conditions must be met.",
+          "Policy versions define approval logic and reviewable constraints.",
+          "Independent deterministic risk decides whether execution may proceed.",
         ],
       },
       {
-        id: "request-response-patterns",
-        title: "Request and response patterns",
+        id: "execution-plane",
+        title: "Execution plane",
         bullets: [
-          "Command APIs create or mutate entities and return immediate execution context.",
-          "Read APIs expose current state projections for polling and diagnostics.",
-          "Event streams deliver asynchronous state transitions and retries.",
+          "Accounts, Pay, and Markets receive deterministic commands only after authorization.",
+          "Agent Gateway acts as the boundary between proposal context and executable financial actions.",
+          "Confidential execution protects sensitive state while preserving common control semantics.",
+          "Private perps extend the execution plane without changing the core trust model.",
         ],
       },
       {
-        id: "lifecycle-and-state-model",
-        title: "Lifecycle and state model",
+        id: "truth-layer",
+        title: "Ledger and settlement truth layer",
         steps: [
-          "Client submits command with idempotency key and correlation metadata.",
-          "Platform validates and records accepted operation state.",
-          "Downstream processing updates entity lifecycle states.",
-          "Merchant systems converge state through webhook ingestion and reconciliation polls.",
+          "Proposal arrives through the Agent Gateway with idempotency and correlation metadata.",
+          "Control-plane systems validate identity, mandates, policy, and independent risk.",
+          "Execution-plane services issue deterministic account, payment, market, or treasury actions.",
+          "Ledger and settlement publish terminal state, balances, and provenance records.",
         ],
       },
       {
-        id: "error-failure-taxonomy",
-        title: "Error and failure taxonomy",
+        id: "boundary-failures",
+        title: "Boundary failures",
         bullets: [
-          "Boundary mismatch: wrong owner handles failure class.",
-          "Integration gap: event not consumed or acknowledged.",
-          "State divergence: client projection differs from canonical platform state.",
+          "Authorization failure: mandate, policy, or risk blocks execution.",
+          "Boundary mismatch: proposal context attempts to bypass governed control surfaces.",
+          "State divergence: client projection differs from canonical ledger or settlement state.",
         ],
       },
       {
-        id: "retry-idempotency-guidance",
-        title: "Retry and idempotency guidance",
-        body: "Retriable operations must preserve operation identity and use deterministic deduplication in all owner services.",
+        id: "control-notes",
+        title: "Control notes",
+        body: "Retriable operations must preserve operation identity, respect replay and rate controls, and never escalate agent authority during recovery.",
       },
       {
         id: "observability-debugging",
         title: "Observability and debugging entry points",
         bullets: [
-          "Per-boundary dashboards for request acceptance, processing latency, and event lag.",
-          "Cross-system trace views keyed by correlation and request identifiers.",
-          "Ownership-aware incident templates for faster handoffs.",
+          "Per-boundary dashboards for gateway intake, authorization latency, execution latency, and settlement finality.",
+          "Cross-system trace views keyed by proposal, policy, request, event, and settlement identifiers.",
+          "Ownership-aware incident templates for suspension, replay review, and emergency kill-switch activation.",
         ],
       },
       {
         id: "related-docs",
         title: "Related docs",
         links: [
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
           getDocLink("/docs/developer-guide/api-overview"),
-          getDocLink("/docs/developer-guide/webhooks-events"),
-          getDocLink("/docs/developer-guide/observability-and-runbooks"),
-          getDocLink("/docs/merchant-guide/reconciliation-reporting"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/api-sdk-onboarding": {
+    description: "Onboard to Ryvra APIs and SDKs with the authority model, environment setup, and first bounded workflow in place.",
+    metadataTitle: "Developer Guide: API and SDK Onboarding",
+    metadataDescription: "Ryvra onboarding guide for APIs and SDKs covering authority boundaries, credentials, first workflows, and production readiness.",
+    calloutVariant: "success",
+    calloutTitle: "Start safe",
+    calloutBody: "Complete onboarding around authority, credentials, and observability before enabling any agent-assisted workflow.",
+    headings: [
+      {
+        id: "what-you-need",
+        title: "What you need",
+        bullets: [
+          "Sandbox or production environment access.",
+          "Credential storage and rotation process.",
+          "Defined owner for mandates, policy, and incident escalation.",
+          "A first low-risk workflow to validate end-to-end behavior.",
+        ],
+      },
+      {
+        id: "recommended-onboarding-sequence",
+        title: "Recommended onboarding sequence",
+        steps: [
+          "Read the architecture overview and governance model first.",
+          "Provision credentials and bind identity to the correct operator or runtime.",
+          "Implement SDK or API calls with idempotency, correlation, and policy metadata.",
+          "Test one low-risk workflow and confirm terminal settlement state plus evidence capture.",
+          "Promote only after replay, rate, spend, and suspension controls are verified.",
+        ],
+      },
+      {
+        id: "first-workflow-checklist",
+        title: "First workflow checklist",
+        bullets: [
+          "The workflow stays within a published mandate.",
+          "The risk engine and policy checks can block it deterministically.",
+          "The integration records request, event, and settlement IDs.",
+          "Operators know how to suspend or revoke the workflow if needed.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/governance-and-security-model"),
         ],
       },
     ],
   },
   "/docs/developer-guide/api-overview": {
-    description: "Review API surface families, compatibility expectations, and response conventions before endpoint-level integration.",
+    description: "Review API surface families, authority expectations, and response conventions before endpoint-level integration.",
     metadataTitle: "Developer Guide: API Overview",
-    metadataDescription: "Ryvra API surface map, endpoint families, payload conventions, and compatibility expectations for production integrations.",
+    metadataDescription: "Ryvra API surface map, endpoint families, payload conventions, and authority expectations for production integrations.",
     calloutVariant: "info",
     calloutTitle: "Map the surface",
-    calloutBody: "Start by mapping endpoint families and ownership before implementing specific workflows.",
+    calloutBody: "Start by mapping endpoint families, ownership, and authority boundaries before implementing specific workflows.",
     headings: [
       {
         id: "purpose-and-scope",
@@ -2197,6 +2459,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           "Environment credentials are available for sandbox and production targets.",
           "Service clients support retries, timeouts, and idempotency key headers.",
           "Request/response schemas are validated before deployment.",
+          "Authority metadata is mapped to identity, mandate, and policy references.",
         ],
       },
       {
@@ -2205,16 +2468,16 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         bullets: [
           "Resource creation endpoints return identifiers and initial lifecycle state.",
           "Read endpoints return latest observable state and timestamp metadata.",
-          "Action endpoints return accepted, rejected, or terminal outcome signals.",
+          "Action endpoints return accepted, rejected, or terminal outcome signals after governed authorization.",
         ],
       },
       {
         id: "lifecycle-and-state-model",
         title: "Lifecycle and state model",
         bullets: [
-          "Intent creation captures desired operation context.",
-          "Processing stages update state until terminal success or failure.",
-          "Terminal states are consumed by merchant systems for fulfillment and accounting.",
+          "Intent creation captures desired operation context and authority references.",
+          "Processing stages update state until terminal success, failure, suspension, or cancellation.",
+          "Terminal states are consumed by merchant systems for fulfillment, accounting, and audit defensibility.",
         ],
       },
       {
@@ -2244,10 +2507,11 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "related-docs",
         title: "Related docs",
         links: [
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
           getDocLink("/docs/developer-guide/authentication"),
           getDocLink("/docs/developer-guide/error-model-and-retries"),
           getDocLink("/docs/developer-guide/rate-limits-idempotency"),
-          getDocLink("/docs/developer-guide/changelog-and-versioning"),
+          getDocLink("/docs/governance-and-security-model"),
         ],
       },
     ],

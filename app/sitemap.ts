@@ -1,4 +1,5 @@
 import type { MetadataRoute } from "next";
+import { allCapabilityLinks } from "@/lib/capabilities";
 import { docsPageOrder } from "@/lib/docs";
 
 const baseUrl = "https://ryvra.org";
@@ -8,10 +9,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "",
     "/brand",
     "/build",
+    "/capabilities",
     "/litepaper",
     "/team",
     "/privacy",
     "/terms",
+    ...allCapabilityLinks.map((link) => link.href),
     ...docsPageOrder,
   ];
 

@@ -1,114 +1,63 @@
-# Ryvra Protocol (v1)
+# Ryvra Website
 
-Ryvra is an **Account Abstraction (EIP-4337)** and **Unified Assets** protocol for programmable payments and multi-asset markets.
+Ryvra is programmable financial infrastructure for bounded autonomous finance.
 
-> **Core idea:** every valid user transaction is a measurable contribution to the network.  
-> Ryvra uses **Proof of Transaction (PoT)** to reward contributors with protocol tokens.
-
----
-
-## What Ryvra does
-
-- **Smart Accounts (EIP-4337):** user operations, session keys, spending policies
-- **Gas Abstraction:** paymaster-enabled sponsored or flexible fee payment
-- **Unified Assets:** one canonical asset model across stablecoins, crypto, RWAs, and metals
-- **Shared Ledger + Settlement:** consistent balances and reconciliation across products
-- **Proof of Transaction (PoT):** transparent contribution accounting and token rewards
+> **Messaging baseline:** AI proposes, Ryvra authorizes, deterministic systems execute.  
+> Ledger and settlement provide truth and finality.
 
 ---
 
-## Architecture at a glance
+## What this website communicates
 
-```text
-Clients (Web/Mobile/API)
-   ↓
-API Gateway + Auth
-   ↓
-AA Service (4337) ── Bundler/Paymaster
-   ↓
-Policy + Risk Engine
-   ↓
-Unified Asset Registry + Ledger + Settlement
-   ↓
-Ryvra Pay (rails) + Ryvra Markets (trading)
-   ↓
-PoT Engine (contribution scoring + rewards)
-```
+- **Programmable authority:** identity, mandates, policy, and independent risk determine what can execute
+- **Execution modules:** accounts, pay, markets, and treasury workflows share one authorization model
+- **Truth layer:** ledger and settlement anchor balances, reconciliation, and terminal outcomes
+- **Confidential execution:** sensitive financial state can remain private without giving up control or auditability
+- **Bounded autonomy:** Ryvra avoids claims of unrestricted AI wallet control or self-governing agents
 
 ---
 
-## Proof of Transaction (PoT)
+## Website surface ownership
 
-PoT is Ryvra’s incentive layer.
-
-### High-level flow
-1. User submits a valid transaction intent/UserOp.
-2. Transaction is executed and finalized.
-3. Contribution event is recorded (with anti-abuse checks).
-4. Reward score is computed by policy.
-5. Tokens are distributed on epoch settlement.
-
-### Goals
-- Reward real economic activity.
-- Discourage spam/wash activity.
-- Align long-term usage with long-term ownership.
-
-> PoT parameters are governed and may evolve (weights, caps, eligibility rules).
+| Surface | Ownership |
+| --- | --- |
+| `/` homepage messaging, architecture, security, provenance | Website + product marketing |
+| `/capabilities/*` capability pages | Product + solutions engineering |
+| `/build` developer and enterprise CTA path | Developer relations + integrations |
+| `/brand` messaging framework narrative | Product marketing |
+| `/docs/*` RFCs, onboarding, governance/security, provenance, integration docs | Developer relations + protocol/docs |
 
 ---
 
-## Repository goals (v1)
+## Messaging framework
 
-- Define protocol interfaces and core specs.
-- Ship reference implementation for:
-  - account abstraction orchestration,
-  - unified asset registry,
-  - contribution/reward accounting.
-- Provide SDK and API foundations for Ryvra Pay and Ryvra Markets.
+Use this framework consistently across the site:
 
----
+1. **AI proposes** financial intents or workflow suggestions.
+2. **Ryvra authorizes** through identity, mandates, policy, and deterministic risk.
+3. **Deterministic systems execute** against accounts, markets, pay, and treasury modules.
+4. **Ledger and settlement finalize** state, balances, and audit truth.
+5. **Confidential execution extends** the platform for sensitive financial state and private perps.
 
-## Status
+Avoid copy that implies:
 
-⚠️ **Early-stage protocol repository (v1 draft).**  
-Interfaces and RFCs are expected to evolve rapidly.
-
----
-
-## Documentation
-
-- `docs/rfc-0001-aa-unified-assets.md` — AA + Unified Assets protocol spec (v1)
-- `docs/tokenomics-proof-of-transaction.md` — PoT design and reward policy (draft)
-- `docs/security-model.md` — threat model and controls (draft)
+- unrestricted autonomous trading
+- AI-controlled authority
+- opaque or unauditable execution
 
 ---
 
-## Design principles
+## Source-of-truth documentation links
 
-- **User sovereignty:** user signatures and account policies are authoritative
-- **Determinism:** contribution accounting should be auditable and reproducible
-- **Safety:** anti-sybil, anti-spam, anti-wash controls are mandatory
-- **Composability:** apps build on protocol primitives, not bespoke flows
-- **Compliance-ready:** modular risk and policy hooks by jurisdiction/product
+- RFC index: `/docs/rfc-index`
+- API and SDK onboarding: `/docs/developer-guide/api-sdk-onboarding`
+- Governance and security model: `/docs/governance-and-security-model`
+- Audit and provenance: `/docs/audit-and-provenance`
+- Architecture overview: `/docs/developer-guide/architecture-overview`
 
----
-
-## Quick start (placeholder)
-
-```bash
-pnpm install
-pnpm dev
-```
-
-(Setup docs will be expanded as modules are published.)
+These docs routes are the canonical source for website messaging about architecture, authority, and trust boundaries.
 
 ---
-
-## Stack
-
-- Next.js (App Router) + TypeScript
-- Tailwind CSS (minimal baseline)
-- pnpm **10.16.0** (required)
 
 ## Local setup
 
@@ -131,6 +80,8 @@ pnpm dev
    pnpm dev
    ```
 
+---
+
 ## Scripts
 
 - `pnpm dev` – local development
@@ -143,16 +94,18 @@ pnpm dev
 
 ---
 
-## Contributing
+## Stack
 
-We welcome protocol feedback, architecture critiques, and implementation PRs.
-
-- Open an issue for design discussion
-- Link proposals to an RFC
-- Include test coverage for critical logic
+- Next.js 16 + App Router
+- React 19
+- TypeScript 5
+- Tailwind CSS 4
+- pnpm 10.16.0
 
 ---
 
-## License
+## Maintenance notes
 
-TBD (recommended: dual model for protocol code + docs governance policy).
+- Homepage and capability pages should use natural language and compliance-friendly wording.
+- Update `/content/brand-narrative.md` when messaging framework changes.
+- Update `/lib/docs.ts` when source-of-truth documentation routes or CTA targets change.

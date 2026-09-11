@@ -1,187 +1,192 @@
 import Link from "next/link";
-import { AllocationEnvelopeRangeBar } from "@/components/tokenomics/AllocationEnvelopeRangeBar";
-import { CapHalvingStepChart } from "@/components/tokenomics/CapHalvingStepChart";
-import { EligibilityFunnelDiagram } from "@/components/tokenomics/EligibilityFunnelDiagram";
+import { ControlFlowDiagram } from "@/components/architecture/ControlFlowDiagram";
+import { PlatformArchitectureDiagram } from "@/components/architecture/PlatformArchitectureDiagram";
+import { ProvenanceLifecycleDiagram } from "@/components/architecture/ProvenanceLifecycleDiagram";
 import { Section } from "@/components/Section";
-import { TgeConversionCard } from "@/components/tokenomics/TgeConversionCard";
-import {
-  TOKENOMICS_AS_OF_DATE,
-  TOKENOMICS_FAQ_ITEMS,
-  TOKENOMICS_GOVERNANCE_PARAMETERS,
-  TOKENOMICS_LEGAL_COMPLIANCE_CONSTRAINTS,
-  TOKENOMICS_POLICY_ASSUMPTIONS,
-  TOKENOMICS_VISUAL_DISCLOSURE,
-} from "@/lib/tokenomics";
+import { allCapabilityLinks } from "@/lib/capabilities";
+
+const controlPlaneItems = [
+  "Identity binds every workflow to a verified principal.",
+  "Mandates define what an operator or agent is allowed to propose.",
+  "Policy versions make approval logic explicit and reviewable.",
+  "Independent deterministic risk decides whether execution can proceed.",
+];
+
+const executionPlaneItems = [
+  "Accounts issue deterministic commands instead of open-ended agent actions.",
+  "Markets and Pay inherit the same authorization and settlement model.",
+  "Ledger and settlement publish final state, balances, and reconciliation truth.",
+  "Confidential execution protects sensitive financial state and extends to private perps.",
+];
+
+const trustControls = [
+  "No unrestricted AI wallet keys.",
+  "No AI self-policy modification.",
+  "Independent deterministic risk engine.",
+  "Replay, rate, and spend controls.",
+  "Kill switch and suspension controls.",
+  "End-to-end provenance and auditability.",
+];
+
+const ctaLinks = [
+  { href: "/docs/rfc-index", label: "Docs RFC index" },
+  { href: "/docs/developer-guide/api-sdk-onboarding", label: "API + SDK onboarding" },
+  { href: "/docs/governance-and-security-model", label: "Governance + security model" },
+  { href: "/docs/audit-and-provenance", label: "Audit + provenance" },
+];
 
 export default function HomePage() {
   return (
     <>
-      <Section className="hero" title="Ryvra Protocol">
-        <h1>Eligible transactions contribute.</h1>
+      <Section className="hero" title="Ryvra">
+        <h1>Programmable financial infrastructure for bounded autonomous finance.</h1>
         <p className="lead">
-          Ryvra is an EIP-4337 account abstraction and Unified Assets protocol
-          for payments and markets. Eligible, finalized, policy-compliant
-          transactions can earn pre-TGE contribution points through Proof of
-          Transaction (PoT).
+          AI proposes, Ryvra authorizes, and deterministic systems execute. Ryvra
+          gives teams programmable authority through identity, mandates, policy, and
+          risk, then anchors finality in ledger and settlement.
+        </p>
+        <p>
+          The platform separates agent interfaces from financial authority so teams
+          can automate payments, markets, and treasury workflows without implying
+          unrestricted AI control.
         </p>
         <div className="button-row">
-          <Link className="button button-primary" href="/build">
-            Build on Ryvra
+          <Link className="button button-primary" href="/docs/developer-guide/api-sdk-onboarding">
+            Start API + SDK onboarding
           </Link>
-          <Link className="button button-secondary" href="/brand">
-            Brand narrative
+          <Link className="button button-secondary" href="/docs/governance-and-security-model">
+            Review governance + security
           </Link>
-          <Link className="button button-secondary" href="/docs/getting-started">
-            Read docs
+          <Link className="button button-secondary" href="/capabilities">
+            Explore capability pages
           </Link>
         </div>
       </Section>
 
-      <Section title="Why Ryvra">
+      <Section title="Authority model">
+        <div className="grid grid-2">
+          <article className="card">
+            <strong>Bounded autonomy</strong>
+            <p>
+              Ryvra supports autonomous-finance workflows only inside pre-defined
+              authority boundaries. Agents can propose intents, but they do not
+              receive open-ended wallet control or self-issued permissions.
+            </p>
+          </article>
+          <article className="card">
+            <strong>Truth and finality</strong>
+            <p>
+              Ledger and settlement are the source of truth for balances, state,
+              reconciliation, and terminal outcomes across every execution path.
+            </p>
+          </article>
+          <article className="card">
+            <strong>Programmable control plane</strong>
+            <p>
+              Identity, mandates, policy, and risk define what can be proposed,
+              what can be authorized, and what deterministic systems are allowed to
+              execute.
+            </p>
+          </article>
+          <article className="card">
+            <strong>Confidential execution</strong>
+            <p>
+              Sensitive financial state can be evaluated inside protected
+              execution environments while still preserving authorization,
+              settlement discipline, and auditability.
+            </p>
+          </article>
+        </div>
+      </Section>
+
+      <Section title="Architecture">
         <p className="lead">
-          Ryvra reduces integration fragmentation by standardizing account
-          execution, asset handling, and policy controls across protocol
-          modules.
+          Ryvra separates proposal, authorization, execution, and settlement so the
+          system is programmable without handing unsafe authority to AI.
+        </p>
+        <PlatformArchitectureDiagram />
+        <div className="grid grid-2 architecture-list-grid">
+          <article className="card">
+            <strong>Control Plane</strong>
+            <ul className="tokenomics-list">
+              {controlPlaneItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+          <article className="card">
+            <strong>Execution Plane</strong>
+            <ul className="tokenomics-list">
+              {executionPlaneItems.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </article>
+        </div>
+      </Section>
+
+      <Section title="Control flow">
+        <ControlFlowDiagram />
+      </Section>
+
+      <Section title="Security and trust">
+        <p className="lead">
+          Ryvra is designed to make the security boundary legible to developers,
+          operators, enterprises, and regulators.
         </p>
         <div className="grid grid-2">
           <article className="card">
-            <strong>EIP-4337 Account Abstraction</strong>
-            <p>Smart accounts, UserOps, session policies, and composable controls.</p>
-          </article>
-          <article className="card">
-            <strong>Unified Assets</strong>
-            <p>One canonical framework across stablecoins, crypto, RWAs, and metals.</p>
-          </article>
-          <article className="card">
-            <strong>Policy + Risk Hooks</strong>
-            <p>Compliance-aware controls and modular enforcement by product and region.</p>
-          </article>
-          <article className="card">
-            <strong>PoT Rewards Engine</strong>
-            <p>Transparent points accounting for contribution and allocation policy.</p>
-          </article>
-        </div>
-      </Section>
-
-      <Section title="Built as protocol modules">
-        <div className="grid grid-3">
-          <article className="card">
-            <strong>Ryvra Accounts</strong>
-            <p>
-              EIP-4337 smart account orchestration, session keys, sponsorship
-              policy, and account-level controls.
-            </p>
-          </article>
-          <article className="card">
-            <strong>Ryvra Pay</strong>
-            <p>
-              Stablecoin rails for payouts, collections, and treasury movement
-              with programmable policy checks.
-            </p>
-          </article>
-          <article className="card">
-            <strong>Ryvra Markets</strong>
-            <p>
-              Crypto/RWA/metals execution with shared account context and unified
-              asset treatment.
-            </p>
-          </article>
-        </div>
-      </Section>
-
-      <Section id="tokenomics-pot" title="Proof of Transaction (PoT)">
-        <p className="lead">
-          Proof of Transaction rewards eligible economic activity with points
-          before TGE, under published caps and anti-abuse controls.
-        </p>
-        <ul>
-          <li>{TOKENOMICS_POLICY_ASSUMPTIONS[0]}</li>
-          <li>{TOKENOMICS_POLICY_ASSUMPTIONS[1]}</li>
-          <li>
-            As of {TOKENOMICS_AS_OF_DATE}, the roadmap target references a Q4
-            2026 TGE window.
-          </li>
-        </ul>
-      </Section>
-
-      <Section id="tokenomics-snapshot" title="Tokenomics Snapshot">
-        <p className="lead">
-          Compact reference to current public tokenomics parameters.
-        </p>
-        <div className="grid grid-3">
-          <article className="card">
-            <strong>Current policy assumptions</strong>
+            <strong>Explicit controls</strong>
             <ul className="tokenomics-list">
-              {TOKENOMICS_POLICY_ASSUMPTIONS.map((item) => (
+              {trustControls.map((item) => (
                 <li key={item}>{item}</li>
               ))}
             </ul>
           </article>
           <article className="card">
-            <strong>Governance-adjustable parameters</strong>
-            <ul className="tokenomics-list">
-              {TOKENOMICS_GOVERNANCE_PARAMETERS.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
+            <strong>Why it matters</strong>
+            <p>
+              Bounded autonomy reduces the risk of opaque execution. Ryvra keeps
+              policy human-governed, keeps risk deterministic, and preserves audit
+              evidence from intent intake through final settlement.
+            </p>
           </article>
-          <article className="card">
-            <strong>Legal/compliance constraints</strong>
-            <ul className="tokenomics-list">
-              {TOKENOMICS_LEGAL_COMPLIANCE_CONSTRAINTS.map((item) => (
-                <li key={item}>{item}</li>
-              ))}
-            </ul>
-          </article>
-        </div>
-        <p className="disclaimer">
-          As of {TOKENOMICS_AS_OF_DATE}. {TOKENOMICS_VISUAL_DISCLOSURE}
-        </p>
-        <div className="button-row">
-          <Link className="button button-secondary" href="#tokenomics-faq">
-            Jump to homepage FAQ
-          </Link>
-          <Link className="button button-secondary" href="/litepaper#tokenomics-faq">
-            Open litepaper FAQ view
-          </Link>
         </div>
       </Section>
 
-      <Section id="tokenomics-visuals" title="Tokenomics Visuals (Illustrative)">
-        <p className="lead">
-          Visual references for cap halving, eligibility funneling, proportional
-          conversion, and allocation envelopes.
-        </p>
-        <p className="disclaimer">
-          As of {TOKENOMICS_AS_OF_DATE}. {TOKENOMICS_VISUAL_DISCLOSURE}
-        </p>
-        <div className="tokenomics-visual-grid">
-          <CapHalvingStepChart />
-          <EligibilityFunnelDiagram />
-          <TgeConversionCard />
-          <AllocationEnvelopeRangeBar />
-        </div>
+      <Section title="Lifecycle and provenance">
+        <ProvenanceLifecycleDiagram />
       </Section>
 
-      <Section id="tokenomics-faq" title="Tokenomics FAQ">
+      <Section title="Capability pages">
         <div className="grid grid-2">
-          {TOKENOMICS_FAQ_ITEMS.map((item) => (
-            <article className="card" key={item.question}>
-              <strong>{item.question}</strong>
-              <p>{item.answer}</p>
+          {allCapabilityLinks.map((link) => (
+            <article className="card" key={link.href}>
+              <strong>{link.label}</strong>
+              <p>Open the module page for product scope, control boundaries, and related docs.</p>
+              <div className="button-row">
+                <Link className="button button-secondary" href={link.href}>
+                  Open page
+                </Link>
+              </div>
             </article>
           ))}
         </div>
-        <div className="button-row">
-          <Link className="button button-secondary" href="/litepaper#tokenomics-visuals">
-            View tokenomics visuals on litepaper page
-          </Link>
-          <Link className="button button-secondary" href="/docs/glossary">
-            View glossary
-          </Link>
-          <Link className="button button-primary" href="/docs">
-            Explore docs
-          </Link>
+      </Section>
+
+      <Section title="Developer and enterprise paths">
+        <div className="grid grid-2">
+          {ctaLinks.map((link) => (
+            <article className="card" key={link.href}>
+              <strong>{link.label}</strong>
+              <p>Use the linked resource for production design, onboarding, and review.</p>
+              <div className="button-row">
+                <Link className="button button-secondary" href={link.href}>
+                  Open resource
+                </Link>
+              </div>
+            </article>
+          ))}
         </div>
       </Section>
     </>
