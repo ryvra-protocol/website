@@ -218,8 +218,21 @@ a {
   line-height: 1.1;
 }
 
+.founder-role {
+  margin: 0.45rem 0 0;
+  color: var(--muted);
+  font-weight: 600;
+}
+
 .founder-bio {
   margin-top: 0.75rem;
+}
+
+.founder-quote {
+  margin: 0.85rem 0 0;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent);
+  color: var(--muted);
 }
 
 .founder-profile-links {
