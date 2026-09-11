@@ -57,12 +57,7 @@ const footerSections: FooterSection[] = [
   {
     id: "team",
     title: "Team",
-    links: [
-      { href: "/team#founder-and-ceo", label: "Founder & CEO (Omar Ryvra)" },
-      { href: "/team#lead-engineer-experiences", label: "Lead Engineer with Experiences" },
-      { href: "/team#co-founder-abdulrazak-hassan", label: "Co-Founder (Abdulrazak Hassan)" },
-      { href: "/team#microsoft-for-startups-participants", label: "Microsoft for Startups Participants" },
-    ],
+    links: [{ href: "/founder", label: "Umar Rabiu — Founder & CEO" }],
   },
   {
     id: "community",
