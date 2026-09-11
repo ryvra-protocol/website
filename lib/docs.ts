@@ -458,13 +458,14 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "core-rfcs",
-        title: "Core RFCs",
-        bullets: [
-          "RFC 0001: platform architecture and boundary model.",
-          "RFC 0002: agent gateway and intent-ingress rules.",
-          "RFC 0003: programmable authority via identity, mandates, policy, and risk.",
-          "RFC 0004: ledger, settlement, and finality semantics.",
-          "RFC 0005: confidential execution and private extensions.",
+        title: "Core RFC references",
+        body: "These linked pages are the current canonical references for the RFC topics reflected in website messaging and implementation planning.",
+        links: [
+          getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
+          getDocLink("/docs/developer-guide/api-overview"),
         ],
       },
       {
