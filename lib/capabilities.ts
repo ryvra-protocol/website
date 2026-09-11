@@ -99,7 +99,7 @@ export const capabilityPages: CapabilityPageContent[] = [
     ],
     docsLinks: [
       { href: "/docs/developer-guide/api-sdk-onboarding", label: "API and SDK onboarding" },
-      { href: "/docs/developer-guide/testing-sandbox", label: "Testing sandbox" },
+      { href: "/docs/developer-guide/architecture-overview", label: "Architecture overview" },
       { href: "/docs/governance-and-security-model", label: "Governance and security model" },
     ],
     relatedPages: relatedPages("/capabilities/agent-runtime"),
