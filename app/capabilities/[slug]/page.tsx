@@ -5,13 +5,17 @@ import { capabilityPageBySlug, capabilityPages } from "@/lib/capabilities";
 
 export const dynamicParams = false;
 
+type CapabilityRoutePageProps = {
+  params: Promise<{ slug: string }>;
+};
+
 export function generateStaticParams() {
   return capabilityPages.map((page) => ({ slug: page.slug }));
 }
 
 export async function generateMetadata({
   params,
-}: PageProps<"/capabilities/[slug]">): Promise<Metadata> {
+}: CapabilityRoutePageProps): Promise<Metadata> {
   const { slug } = await params;
   const page = capabilityPageBySlug.get(slug);
 
@@ -28,7 +32,7 @@ export async function generateMetadata({
 
 export default async function CapabilityRoutePage({
   params,
-}: PageProps<"/capabilities/[slug]">) {
+}: CapabilityRoutePageProps) {
   const { slug } = await params;
   const page = capabilityPageBySlug.get(slug);
 
