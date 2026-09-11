@@ -1,17 +1,13 @@
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Section } from "@/components/Section";
 
 const siteUrl = "https://ryvra.org";
 const metadataTitle = "Founder";
 const metadataDescription =
-  "Founder profile for Umar Rabiu, including leadership role, experience, and social links.";
+  "Meet Umar Rabiu, Founder & CEO of Ryvra, a technical founder building full-stack and Web3 financial infrastructure.";
 const canonicalUrl = `${siteUrl}/founder`;
-
-const experienceItems = [
-  "Founder & CEO at Ryvra, leading autonomous-finance product strategy and protocol direction.",
-  "Built and shipped TypeScript and JavaScript products across trading, exchange, and fintech workflows.",
-  "Hands-on builder of DeFi and arbitrage systems, including Aave-focused automation projects.",
-];
+const founderImageSrc: string | null = null;
 
 const profileLinks = [
   { label: "GitHub", href: "https://github.com/UmarfarouqRb" },
@@ -33,39 +29,94 @@ export const metadata: Metadata = {
 
 export default function FounderPage() {
   return (
-    <Section title="Founder">
-      <article className="card">
-        <p className="lead">Umar Rabiu</p>
-        <p>
-          <strong>Role:</strong> Founder &amp; CEO
-        </p>
-      </article>
-      <article className="card">
-        <strong>Experience</strong>
-        <ul>
-          {experienceItems.map((item) => (
-            <li key={item}>{item}</li>
-          ))}
-        </ul>
-      </article>
-      <article className="card">
-        <strong>Profiles</strong>
-        <ul>
-          {profileLinks.map((link) => (
-            <li key={link.label}>
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`${link.label} (opens in new tab)`}
-              >
-                {link.label}
-                <span aria-hidden="true"> ↗</span>
-              </a>
-            </li>
-          ))}
-        </ul>
-      </article>
-    </Section>
+    <>
+      <Section className="hero founder-hero" title="Founder & CEO">
+        <p className="lead">Technical Founder at Ryvra</p>
+        <div className="founder-profile-layout">
+          <div className="founder-photo-shell" aria-label="Founder profile photo">
+            {founderImageSrc ? (
+              <Image
+                src={founderImageSrc}
+                alt="Umar Rabiu"
+                width={480}
+                height={560}
+                className="founder-photo"
+                priority
+              />
+            ) : (
+              <div className="founder-photo founder-photo-placeholder">
+                <span>Profile photo (replace with founder image)</span>
+              </div>
+            )}
+          </div>
+          <div className="founder-profile-copy">
+            <p className="founder-name">Umar Rabiu</p>
+            <p className="lead founder-bio">
+              Technical Founder @ Ryvra | Full-stack &amp; Web3 engineer | Building financial
+              infrastructure.
+            </p>
+            <p>
+              Umar Rabiu is a full-stack Web3 engineer and technical founder focused on building
+              practical financial systems from the protocol layer through product delivery.
+            </p>
+            <p>
+              His work spans TypeScript and JavaScript, React, Node.js, PostgreSQL, Solidity, and
+              blockchain infrastructure, with experience shipping systems that connect application
+              logic, execution, and data reliability in production.
+            </p>
+          </div>
+        </div>
+      </Section>
+
+      <Section title="Experience">
+        <div className="grid grid-2">
+          <article className="card">
+            <strong>Builder across the stack</strong>
+            <p>
+              He has built decentralized trading systems, smart contracts, relayer infrastructure,
+              APIs, databases, authentication flows, and production web applications with a
+              hands-on engineering approach.
+            </p>
+          </article>
+          <article className="card">
+            <strong>Infrastructure focus</strong>
+            <p>
+              At Ryvra, he is building EIP-4337 account abstraction services, asset
+              infrastructure, ledger and settlement systems, policy and risk infrastructure, market
+              execution, payment rails, and the product applications that make those systems usable.
+            </p>
+          </article>
+        </div>
+      </Section>
+
+      <Section title="Approach">
+        <article className="card">
+          <p>
+            I learned primarily by building: taking ideas from architecture and prototypes through
+            implementation, debugging, deployment, and iteration.
+          </p>
+        </article>
+      </Section>
+
+      <Section title="Profiles">
+        <article className="card">
+          <ul className="founder-profile-links">
+            {profileLinks.map((link) => (
+              <li key={link.label}>
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${link.label} (opens in new tab)`}
+                >
+                  {link.label}
+                  <span aria-hidden="true"> ↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </article>
+      </Section>
+    </>
   );
 }

@@ -3,6 +3,7 @@ import Link from "next/link";
 const links = [
   { href: "/capabilities", label: "Capabilities" },
   { href: "/brand", label: "Brand" },
+  { href: "/founder", label: "Founder" },
   { href: "/docs", label: "Docs" },
   { href: "/docs/rfc-index", label: "RFCs" },
   { href: "/docs/developer-guide/api-sdk-onboarding", label: "API + SDK" },
