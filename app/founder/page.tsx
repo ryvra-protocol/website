@@ -26,7 +26,7 @@ const founderProfile: FounderProfile = {
   subtitle: "Technical Founder at Ryvra",
   bio: "Technical Founder @ Ryvra | Full-stack & Web3 engineer | Building financial infrastructure.",
   image: {
-    src: null as string | null,
+    src: null,
     alt: "Umar Rabiu",
     placeholderLabel: "Profile photo (replace with founder image)",
   },
