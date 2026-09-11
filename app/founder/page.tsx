@@ -7,7 +7,20 @@ const metadataTitle = "Founder";
 const metadataDescription =
   "Meet Umar Rabiu, Founder & CEO of Ryvra, a technical founder building full-stack and Web3 financial infrastructure.";
 const canonicalUrl = `${siteUrl}/founder`;
-const founderProfile = {
+
+type FounderProfile = {
+  name: string;
+  role: string;
+  subtitle: string;
+  bio: string;
+  image: {
+    src: string | null;
+    alt: string;
+    placeholderLabel: string;
+  };
+};
+
+const founderProfile: FounderProfile = {
   name: "Umar Rabiu",
   role: "Founder & CEO",
   subtitle: "Technical Founder at Ryvra",
@@ -74,9 +87,10 @@ export default function FounderPage() {
               practical financial systems from the protocol layer through product delivery.
             </p>
             <p>
-              His work spans TypeScript and JavaScript, React, Node.js, PostgreSQL, Solidity, and
-              blockchain infrastructure, with experience shipping systems that connect application
-              logic, execution, and data reliability in production.
+              Umar Rabiu&apos;s work spans TypeScript and JavaScript, React, Node.js,
+              PostgreSQL, Solidity, and blockchain infrastructure, with experience shipping
+              systems that connect application logic, execution, and data reliability in
+              production.
             </p>
           </div>
         </div>
@@ -87,17 +101,18 @@ export default function FounderPage() {
           <article className="card">
             <strong>Builder across the stack</strong>
             <p>
-              He has built decentralized trading systems, smart contracts, relayer infrastructure,
-              APIs, databases, authentication flows, and production web applications with a
-              hands-on engineering approach.
+              Umar Rabiu has built decentralized trading systems, smart contracts, relayer
+              infrastructure, APIs, databases, authentication flows, and production web
+              applications with a hands-on engineering approach.
             </p>
           </article>
           <article className="card">
             <strong>Infrastructure focus</strong>
             <p>
-              At Ryvra, he is building EIP-4337 account abstraction services, asset
-              infrastructure, ledger and settlement systems, policy and risk infrastructure, market
-              execution, payment rails, and the product applications that make those systems usable.
+              At Ryvra, Umar Rabiu is building EIP-4337 account abstraction services, asset
+              infrastructure, ledger and settlement systems, policy and risk infrastructure,
+              market execution, payment rails, and the product applications that make those
+              systems usable.
             </p>
           </article>
         </div>
@@ -105,7 +120,7 @@ export default function FounderPage() {
 
       <Section title="Learning approach">
         <article className="card">
-          <p>His learning approach is grounded in execution:</p>
+          <p>Umar Rabiu&apos;s learning approach is grounded in execution:</p>
           <blockquote className="founder-quote">
             I learned primarily by building: taking ideas from architecture and prototypes through
             implementation, debugging, deployment, and iteration.
