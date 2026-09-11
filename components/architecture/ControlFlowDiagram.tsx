@@ -1,14 +1,19 @@
+import { useId } from "react";
+
 export function ControlFlowDiagram() {
+  const titleId = useId();
+  const descId = useId();
+
   return (
     <figure className="diagram-card">
       <svg
         className="diagram-svg"
         viewBox="0 0 760 220"
         role="img"
-        aria-labelledby="control-flow-title control-flow-desc"
+        aria-labelledby={`${titleId} ${descId}`}
       >
-        <title id="control-flow-title">Ryvra control flow</title>
-        <desc id="control-flow-desc">
+        <title id={titleId}>Ryvra control flow</title>
+        <desc id={descId}>
           AI proposes an intent, Ryvra authorizes it with mandates and policy, deterministic
           systems execute, and the ledger and settlement layer publishes final state.
         </desc>

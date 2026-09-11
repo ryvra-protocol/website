@@ -1,14 +1,19 @@
+import { useId } from "react";
+
 export function ProvenanceLifecycleDiagram() {
+  const titleId = useId();
+  const descId = useId();
+
   return (
     <figure className="diagram-card">
       <svg
         className="diagram-svg"
         viewBox="0 0 760 260"
         role="img"
-        aria-labelledby="provenance-title provenance-desc"
+        aria-labelledby={`${titleId} ${descId}`}
       >
-        <title id="provenance-title">Intent provenance lifecycle</title>
-        <desc id="provenance-desc">
+        <title id={titleId}>Intent provenance lifecycle</title>
+        <desc id={descId}>
           A lifecycle from mandate creation through authorization, execution, settlement, and
           audit retention with suspension and kill switch controls.
         </desc>

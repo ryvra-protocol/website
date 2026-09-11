@@ -1,14 +1,19 @@
+import { useId } from "react";
+
 export function PlatformArchitectureDiagram() {
+  const titleId = useId();
+  const descId = useId();
+
   return (
     <figure className="diagram-card">
       <svg
         className="diagram-svg"
         viewBox="0 0 760 420"
         role="img"
-        aria-labelledby="platform-architecture-title platform-architecture-desc"
+        aria-labelledby={`${titleId} ${descId}`}
       >
-        <title id="platform-architecture-title">Ryvra platform architecture</title>
-        <desc id="platform-architecture-desc">
+        <title id={titleId}>Ryvra platform architecture</title>
+        <desc id={descId}>
           Agent clients connect through an Agent Gateway to a Control Plane and Execution Plane,
           with ledger and settlement as the truth layer and confidential execution as an extension.
         </desc>
