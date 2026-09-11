@@ -24,8 +24,11 @@ export function PlatformArchitectureDiagram() {
         <text x="380" y="60" textAnchor="middle" className="diagram-label">
           Agent Gateway
         </text>
-        <text x="380" y="82" textAnchor="middle" className="diagram-copy">
-          Intent intake, identity binding, safe context handoff
+        <text x="380" y="80" textAnchor="middle" className="diagram-copy">
+          Intent intake
+        </text>
+        <text x="380" y="100" textAnchor="middle" className="diagram-copy">
+          Identity binding and safe handoff
         </text>
 
         <rect x="92" y="144" width="248" height="148" rx="22" className="diagram-panel" />
@@ -74,8 +77,11 @@ export function PlatformArchitectureDiagram() {
         <text x="636" y="60" textAnchor="middle" className="diagram-label">
           Confidential execution
         </text>
-        <text x="636" y="82" textAnchor="middle" className="diagram-copy">
-          Private state and private perps extension
+        <text x="636" y="80" textAnchor="middle" className="diagram-copy">
+          Private state
+        </text>
+        <text x="636" y="100" textAnchor="middle" className="diagram-copy">
+          Private perps extension
         </text>
 
         <path d="M190 66H240" className="diagram-line" />

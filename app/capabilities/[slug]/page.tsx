@@ -4,7 +4,7 @@ import { CapabilityPage } from "@/components/CapabilityPage";
 import { capabilityPageBySlug, capabilityPages } from "@/lib/capabilities";
 
 type CapabilityRouteProps = {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 };
 
 export async function generateStaticParams() {
@@ -12,7 +12,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: CapabilityRouteProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { slug } = params;
   const page = capabilityPageBySlug.get(slug);
 
   if (!page) {
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: CapabilityRouteProps): Promis
 }
 
 export default async function CapabilityRoutePage({ params }: CapabilityRouteProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const page = capabilityPageBySlug.get(slug);
 
   if (!page) {

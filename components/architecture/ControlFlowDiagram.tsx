@@ -13,19 +13,43 @@ export function ControlFlowDiagram() {
           systems execute, and the ledger and settlement layer publishes final state.
         </desc>
         {[
-          { x: 20, title: "1. AI proposes", body: "Intent only, no wallet authority" },
-          { x: 204, title: "2. Ryvra authorizes", body: "Identity, mandates, policy, risk" },
-          { x: 388, title: "3. Systems execute", body: "Deterministic accounts, pay, markets" },
-          { x: 572, title: "4. Ledger settles", body: "Final state, audit trail, replay-safe" },
+          {
+            x: 20,
+            title: "1. AI proposes",
+            lines: ["Intent only", "No wallet authority"],
+          },
+          {
+            x: 204,
+            title: "2. Ryvra authorizes",
+            lines: ["Identity and mandates", "Policy and risk"],
+          },
+          {
+            x: 388,
+            title: "3. Systems execute",
+            lines: ["Deterministic accounts", "Pay and markets"],
+          },
+          {
+            x: 572,
+            title: "4. Ledger settles",
+            lines: ["Final state and audit", "Replay-safe terminal record"],
+          },
         ].map((step) => (
           <g key={step.title}>
             <rect x={step.x} y="42" width="168" height="112" rx="18" className="diagram-panel" />
             <text x={step.x + 84} y="80" textAnchor="middle" className="diagram-heading">
               {step.title}
             </text>
-            <text x={step.x + 84} y="112" textAnchor="middle" className="diagram-copy">
-              {step.body}
-            </text>
+            {step.lines.map((line, index) => (
+              <text
+                key={`${step.title}-${line}`}
+                x={step.x + 84}
+                y={112 + index * 20}
+                textAnchor="middle"
+                className="diagram-copy"
+              >
+                {line}
+              </text>
+            ))}
           </g>
         ))}
         <path d="M188 98H204" className="diagram-line" />

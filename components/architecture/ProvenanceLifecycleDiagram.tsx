@@ -47,9 +47,11 @@ export function ProvenanceLifecycleDiagram() {
         <text x="680" y="126" textAnchor="middle" className="diagram-copy">
           replay trace
         </text>
-        <text x="380" y="220" textAnchor="middle" className="diagram-copy">
-          Suspension, spend caps, replay/rate controls, and kill switch operate across the full
-          lifecycle.
+        <text x="380" y="214" textAnchor="middle" className="diagram-copy">
+          Suspension, spend caps, replay and rate controls
+        </text>
+        <text x="380" y="234" textAnchor="middle" className="diagram-copy">
+          plus kill switch operate across the full lifecycle.
         </text>
         <path d="M160 124H180" className="diagram-line" />
         <path d="M310 124H330" className="diagram-line" />
