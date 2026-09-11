@@ -67,11 +67,7 @@ export default function FounderPage() {
                 priority
               />
             ) : (
-              <div
-                className="founder-photo founder-photo-placeholder"
-                role="img"
-                aria-label="Profile photo placeholder. Replace with founder image."
-              >
+              <div className="founder-photo founder-photo-placeholder" aria-hidden="true">
                 <span>{founderProfile.image.placeholderLabel}</span>
               </div>
             )}
