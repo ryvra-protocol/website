@@ -29,10 +29,10 @@ const trustControls = [
 ];
 
 const ctaLinks = [
-  { href: "/docs/rfc-index", label: "Docs RFC index" },
-  { href: "/docs/developer-guide/api-sdk-onboarding", label: "API + SDK onboarding" },
-  { href: "/docs/governance-and-security-model", label: "Governance + security model" },
-  { href: "/docs/audit-and-provenance", label: "Audit + provenance" },
+  { href: "/docs/developer-guide", label: "For developers" },
+  { href: "/docs/merchant-guide", label: "For merchants" },
+  { href: "/docs/tokenomics", label: "Tokenomics" },
+  { href: "/docs/rfc-technical-specs", label: "RFC / technical specs" },
 ];
 
 export default function HomePage() {
@@ -52,10 +52,13 @@ export default function HomePage() {
         </p>
         <div className="button-row">
           <Link className="button button-primary" href="/docs/developer-guide/api-sdk-onboarding">
-            Start API + SDK onboarding
+            Start developer quickstart
           </Link>
-          <Link className="button button-secondary" href="/docs/governance-and-security-model">
-            Review governance + security
+          <Link className="button button-secondary" href="/docs/user-guide">
+            Explore user docs
+          </Link>
+          <Link className="button button-secondary" href="/docs/security-and-risk">
+            Review security + risk
           </Link>
           <Link className="button button-secondary" href="/capabilities">
             Explore capability pages

@@ -18,7 +18,7 @@ const footerSections: FooterSection[] = [
     links: [
       { href: "/brand", label: "Brand" },
       { href: "/brand#mission", label: "Messaging framework" },
-      { href: "/docs/rfc-index", label: "RFC Index" },
+      { href: "/docs/rfc-technical-specs", label: "RFC / Technical Specs" },
       { href: "/build", label: "Build with Ryvra" },
     ],
   },
@@ -40,8 +40,8 @@ const footerSections: FooterSection[] = [
       { href: "/capabilities/agentic-markets", label: "Agentic Markets" },
       { href: "/capabilities/autonomous-treasury", label: "Autonomous Treasury" },
       { href: "/capabilities/private-perps", label: "Private Perps" },
-      { href: "/docs/developer-guide", label: "Developer Docs" },
-      { href: "/docs/merchant-guide/merchant-faq", label: "Support" },
+      { href: "/docs/developer-guide", label: "For Developers" },
+      { href: "/docs/merchant-guide", label: "For Merchants" },
     ],
   },
   {
@@ -49,9 +49,9 @@ const footerSections: FooterSection[] = [
     title: "Learn",
     links: [
       { href: "/docs", label: "Docs Home" },
-      { href: "/docs/developer-guide/api-sdk-onboarding", label: "API + SDK Onboarding" },
-      { href: "/docs/governance-and-security-model", label: "Governance + Security" },
-      { href: "/docs/audit-and-provenance", label: "Audit + Provenance" },
+      { href: "/docs/user-guide", label: "For Users" },
+      { href: "/docs/tokenomics", label: "Tokenomics" },
+      { href: "/docs/security-and-risk", label: "Security & Risk" },
     ],
   },
   {
