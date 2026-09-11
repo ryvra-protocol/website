@@ -93,7 +93,7 @@ export function PlatformArchitectureDiagram() {
         <path d="M544 292V330" className="diagram-line" />
         <path d="M520 66H552" className="diagram-line" />
       </svg>
-      <figcaption className="tokenomics-caption">
+      <figcaption className="diagram-caption">
         Agents can propose intents, but Ryvra binds authority in the control plane and only
         deterministic systems can execute against the ledger and settlement truth layer.
       </figcaption>

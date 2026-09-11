@@ -330,6 +330,11 @@ a {
   padding: 1rem;
 }
 
+.diagram-caption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+}
+
 .diagram-svg {
   width: 100%;
   height: auto;

@@ -56,7 +56,7 @@ export function ControlFlowDiagram() {
         <path d="M372 98H388" className="diagram-line" />
         <path d="M556 98H572" className="diagram-line" />
       </svg>
-      <figcaption className="tokenomics-caption">
+      <figcaption className="diagram-caption">
         The authority chain is explicit: proposals are bounded, authorization is programmable,
         execution is deterministic, and finality comes from ledger and settlement.
       </figcaption>

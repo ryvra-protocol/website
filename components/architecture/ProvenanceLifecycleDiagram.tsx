@@ -58,7 +58,7 @@ export function ProvenanceLifecycleDiagram() {
         <path d="M460 124H480" className="diagram-line" />
         <path d="M610 124H630" className="diagram-line" />
       </svg>
-      <figcaption className="tokenomics-caption">
+      <figcaption className="diagram-caption">
         Every intent carries provenance from authority binding through settlement, with
         suspension and emergency controls available before and after execution.
       </figcaption>
