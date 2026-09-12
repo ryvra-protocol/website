@@ -32,14 +32,18 @@ function normalizeDocsListItem(
   }
 
   if (typeof item === "string") {
-    return { summary: item };
+    return { summary: item, body: item };
   }
 
   const contentItem = item as Exclude<DocsListItem, string>;
+  const hasSupportingContent =
+    Boolean(contentItem.body) ||
+    Boolean(contentItem.children?.length) ||
+    Boolean(contentItem.code);
 
   return {
     summary: contentItem.summary,
-    body: contentItem.body,
+    body: contentItem.body ?? (hasSupportingContent ? undefined : contentItem.summary),
     children: contentItem.children,
     childrenOrdered: contentItem.childrenOrdered,
     code: contentItem.code,
@@ -73,17 +77,15 @@ export function DocsList({
             <details className="docs-collapsible-details" data-docs-collapsible-item="true">
               <summary className="docs-collapsible-summary" aria-expanded="false">
                 <span className="docs-collapsible-summary-text">{normalized.summary}</span>
+                {normalized.href ? (
+                  <Link href={normalized.href} className="docs-collapsible-summary-link">
+                    Open page
+                  </Link>
+                ) : null}
               </summary>
               {hasPanel ? (
                 <div className="docs-collapsible-panel">
                   {normalized.body ? <p>{normalized.body}</p> : null}
-                  {normalized.href ? (
-                    <p>
-                      <Link href={normalized.href} className="docs-inline-link">
-                        Open {normalized.summary}
-                      </Link>
-                    </p>
-                  ) : null}
                   {normalized.code ? (
                     <pre className="docs-collapsible-code">
                       <code>{normalized.code}</code>

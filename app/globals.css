@@ -816,6 +816,13 @@ a {
   min-width: 0;
 }
 
+.docs-collapsible-summary-link {
+  color: var(--accent);
+  font-size: 0.82rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .docs-collapsible-panel {
   border-top: 1px solid var(--border);
   padding: 0.85rem 0.95rem 0.95rem;
@@ -840,11 +847,6 @@ a {
   overflow: auto;
   border: 1px solid var(--border);
   background: var(--surface);
-}
-
-.docs-inline-link {
-  color: var(--accent);
-  font-weight: 600;
 }
 
 .docs-pager {

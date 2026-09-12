@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import ts from 'typescript';
 import { loadDocsModule } from './docs-validation-data.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -8,30 +9,123 @@ const __dirname = path.dirname(__filename);
 const docsListPath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsList.tsx');
 const docsListControlsPath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsListControls.tsx');
 const docsPageFramePath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsPageFrame.tsx');
-const docsListSource = fs.readFileSync(docsListPath, 'utf8');
-const controlsSource = fs.readFileSync(docsListControlsPath, 'utf8');
-const pageFrameSource = fs.readFileSync(docsPageFramePath, 'utf8');
 const docs = loadDocsModule();
 const errors = [];
 
-if (!docsListSource.includes('<details') || !docsListSource.includes('<summary')) {
-  errors.push('DocsList must use native <details><summary> semantics.');
+function parseTsx(filePath) {
+  const source = fs.readFileSync(filePath, 'utf8');
+  return {
+    source,
+    ast: ts.createSourceFile(filePath, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX),
+  };
 }
 
-if (!docsListSource.includes('<DocsList')) {
+function getTagName(node, sourceFile) {
+  return ts.isIdentifier(node.tagName) ? node.tagName.text : node.tagName.getText(sourceFile);
+}
+
+function getJsxAttribute(node, name) {
+  const attribute = node.attributes.properties.find(
+    (property) => ts.isJsxAttribute(property) && property.name.text === name,
+  );
+
+  return attribute && ts.isJsxAttribute(attribute) ? attribute : undefined;
+}
+
+function hasBooleanAttribute(node, name) {
+  return Boolean(getJsxAttribute(node, name));
+}
+
+function getStringAttributeValue(attribute) {
+  if (!attribute || !attribute.initializer) {
+    return undefined;
+  }
+
+  if (ts.isStringLiteral(attribute.initializer)) {
+    return attribute.initializer.text;
+  }
+
+  if (
+    ts.isJsxExpression(attribute.initializer) &&
+    attribute.initializer.expression &&
+    (ts.isStringLiteral(attribute.initializer.expression) ||
+      ts.isNoSubstitutionTemplateLiteral(attribute.initializer.expression))
+  ) {
+    return attribute.initializer.expression.text;
+  }
+
+  return undefined;
+}
+
+function collectJsxTags(sourceFile) {
+  const tags = [];
+
+  function visit(node) {
+    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
+      tags.push(node);
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile.ast);
+  return tags;
+}
+
+function collectImports(sourceFile) {
+  return sourceFile.ast.statements.filter(ts.isImportDeclaration);
+}
+
+const docsList = parseTsx(docsListPath);
+const docsListControls = parseTsx(docsListControlsPath);
+const docsPageFrame = parseTsx(docsPageFramePath);
+
+const docsListTags = collectJsxTags(docsList);
+if (!docsListTags.some((node) => getTagName(node, docsList.ast) === 'details')) {
+  errors.push('DocsList must use native <details> semantics.');
+}
+if (!docsListTags.some((node) => getTagName(node, docsList.ast) === 'summary')) {
+  errors.push('DocsList must use native <summary> semantics.');
+}
+if (
+  !docsListTags.some((node) => getTagName(node, docsList.ast) === 'DocsList') ||
+  !docsList.source.includes('items={normalized.children}')
+) {
   errors.push('DocsList must render nested list items recursively.');
 }
 
-if (!controlsSource.includes('Expand all') || !controlsSource.includes('Collapse all')) {
+const docsListControlTags = collectJsxTags(docsListControls);
+const controlsText = docsListControls.source;
+if (!controlsText.includes('Expand all') || !controlsText.includes('Collapse all')) {
   errors.push('DocsListControls must expose Expand all and Collapse all controls.');
 }
-
-if (!pageFrameSource.includes('<DocsListControls') || !pageFrameSource.includes('<DocsList items={heading.steps} ordered />')) {
-  errors.push('DocsPageFrame must wire collapsible controls and ordered-list rendering.');
+if (!docsListControlTags.some((node) => getTagName(node, docsListControls.ast) === 'button')) {
+  errors.push('DocsListControls must render button controls.');
 }
 
-if (!pageFrameSource.includes('<DocsList items={heading.bullets} />') || !pageFrameSource.includes('mode="links"')) {
-  errors.push('DocsPageFrame must wire unordered and linked list rendering.');
+const pageFrameImports = collectImports(docsPageFrame);
+const hasDocsListImport = pageFrameImports.some(
+  (node) => node.moduleSpecifier.getText(docsPageFrame.ast).includes('DocsList'),
+);
+const hasDocsListControlsImport = pageFrameImports.some(
+  (node) => node.moduleSpecifier.getText(docsPageFrame.ast).includes('DocsListControls'),
+);
+if (!hasDocsListImport || !hasDocsListControlsImport) {
+  errors.push('DocsPageFrame must import DocsList and DocsListControls.');
+}
+
+const pageFrameTags = collectJsxTags(docsPageFrame);
+const docsListUsage = pageFrameTags.filter((node) => getTagName(node, docsPageFrame.ast) === 'DocsList');
+if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'DocsListControls')) {
+  errors.push('DocsPageFrame must render DocsListControls.');
+}
+if (!docsListUsage.some((node) => hasBooleanAttribute(node, 'ordered'))) {
+  errors.push('DocsPageFrame must render ordered docs lists through DocsList.');
+}
+if (!docsListUsage.some((node) => getStringAttributeValue(getJsxAttribute(node, 'mode')) === 'links')) {
+  errors.push('DocsPageFrame must render linked docs lists through DocsList.');
+}
+if (docsListUsage.length < 3) {
+  errors.push('DocsPageFrame must render multiple docs list modes through DocsList.');
 }
 
 const pages = docs.docsPages;
@@ -48,11 +142,9 @@ const hasDeeplyNested = pages.some((page) =>
 if (!hasOrdered) {
   errors.push('Expected at least one ordered docs list for collapsible coverage.');
 }
-
 if (!hasUnordered) {
   errors.push('Expected at least one unordered docs list for collapsible coverage.');
 }
-
 if (!hasDeeplyNested) {
   errors.push('Expected at least one nested docs list item for collapsible coverage.');
 }
