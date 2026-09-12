@@ -57,11 +57,16 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
           <section key={heading.id} className="docs-section-block">
             <DocsHeading id={heading.id}>{heading.title}</DocsHeading>
             {heading.audience && heading.audience.length > 0 ? (
-              <ul className="docs-audience-tags">
-                {heading.audience.map((audience) => (
-                  <li key={`${heading.id}-${audience}`}>{audience}</li>
-                ))}
-              </ul>
+              <>
+                <span id={`${heading.id}-audience-label`} className="sr-only">
+                  Audience tags
+                </span>
+                <ul className="docs-audience-tags" aria-labelledby={`${heading.id}-audience-label`}>
+                  {heading.audience.map((audience) => (
+                    <li key={`${heading.id}-${audience}`}>{audience}</li>
+                  ))}
+                </ul>
+              </>
             ) : null}
             {heading.body ? <p>{heading.body}</p> : null}
             {heading.steps && heading.steps.length > 0 ? (

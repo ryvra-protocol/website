@@ -55,7 +55,7 @@ export function DocsList({
           <li key={`${depth}-${index}-${normalized.summary}`} className="docs-collapsible-list-item">
             {hasPanel ? (
               <details className="docs-collapsible-details" data-docs-collapsible-item="true">
-                <summary className="docs-collapsible-summary" aria-expanded="false">
+                <summary className="docs-collapsible-summary">
                   <span className="docs-collapsible-summary-text">{normalized.summary}</span>
                 </summary>
                 <div className="docs-collapsible-panel">

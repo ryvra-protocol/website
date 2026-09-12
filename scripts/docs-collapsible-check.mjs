@@ -116,8 +116,8 @@ if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'DocsL
 if (!docsListUsage.some((node) => hasBooleanAttribute(node, 'ordered'))) {
   errors.push('DocsPageFrame must render ordered docs lists through DocsList.');
 }
-if (docsListUsage.length < 2) {
-  errors.push('DocsPageFrame must render multiple collapsible docs list variants through DocsList.');
+if (!docsListUsage.some((node) => !hasBooleanAttribute(node, 'ordered'))) {
+  errors.push('DocsPageFrame must render unordered docs lists through DocsList.');
 }
 if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'ul')) {
   errors.push('DocsPageFrame must continue rendering plain related-link lists.');

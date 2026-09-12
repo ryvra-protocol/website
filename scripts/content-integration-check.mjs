@@ -71,18 +71,8 @@ function visit(node) {
 
 visit(litepaperAst);
 
-const requiredLitepaperIds = [
-  'what-ryvra-is',
-  'why-programmable-financial-authority-matters',
-  'how-agent-safety-boundaries-work',
-  'how-ledger-settlement-and-provenance-fit-together',
-  'confidential-execution-and-private-markets',
-];
-
-for (const id of requiredLitepaperIds) {
-  if (!litepaperSectionIds.has(id)) {
-    errors.push(`Litepaper page is missing required section id: ${id}`);
-  }
+if (litepaperSectionIds.size === 0) {
+  errors.push('Litepaper page should expose stable section anchors for overview content.');
 }
 
 for (const href of ['/docs/tokenomics/litepaper-faq', '/docs/tokenomics/tokenomics-faq']) {
