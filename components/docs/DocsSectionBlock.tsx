@@ -1,7 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { DocsHeading } from "@/components/docs/DocsHeading";
 import { getDocsSectionBlockConfig } from "@/lib/docsSectionBlocks";
 
@@ -53,8 +53,8 @@ function DocsSectionBlockCollapsible({
   children,
 }: DocsSectionBlockCollapsibleProps) {
   const [open, setOpen] = useState(defaultOpen);
-  const panelId = useMemo(() => `${id}-panel`, [id]);
-  const buttonId = useMemo(() => `${id}-toggle`, [id]);
+  const panelId = `${id}-panel`;
+  const buttonId = `${id}-toggle`;
 
   useEffect(() => {
     const getCurrentHash = () => {
@@ -110,7 +110,7 @@ function DocsSectionBlockCollapsible({
             <span className="docs-section-toggle-label">{title}</span>
           </button>
         </DocsHeading>
-        <div id={panelId} className="docs-section-panel" role="region" aria-labelledby={buttonId} hidden={!open}>
+        <div id={panelId} className="docs-section-panel" role="region" aria-labelledby={id} hidden={!open}>
           {children}
         </div>
       </div>
