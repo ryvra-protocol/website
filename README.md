@@ -117,5 +117,8 @@ These docs routes are the canonical public-navigation layer for website messagin
 - FAQ pages in the docs portal are authored in `/lib/docs.ts` using `audience` tags on each FAQ heading.
 - Docs list items now render as collapsible `<details>/<summary>` blocks globally through `/components/docs/DocsList.tsx`; prefer short lead summaries and optional nested children when authoring deeper list content.
 - If a list item needs nested guidance, keep the top-level summary concise and place supporting detail in nested `children` content rather than overloading the summary line.
+- Docs metadata (`Last updated`, `Compatibility window`) belongs in the docs page footer block only; do not duplicate metadata as body headings.
+- Prefer purpose-first docs copy: keep concise purpose statements and trim redundant helper label text in section intros.
+- Top navigation should contain broad primary routes; keep `/founder` route access in footer/direct URL rather than top nav.
 - Keep the docs portal in a “natural language first, spec second” structure.
 - Check `/docs/docs-ia-v2` and `/docs/writing-style-and-templates` before making larger documentation IA changes.

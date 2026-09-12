@@ -92,8 +92,8 @@ for (const href of ['/docs/tokenomics/litepaper-faq', '/docs/tokenomics/tokenomi
   if (!headingIds.has('who-is-this-for')) {
     errors.push(`${href} is missing the who-is-this-for section.`);
   }
-  if (!headingIds.has('last-updated')) {
-    errors.push(`${href} is missing the last-updated section.`);
+  if (headingIds.has('last-updated') || headingIds.has('compatibility-window')) {
+    errors.push(`${href} should rely on page metadata footer instead of inline metadata sections.`);
   }
 
   const faqHeadings = page.headings.filter((heading) => heading.kind === 'faq');
