@@ -55,6 +55,7 @@ function DocsSectionBlockCollapsible({
   const [open, setOpen] = useState(defaultOpen);
   const panelId = useMemo(() => `${id}-panel`, [id]);
   const buttonId = useMemo(() => `${id}-toggle`, [id]);
+  const labelId = useMemo(() => `${id}-label`, [id]);
 
   useEffect(() => {
     const syncHashState = () => {
@@ -98,10 +99,12 @@ function DocsSectionBlockCollapsible({
             <span className="docs-section-chevron" aria-hidden="true">
               ▸
             </span>
-            <span className="docs-section-toggle-label">{title}</span>
+            <span id={labelId} className="docs-section-toggle-label">
+              {title}
+            </span>
           </button>
         </DocsHeading>
-        <div id={panelId} className="docs-section-panel" role="region" aria-labelledby={buttonId} hidden={!open}>
+        <div id={panelId} className="docs-section-panel" role="region" aria-labelledby={labelId} hidden={!open}>
           {children}
         </div>
       </div>

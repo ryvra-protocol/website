@@ -88,11 +88,18 @@ function containsStringLiteral(node, value) {
   return found;
 }
 
-function containsIdentifier(node, value) {
+function containsWindowLocationHashAccess(node) {
   let found = false;
 
   function visit(current) {
-    if (ts.isIdentifier(current) && current.text === value) {
+    if (
+      ts.isPropertyAccessExpression(current) &&
+      current.name.text === 'hash' &&
+      ts.isPropertyAccessExpression(current.expression) &&
+      current.expression.name.text === 'location' &&
+      ts.isIdentifier(current.expression.expression) &&
+      current.expression.expression.text === 'window'
+    ) {
       found = true;
       return;
     }
@@ -175,11 +182,7 @@ const docsSectionBlockText = docsSectionBlock.source;
 if (!docsSectionBlockText.includes('aria-expanded={open}')) {
   errors.push('DocsSectionBlock must expose aria-expanded state on its toggle.');
 }
-if (
-  !containsIdentifier(docsSectionBlock.ast, 'window') ||
-  !containsIdentifier(docsSectionBlock.ast, 'location') ||
-  !containsIdentifier(docsSectionBlock.ast, 'hash')
-) {
+if (!containsWindowLocationHashAccess(docsSectionBlock.ast)) {
   errors.push('DocsSectionBlock must auto-expand when the URL hash targets a section.');
 }
 if (!containsStringLiteral(docsSectionBlock.ast, 'hashchange')) {

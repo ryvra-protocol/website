@@ -54,7 +54,7 @@ export function getDocsSectionBlockConfig(
     return { kind: "prerequisites", defaultOpen: false };
   }
 
-  if (matchesPrefix(normalizedTitle, ["step by step"]) || normalizedId.includes("step by step")) {
+  if (matchesPrefix(normalizedTitle, ["step by step"]) || matchesPrefix(normalizedId, ["step by step"])) {
     return { kind: "step-by-step", defaultOpen: false };
   }
 
