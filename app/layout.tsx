@@ -15,6 +15,11 @@ export const metadata: Metadata = {
     template: `%s | ${siteName}`,
   },
   description: siteDescription,
+  icons: {
+    icon: "/ryvra_logo_image.png",
+    shortcut: "/ryvra_logo_image.png",
+    apple: "/ryvra_logo_image.png",
+  },
   openGraph: {
     title: "Ryvra",
     description: siteDescription,
