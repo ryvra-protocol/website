@@ -714,6 +714,13 @@ a {
   margin-top: 1rem;
 }
 
+.docs-section-card {
+  border: 1px solid var(--border);
+  border-radius: 0.9rem;
+  background: color-mix(in srgb, var(--surface-muted) 70%, var(--surface));
+  overflow: clip;
+}
+
 .docs-list-controls {
   display: flex;
   gap: 0.75rem;
@@ -727,7 +734,7 @@ a {
 
 .docs-heading {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.45rem;
   margin: 0;
   scroll-margin-top: 5rem;
@@ -768,6 +775,51 @@ a {
   padding: 0.18rem 0.55rem;
   font-size: 0.78rem;
   color: var(--muted);
+}
+
+.docs-section-toggle {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  padding: 0.85rem 0.95rem;
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.docs-section-toggle:hover {
+  background: color-mix(in srgb, var(--surface-muted) 85%, var(--surface));
+}
+
+.docs-section-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 0.75rem;
+}
+
+.docs-section-chevron {
+  color: var(--accent);
+  line-height: 1.2;
+  transform-origin: center;
+  transition: transform 0.15s ease;
+}
+
+.docs-section-toggle[aria-expanded="true"] .docs-section-chevron {
+  transform: rotate(90deg);
+}
+
+.docs-section-toggle-label {
+  flex: 1;
+  min-width: 0;
+}
+
+.docs-section-body {
+  margin-top: 0.55rem;
 }
 
 .docs-collapsible-list {
@@ -853,14 +905,29 @@ a {
   padding: 0.85rem 0.95rem 0.95rem;
 }
 
+.docs-section-panel {
+  border-top: 1px solid var(--border);
+  padding: 0.85rem 0.95rem 0.95rem;
+}
+
+.docs-section-panel[hidden] {
+  display: none;
+}
+
+.docs-section-body > :first-child,
+.docs-section-panel > :first-child,
 .docs-collapsible-panel > :first-child {
   margin-top: 0;
 }
 
+.docs-section-body > :last-child,
+.docs-section-panel > :last-child,
 .docs-collapsible-panel > :last-child {
   margin-bottom: 0;
 }
 
+.docs-section-body p,
+.docs-section-panel p,
 .docs-collapsible-panel p {
   color: var(--muted);
 }
@@ -903,6 +970,7 @@ a {
 
 @media (prefers-reduced-motion: reduce) {
   .docs-heading-anchor,
+  .docs-section-chevron,
   .docs-collapsible-summary::before {
     transition: none;
   }

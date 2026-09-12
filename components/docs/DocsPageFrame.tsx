@@ -1,10 +1,11 @@
 import Link from "next/link";
 import { DocsList } from "@/components/docs/DocsList";
 import { DocsListControls } from "@/components/docs/DocsListControls";
+import { DocsSectionBlock } from "@/components/docs/DocsSectionBlock";
 import type { DocsBreadcrumb, DocsPage, DocsSidebarItem } from "@/lib/docs";
 import { DocsCallout } from "@/components/docs/DocsCallout";
-import { DocsHeading } from "@/components/docs/DocsHeading";
 import { DocsToc } from "@/components/docs/DocsToc";
+import { isDocsSectionBlock } from "@/lib/docsSectionBlocks";
 
 type DocsPageFrameProps = {
   page: DocsPage;
@@ -18,6 +19,7 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
   const hasCollapsibleLists = page.headings.some(
     (heading) => Boolean(heading.steps?.length) || Boolean(heading.bullets?.length),
   );
+  const hasCollapsibleSections = page.headings.some((heading) => isDocsSectionBlock(heading));
 
   return (
     <div className="docs-page-shell">
@@ -51,11 +53,10 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
           {page.calloutBody}
         </DocsCallout>
 
-        {hasCollapsibleLists ? <DocsListControls rootId={articleId} /> : null}
+        {hasCollapsibleLists || hasCollapsibleSections ? <DocsListControls rootId={articleId} /> : null}
 
         {page.headings.map((heading) => (
-          <section key={heading.id} className="docs-section-block">
-            <DocsHeading id={heading.id}>{heading.title}</DocsHeading>
+          <DocsSectionBlock key={heading.id} id={heading.id} title={heading.title} kind={heading.kind}>
             {heading.audience && heading.audience.length > 0 ? (
               <>
                 <span id={`${heading.id}-audience-label`} className="sr-only">
@@ -84,7 +85,7 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
                 ))}
               </ul>
             ) : null}
-          </section>
+          </DocsSectionBlock>
         ))}
 
         <nav className="docs-pager" aria-label="Previous and next documentation pages">

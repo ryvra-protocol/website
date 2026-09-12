@@ -11,6 +11,8 @@ export function DocsListControls({ rootId }: DocsListControlsProps) {
       return;
     }
 
+    window.dispatchEvent(new CustomEvent("docs:set-all-sections", { detail: { open } }));
+
     root
       .querySelectorAll<HTMLDetailsElement>("[data-docs-collapsible-item='true']")
       .forEach((details) => {
@@ -19,7 +21,7 @@ export function DocsListControls({ rootId }: DocsListControlsProps) {
   };
 
   return (
-    <div className="docs-list-controls" role="group" aria-label="Docs list display controls">
+    <div className="docs-list-controls" role="group" aria-label="Docs section display controls">
       <button
         type="button"
         className="button button-secondary docs-list-controls-button"
