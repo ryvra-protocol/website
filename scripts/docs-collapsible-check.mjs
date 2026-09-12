@@ -36,6 +36,19 @@ function hasBooleanAttribute(node, name) {
   return Boolean(getJsxAttribute(node, name));
 }
 
+function getExpressionText(attribute, sourceFile) {
+  if (
+    !attribute ||
+    !attribute.initializer ||
+    !ts.isJsxExpression(attribute.initializer) ||
+    !attribute.initializer.expression
+  ) {
+    return undefined;
+  }
+
+  return attribute.initializer.expression.getText(sourceFile.ast);
+}
+
 function getStringAttributeValue(attribute) {
   if (!attribute || !attribute.initializer) {
     return undefined;
@@ -87,8 +100,11 @@ if (!docsListTags.some((node) => getTagName(node, docsList.ast) === 'summary')) 
   errors.push('DocsList must use native <summary> semantics.');
 }
 if (
-  !docsListTags.some((node) => getTagName(node, docsList.ast) === 'DocsList') ||
-  !docsList.source.includes('items={normalized.children}')
+  !docsListTags.some(
+    (node) =>
+      getTagName(node, docsList.ast) === 'DocsList' &&
+      getExpressionText(getJsxAttribute(node, 'items'), docsList) === 'normalized.children',
+  )
 ) {
   errors.push('DocsList must render nested list items recursively.');
 }

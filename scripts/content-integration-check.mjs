@@ -52,12 +52,10 @@ const litepaperLinks = new Set();
 function visit(node) {
   if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
     const tagName = getTagName(node);
+    const id = getStringAttributeValue(getJsxAttribute(node, 'id'));
 
-    if (tagName === 'h3') {
-      const id = getStringAttributeValue(getJsxAttribute(node, 'id'));
-      if (id) {
-        litepaperSectionIds.add(id);
-      }
+    if (id && /^h[1-6]$/.test(tagName)) {
+      litepaperSectionIds.add(id);
     }
 
     if (tagName === 'Link') {

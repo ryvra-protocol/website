@@ -74,33 +74,39 @@ export function DocsList({
 
         return (
           <li key={`${depth}-${index}-${normalized.summary}`} className="docs-collapsible-list-item">
-            <details className="docs-collapsible-details" data-docs-collapsible-item="true">
-              <summary className="docs-collapsible-summary" aria-expanded="false">
-                <span className="docs-collapsible-summary-text">{normalized.summary}</span>
+            {hasPanel ? (
+              <div className="docs-collapsible-item-shell">
+                <details className="docs-collapsible-details" data-docs-collapsible-item="true">
+                  <summary className="docs-collapsible-summary" aria-expanded="false">
+                    <span className="docs-collapsible-summary-text">{normalized.summary}</span>
+                  </summary>
+                  <div className="docs-collapsible-panel">
+                    {normalized.body ? <p>{normalized.body}</p> : null}
+                    {normalized.code ? (
+                      <pre className="docs-collapsible-code">
+                        <code>{normalized.code}</code>
+                      </pre>
+                    ) : null}
+                    {normalized.children?.length ? (
+                      <DocsList
+                        items={normalized.children}
+                        ordered={normalized.childrenOrdered}
+                        depth={depth + 1}
+                      />
+                    ) : null}
+                  </div>
+                </details>
                 {normalized.href ? (
-                  <Link href={normalized.href} className="docs-collapsible-summary-link">
+                  <Link href={normalized.href} className="docs-collapsible-item-link">
                     Open page
                   </Link>
                 ) : null}
-              </summary>
-              {hasPanel ? (
-                <div className="docs-collapsible-panel">
-                  {normalized.body ? <p>{normalized.body}</p> : null}
-                  {normalized.code ? (
-                    <pre className="docs-collapsible-code">
-                      <code>{normalized.code}</code>
-                    </pre>
-                  ) : null}
-                  {normalized.children?.length ? (
-                    <DocsList
-                      items={normalized.children}
-                      ordered={normalized.childrenOrdered}
-                      depth={depth + 1}
-                    />
-                  ) : null}
-                </div>
-              ) : null}
-            </details>
+              </div>
+            ) : (
+              <div className="docs-collapsible-leaf">
+                <span className="docs-collapsible-summary-text">{normalized.summary}</span>
+              </div>
+            )}
           </li>
         );
       })}
