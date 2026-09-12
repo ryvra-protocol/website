@@ -35,12 +35,14 @@ function normalizeDocsListItem(
     return { summary: item };
   }
 
+  const contentItem = item as Exclude<DocsListItem, string>;
+
   return {
-    summary: item.summary,
-    body: item.body,
-    children: item.children,
-    childrenOrdered: item.childrenOrdered,
-    code: item.code,
+    summary: contentItem.summary,
+    body: contentItem.body,
+    children: contentItem.children,
+    childrenOrdered: contentItem.childrenOrdered,
+    code: contentItem.code,
   };
 }
 
