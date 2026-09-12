@@ -4712,11 +4712,11 @@ export function normalizeHeadingToken(value: string) {
 export function shouldHideMetadataHeading(heading: DocsHeading) {
   const normalizedTitle = normalizeHeadingToken(heading.title);
   const normalizedId = normalizeHeadingToken(heading.id);
+  const hasMetadataToken = (value: string) =>
+    value.includes("last updated") || value.includes("compatibility window");
   return (
-    normalizedTitle === "last updated" ||
-    normalizedId === "last updated" ||
-    normalizedTitle === "compatibility window" ||
-    normalizedId === "compatibility window"
+    hasMetadataToken(normalizedTitle) ||
+    hasMetadataToken(normalizedId)
   );
 }
 

@@ -217,10 +217,15 @@ const metadataNode = pageFrameMetaNodes[0];
 if (!pagerNode || !metadataNode || metadataNode.pos < pagerNode.pos) {
   errors.push('DocsPageFrame metadata block must appear after the main docs content and pager.');
 }
-if (!docsPageFrame.source.includes('Last updated:')) {
+const metadataElementNode =
+  metadataNode && ts.isJsxOpeningElement(metadataNode) ? metadataNode.parent : metadataNode;
+const metadataNodeSource = metadataElementNode
+  ? docsPageFrame.source.slice(metadataElementNode.pos, metadataElementNode.end)
+  : '';
+if (!metadataNodeSource.includes('Last updated:')) {
   errors.push('DocsPageFrame metadata footer must include Last updated.');
 }
-if (!docsPageFrame.source.includes('Compatibility window:')) {
+if (!metadataNodeSource.includes('Compatibility window:')) {
   errors.push('DocsPageFrame metadata footer must include Compatibility window.');
 }
 
