@@ -71,28 +71,65 @@ a {
   margin: 0 auto;
 }
 
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: var(--background);
+  backdrop-filter: blur(10px);
+  background: color-mix(in srgb, var(--background) 88%, transparent);
+  border-bottom: 1px solid color-mix(in srgb, var(--border) 80%, transparent);
+}
+
 .nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.1rem 0;
+  gap: 1rem;
+  padding: 0.85rem 0;
 }
 
 .wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.1rem;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+  font-size: 1rem;
+  line-height: 1;
+  padding: 0.42rem 0.58rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  background: color-mix(in srgb, var(--surface) 84%, transparent);
+}
+
+.wordmark-mark {
+  color: var(--accent);
+  text-shadow: 0 0 0.4rem color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .nav-links {
   display: flex;
-  gap: 0.8rem;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.45rem;
   flex-wrap: wrap;
 }
 
 .nav-link {
   color: var(--muted);
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+  padding: 0.4rem 0.62rem;
+  border-radius: 0.62rem;
+  border: 1px solid transparent;
+  transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-link:hover {
+  color: var(--foreground);
+  background: color-mix(in srgb, var(--surface-muted) 78%, var(--surface));
+  border-color: color-mix(in srgb, var(--border) 75%, transparent);
 }
 
 .nav-link:focus-visible {
@@ -668,7 +705,9 @@ a {
 }
 
 .docs-page-meta {
-  margin-top: 0.25rem;
+  margin-top: 1.4rem;
+  padding-top: 0.95rem;
+  border-top: 1px solid var(--border);
   font-size: 0.85rem;
   color: var(--muted);
 }
@@ -987,6 +1026,17 @@ a {
 }
 
 @media (max-width: 900px) {
+  .nav {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 0.8rem 0;
+  }
+
+  .nav-links {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
   .docs-layout-shell {
     grid-template-columns: minmax(0, 1fr);
   }

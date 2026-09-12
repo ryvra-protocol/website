@@ -11,6 +11,8 @@ const docsListControlsPath = path.resolve(__dirname, '..', 'components', 'docs',
 const docsPageFramePath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsPageFrame.tsx');
 const docsSectionBlockPath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsSectionBlock.tsx');
 const docsSectionConfigPath = path.resolve(__dirname, '..', 'lib', 'docsSectionBlocks.ts');
+const navbarPath = path.resolve(__dirname, '..', 'components', 'Navbar.tsx');
+const footerPath = path.resolve(__dirname, '..', 'components', 'Footer.tsx');
 const docs = loadDocsModule();
 const errors = [];
 
@@ -49,6 +51,27 @@ function getExpressionText(attribute, sourceFile) {
   }
 
   return attribute.initializer.expression.getText(sourceFile.ast);
+}
+
+function getStringAttributeValue(attribute) {
+  if (!attribute || !attribute.initializer) {
+    return undefined;
+  }
+
+  if (ts.isStringLiteral(attribute.initializer)) {
+    return attribute.initializer.text;
+  }
+
+  if (
+    ts.isJsxExpression(attribute.initializer) &&
+    attribute.initializer.expression &&
+    (ts.isStringLiteral(attribute.initializer.expression) ||
+      ts.isNoSubstitutionTemplateLiteral(attribute.initializer.expression))
+  ) {
+    return attribute.initializer.expression.text;
+  }
+
+  return undefined;
 }
 
 function collectJsxTags(sourceFile) {
@@ -116,6 +139,8 @@ const docsListControls = parseTsx(docsListControlsPath);
 const docsPageFrame = parseTsx(docsPageFramePath);
 const docsSectionBlock = parseTsx(docsSectionBlockPath);
 const docsSectionConfig = parseTsx(docsSectionConfigPath);
+const navbar = parseTsx(navbarPath);
+const footer = parseTsx(footerPath);
 
 const docsListTags = collectJsxTags(docsList);
 if (!docsListTags.some((node) => getTagName(node, docsList.ast) === 'details')) {
@@ -178,6 +203,33 @@ if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'ul'))
   errors.push('DocsPageFrame must continue rendering plain related-link lists.');
 }
 
+const pageFrameMetaNodes = pageFrameTags.filter(
+  (node) => getStringAttributeValue(getJsxAttribute(node, 'className')) === 'docs-page-meta',
+);
+if (pageFrameMetaNodes.length !== 1) {
+  errors.push('DocsPageFrame must render exactly one metadata footer block.');
+}
+const pagerNodes = pageFrameTags.filter(
+  (node) => getStringAttributeValue(getJsxAttribute(node, 'className')) === 'docs-pager',
+);
+const pagerNode = pagerNodes[0];
+const metadataNode = pageFrameMetaNodes[0];
+const pagerElementNode = pagerNode && ts.isJsxOpeningElement(pagerNode) ? pagerNode.parent : pagerNode;
+const metadataElementNode =
+  metadataNode && ts.isJsxOpeningElement(metadataNode) ? metadataNode.parent : metadataNode;
+if (!pagerElementNode || !metadataElementNode || metadataElementNode.pos < pagerElementNode.end) {
+  errors.push('DocsPageFrame metadata block must appear after the main docs content and pager.');
+}
+const metadataNodeSource = metadataElementNode
+  ? docsPageFrame.source.slice(metadataElementNode.pos, metadataElementNode.end)
+  : '';
+if (!metadataNodeSource.includes('Last updated:')) {
+  errors.push('DocsPageFrame metadata footer must include Last updated.');
+}
+if (!metadataNodeSource.includes('Compatibility window:')) {
+  errors.push('DocsPageFrame metadata footer must include Compatibility window.');
+}
+
 const docsSectionBlockText = docsSectionBlock.source;
 if (!docsSectionBlockText.includes('aria-expanded={open}')) {
   errors.push('DocsSectionBlock must expose aria-expanded state on its toggle.');
@@ -193,6 +245,13 @@ if (!containsStringLiteral(docsSectionBlock.ast, 'docs:set-all-sections')) {
 }
 if (!docsSectionBlockText.includes('role="region"')) {
   errors.push('DocsSectionBlock must expose section content as an accessible region.');
+}
+
+if (containsStringLiteral(navbar.ast, '/founder')) {
+  errors.push('Navbar must not include /founder in top navigation links.');
+}
+if (!containsStringLiteral(footer.ast, '/founder')) {
+  errors.push('Footer must retain Founder link for direct discovery.');
 }
 
 const docsSectionConfigText = docsSectionConfig.source;

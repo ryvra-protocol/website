@@ -4486,14 +4486,14 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "standard-template",
         title: "Standard template",
         bullets: [
-          "Summary",
+          "Purpose",
           "Audience",
           "Prerequisites",
           "In plain English",
           "Step-by-step",
           "Troubleshooting",
           "Related pages",
-          "Last updated",
+          "Metadata footer (Last updated + Compatibility window)",
           "Source of truth",
         ],
       },
@@ -4502,6 +4502,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         title: "Writing rules",
         bullets: [
           "Use short paragraphs and action-oriented headings.",
+          "Use concise purpose-first section intros and remove repetitive helper subtext.",
           "Reduce acronyms or define them the first time they appear.",
           "Explain concepts before introducing protocol terms.",
           "Link to deep specs instead of front-loading jargon into overview pages.",
@@ -4700,6 +4701,55 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
   },
 };
 
+export function normalizeHeadingToken(value: string) {
+  return value
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+export function shouldHideMetadataHeading(heading: DocsHeading) {
+  const normalizedTitle = normalizeHeadingToken(heading.title);
+  const normalizedId = normalizeHeadingToken(heading.id);
+  const hasMetadataToken = (value: string) =>
+    value.includes("last updated") || value.includes("compatibility window");
+  return (
+    hasMetadataToken(normalizedTitle) ||
+    hasMetadataToken(normalizedId)
+  );
+}
+
+export function getCanonicalHeadingTitle(heading: DocsHeading) {
+  if (heading.kind === "faq") {
+    return heading.title;
+  }
+
+  const normalizedTitle = normalizeHeadingToken(heading.title);
+
+  if (normalizedTitle === "purpose and scope") {
+    return "Purpose";
+  }
+
+  if (normalizedTitle.includes("step by step")) {
+    return "Step-by-step";
+  }
+
+  if (
+    normalizedTitle === "troubleshooting and recovery" ||
+    normalizedTitle === "troubleshooting and escalation" ||
+    normalizedTitle === "troubleshooting and recovery steps"
+  ) {
+    return "Troubleshooting";
+  }
+
+  if (normalizedTitle === "related docs") {
+    return "Related pages";
+  }
+
+  return heading.title;
+}
+
 export const docsPages: DocsPage[] = docsSidebarItems.map((item) => {
   const authored = authoredDocsByHref[item.href];
   if (!authored) {
@@ -4715,9 +4765,14 @@ export const docsPages: DocsPage[] = docsSidebarItems.map((item) => {
     compatibilityWindow: authored.compatibilityWindow ?? docsPortalCompatibilityWindow,
     parentHref: getParentHref(item.href),
     calloutVariant: authored.calloutVariant ?? getCalloutVariant(item.href),
-    calloutTitle: authored.calloutTitle ?? "Summary",
+    calloutTitle: authored.calloutTitle ?? "Purpose",
     calloutBody: authored.calloutBody ?? authored.description,
-    headings: authored.headings,
+    headings: authored.headings
+      .filter((heading) => !shouldHideMetadataHeading(heading))
+      .map((heading) => ({
+        ...heading,
+        title: getCanonicalHeadingTitle(heading),
+      })),
   };
 });
 

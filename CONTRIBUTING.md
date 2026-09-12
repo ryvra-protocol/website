@@ -24,6 +24,18 @@
 - Add `audience` tags to each FAQ entry using `User`, `Merchant`, and/or `Developer`.
 - Lead with a direct natural-language answer, then link to deeper docs instead of front-loading jargon.
 
+## Docs page metadata and copy rules
+
+- Render `Last updated` and `Compatibility window` only in the page metadata footer at the end of docs pages.
+- Do not add inline `Last updated` or `Compatibility window` headings inside page body sections.
+- Keep docs section intro copy purpose-first: concise purpose statements are preferred over repetitive helper subtext.
+
+## Top navigation governance
+
+- Keep top navigation focused on primary product/docs pathways.
+- Keep `/founder` available by direct route and footer link, not in top navigation.
+- Add or remove top-nav links only when they are broadly relevant to most visitors.
+
 ## Collapsible docs lists
 
 - Docs lists are rendered globally as semantic `<details>/<summary>` items through `/components/docs/DocsList.tsx`.

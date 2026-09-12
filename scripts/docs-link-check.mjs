@@ -10,6 +10,7 @@ const docsPages = docs.docsPages;
 const docsPageOrder = docs.docsPageOrder;
 const getDocBreadcrumbs = docs.getDocBreadcrumbs;
 const getDocNeighbors = docs.getDocNeighbors;
+const shouldHideMetadataHeading = docs.shouldHideMetadataHeading;
 
 const errors = [];
 const pageByHref = new Map();
@@ -116,6 +117,10 @@ for (const page of docsPages) {
   }
 
   for (const heading of page.headings) {
+    if (typeof shouldHideMetadataHeading === 'function' && shouldHideMetadataHeading(heading)) {
+      errors.push(`Inline metadata heading found in ${page.href}#${heading.id}; metadata must render in footer only.`);
+    }
+
     for (const link of heading.links || []) {
       if (!pageByHref.has(link.href)) {
         errors.push(`Broken docs link ${link.href} referenced from ${page.href}#${heading.id}`);
