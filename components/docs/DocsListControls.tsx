@@ -6,12 +6,12 @@ type DocsListControlsProps = {
 
 export function DocsListControls({ rootId }: DocsListControlsProps) {
   const setAll = (open: boolean) => {
+    window.dispatchEvent(new CustomEvent("docs:set-all-sections", { detail: { open } }));
+
     const root = document.getElementById(rootId);
     if (!root) {
       return;
     }
-
-    window.dispatchEvent(new CustomEvent("docs:set-all-sections", { detail: { open } }));
 
     root
       .querySelectorAll<HTMLDetailsElement>("[data-docs-collapsible-item='true']")
