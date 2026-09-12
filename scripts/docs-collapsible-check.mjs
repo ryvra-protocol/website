@@ -9,6 +9,8 @@ const __dirname = path.dirname(__filename);
 const docsListPath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsList.tsx');
 const docsListControlsPath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsListControls.tsx');
 const docsPageFramePath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsPageFrame.tsx');
+const docsSectionBlockPath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsSectionBlock.tsx');
+const docsSectionConfigPath = path.resolve(__dirname, '..', 'lib', 'docsSectionBlocks.ts');
 const docs = loadDocsModule();
 const errors = [];
 
@@ -67,9 +69,53 @@ function collectImports(sourceFile) {
   return sourceFile.ast.statements.filter(ts.isImportDeclaration);
 }
 
+function containsStringLiteral(node, value) {
+  let found = false;
+
+  function visit(current) {
+    if (
+      (ts.isStringLiteral(current) || ts.isNoSubstitutionTemplateLiteral(current)) &&
+      current.text === value
+    ) {
+      found = true;
+      return;
+    }
+
+    ts.forEachChild(current, visit);
+  }
+
+  visit(node);
+  return found;
+}
+
+function containsWindowLocationHashAccess(node) {
+  let found = false;
+
+  function visit(current) {
+    if (
+      ts.isPropertyAccessExpression(current) &&
+      current.name.text === 'hash' &&
+      ts.isPropertyAccessExpression(current.expression) &&
+      current.expression.name.text === 'location' &&
+      ts.isIdentifier(current.expression.expression) &&
+      current.expression.expression.text === 'window'
+    ) {
+      found = true;
+      return;
+    }
+
+    ts.forEachChild(current, visit);
+  }
+
+  visit(node);
+  return found;
+}
+
 const docsList = parseTsx(docsListPath);
 const docsListControls = parseTsx(docsListControlsPath);
 const docsPageFrame = parseTsx(docsPageFramePath);
+const docsSectionBlock = parseTsx(docsSectionBlockPath);
+const docsSectionConfig = parseTsx(docsSectionConfigPath);
 
 const docsListTags = collectJsxTags(docsList);
 if (!docsListTags.some((node) => getTagName(node, docsList.ast) === 'details')) {
@@ -93,6 +139,9 @@ const controlsText = docsListControls.source;
 if (!controlsText.includes('Expand all') || !controlsText.includes('Collapse all')) {
   errors.push('DocsListControls must expose Expand all and Collapse all controls.');
 }
+if (!controlsText.includes('docs:set-all-sections')) {
+  errors.push('DocsListControls must dispatch a global docs:set-all-sections event.');
+}
 if (!docsListControlTags.some((node) => getTagName(node, docsListControls.ast) === 'button')) {
   errors.push('DocsListControls must render button controls.');
 }
@@ -104,14 +153,20 @@ const hasDocsListImport = pageFrameImports.some(
 const hasDocsListControlsImport = pageFrameImports.some(
   (node) => node.moduleSpecifier.getText(docsPageFrame.ast).includes('DocsListControls'),
 );
-if (!hasDocsListImport || !hasDocsListControlsImport) {
-  errors.push('DocsPageFrame must import DocsList and DocsListControls.');
+const hasDocsSectionBlockImport = pageFrameImports.some(
+  (node) => node.moduleSpecifier.getText(docsPageFrame.ast).includes('DocsSectionBlock'),
+);
+if (!hasDocsListImport || !hasDocsListControlsImport || !hasDocsSectionBlockImport) {
+  errors.push('DocsPageFrame must import DocsList, DocsListControls, and DocsSectionBlock.');
 }
 
 const pageFrameTags = collectJsxTags(docsPageFrame);
 const docsListUsage = pageFrameTags.filter((node) => getTagName(node, docsPageFrame.ast) === 'DocsList');
 if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'DocsListControls')) {
   errors.push('DocsPageFrame must render DocsListControls.');
+}
+if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'DocsSectionBlock')) {
+  errors.push('DocsPageFrame must render DocsSectionBlock wrappers.');
 }
 if (!docsListUsage.some((node) => hasBooleanAttribute(node, 'ordered'))) {
   errors.push('DocsPageFrame must render ordered docs lists through DocsList.');
@@ -121,6 +176,39 @@ if (!docsListUsage.some((node) => !hasBooleanAttribute(node, 'ordered'))) {
 }
 if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'ul')) {
   errors.push('DocsPageFrame must continue rendering plain related-link lists.');
+}
+
+const docsSectionBlockText = docsSectionBlock.source;
+if (!docsSectionBlockText.includes('aria-expanded={open}')) {
+  errors.push('DocsSectionBlock must expose aria-expanded state on its toggle.');
+}
+if (!containsWindowLocationHashAccess(docsSectionBlock.ast)) {
+  errors.push('DocsSectionBlock must auto-expand when the URL hash targets a section.');
+}
+if (!containsStringLiteral(docsSectionBlock.ast, 'hashchange')) {
+  errors.push('DocsSectionBlock must react to hash changes.');
+}
+if (!containsStringLiteral(docsSectionBlock.ast, 'docs:set-all-sections')) {
+  errors.push('DocsSectionBlock must listen for global section expand/collapse events.');
+}
+if (!docsSectionBlockText.includes('role="region"')) {
+  errors.push('DocsSectionBlock must expose section content as an accessible region.');
+}
+
+const docsSectionConfigText = docsSectionConfig.source;
+for (const requiredKind of [
+  '"summary"',
+  '"audience"',
+  '"prerequisites"',
+  '"step-by-step"',
+  '"troubleshooting"',
+  '"faq"',
+  '"related-pages"',
+  '"last-updated"',
+]) {
+  if (!docsSectionConfigText.includes(requiredKind)) {
+    errors.push(`docsSectionBlocks must support the ${requiredKind} section kind.`);
+  }
 }
 
 const pages = docs.docsPages;

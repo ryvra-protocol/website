@@ -6,6 +6,8 @@ type DocsListControlsProps = {
 
 export function DocsListControls({ rootId }: DocsListControlsProps) {
   const setAll = (open: boolean) => {
+    window.dispatchEvent(new CustomEvent("docs:set-all-sections", { detail: { open } }));
+
     const root = document.getElementById(rootId);
     if (!root) {
       return;
@@ -19,7 +21,7 @@ export function DocsListControls({ rootId }: DocsListControlsProps) {
   };
 
   return (
-    <div className="docs-list-controls" role="group" aria-label="Docs list display controls">
+    <div className="docs-list-controls" role="group" aria-label="Docs section display controls">
       <button
         type="button"
         className="button button-secondary docs-list-controls-button"
