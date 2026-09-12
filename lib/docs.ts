@@ -127,6 +127,10 @@ export const docsSidebarGroups: DocsSidebarGroup[] = [
         href: "/docs/developer-guide/api-sdk-onboarding",
         title: "Quickstart: SDK + Gateway Flow",
       },
+      {
+        href: "/docs/developer-guide/sdk-package-release-plan",
+        title: "SDK Package Split and Release Plan",
+      },
       { href: "/docs/developer-guide/financial-intent-model", title: "FinancialIntent Model" },
       { href: "/docs/developer-guide/api-overview", title: "API References and Examples" },
       { href: "/docs/developer-guide/authentication", title: "Auth, Mandate, and Capability Flow" },
@@ -2758,9 +2762,96 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         title: "Related docs",
         links: [
           getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/developer-guide/sdk-package-release-plan"),
           getDocLink("/docs/developer-guide/api-overview"),
           getDocLink("/docs/developer-guide/authentication"),
           getDocLink("/docs/governance-and-security-model"),
+        ],
+      },
+    ],
+  },
+  "/docs/developer-guide/sdk-package-release-plan": {
+    description: "Define package boundaries and release sequencing for Ryvra protocol SDKs across auth, API transport, and event consumption.",
+    metadataTitle: "Developer Guide: SDK Package Split and Release Plan",
+    metadataDescription:
+      "Concrete package split and release order for @ryvra/auth, @ryvra/api-client, and @ryvra/events with ownership boundaries and readiness criteria.",
+    calloutVariant: "note",
+    calloutTitle: "Release trust first",
+    calloutBody:
+      "Ship identity and signing primitives before transport and webhook consumption so downstream clients reuse stable trust contracts.",
+    headings: [
+      {
+        id: "purpose-and-scope",
+        title: "Purpose and scope",
+        body: "Sets a concrete package split, release order, and dependency boundaries for protocol SDK publishing.",
+      },
+      {
+        id: "recommended-release-order",
+        title: "Recommended release order",
+        steps: [
+          "Release @ryvra/auth at 0.1.0.",
+          "Release @ryvra/api-client at 0.1.0 after auth contracts are stable.",
+          "Release @ryvra/events at 0.1.0 only after api-client contracts and error envelopes are stable.",
+        ],
+      },
+      {
+        id: "package-1-auth",
+        title: "Package 1: @ryvra/auth",
+        bullets: [
+          "Own token providers, request signing, key rotation hooks, auth config validation, and clock-skew handling.",
+          "Expose auth client, signing helpers, and middleware/interceptor interfaces.",
+          "Remain dependency-isolated from @ryvra/api-client and @ryvra/events.",
+          "Require typed auth errors and sandbox auth-flow integration tests before promotion.",
+        ],
+      },
+      {
+        id: "package-2-api-client",
+        title: "Package 2: @ryvra/api-client",
+        bullets: [
+          "Own typed command/query transport for intents, payments, markets, treasury, and settlement endpoints.",
+          "Provide pagination, retry policies, idempotency/correlation metadata handling, and normalized error mapping.",
+          "Depend on @ryvra/auth for trust and signing primitives.",
+          "Require endpoint parity coverage and end-to-end tests with real auth middleware.",
+        ],
+      },
+      {
+        id: "package-3-events",
+        title: "Package 3: @ryvra/events",
+        bullets: [
+          "Own webhook verification, signature checks, canonical event schema typing, and consumer routing utilities.",
+          "Provide replay-safe helpers for dedupe, ordering, and checkpoint progression.",
+          "Allow dependencies on @ryvra/auth and shared envelope/resource types from @ryvra/api-client.",
+          "Require verified webhook flow tests, replay-safe examples, and compatibility checks against produced protocol events.",
+        ],
+      },
+      {
+        id: "split-boundaries-and-shared-contracts",
+        title: "Split boundaries and shared contracts",
+        bullets: [
+          "@ryvra/auth owns identity and trust primitives only.",
+          "@ryvra/api-client owns synchronous API command/query transport only.",
+          "@ryvra/events owns asynchronous event delivery and consumption only.",
+          "Share only canonical error envelope, request metadata (idempotencyKey and correlationId), and canonical event envelope across packages.",
+        ],
+      },
+      {
+        id: "release-and-compatibility-policy",
+        title: "Release and compatibility policy",
+        bullets: [
+          "Start each package at version 0.1.0 with semver tagging.",
+          "Do not publish @ryvra/events before @ryvra/api-client contract stability is confirmed.",
+          "Require changelog entries and compatibility notes on every publish.",
+        ],
+      },
+      {
+        id: "related-docs",
+        title: "Related docs",
+        links: [
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
+          getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/developer-guide/authentication"),
+          getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/developer-guide/changelog-and-versioning"),
         ],
       },
     ],
@@ -4065,6 +4156,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         title: "Related docs",
         links: [
           getDocLink("/docs/developer-guide/api-overview"),
+          getDocLink("/docs/developer-guide/sdk-package-release-plan"),
           getDocLink("/docs/developer-guide/environments-and-deployment"),
           getDocLink("/docs/developer-guide/testing-sandbox"),
           getDocLink("/docs/developer-guide/troubleshooting"),
