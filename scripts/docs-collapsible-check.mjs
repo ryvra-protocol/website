@@ -214,11 +214,12 @@ const pagerNodes = pageFrameTags.filter(
 );
 const pagerNode = pagerNodes[0];
 const metadataNode = pageFrameMetaNodes[0];
-if (!pagerNode || !metadataNode || metadataNode.pos < pagerNode.pos) {
-  errors.push('DocsPageFrame metadata block must appear after the main docs content and pager.');
-}
+const pagerElementNode = pagerNode && ts.isJsxOpeningElement(pagerNode) ? pagerNode.parent : pagerNode;
 const metadataElementNode =
   metadataNode && ts.isJsxOpeningElement(metadataNode) ? metadataNode.parent : metadataNode;
+if (!pagerElementNode || !metadataElementNode || metadataElementNode.pos < pagerElementNode.end) {
+  errors.push('DocsPageFrame metadata block must appear after the main docs content and pager.');
+}
 const metadataNodeSource = metadataElementNode
   ? docsPageFrame.source.slice(metadataElementNode.pos, metadataElementNode.end)
   : '';
