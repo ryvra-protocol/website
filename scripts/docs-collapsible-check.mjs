@@ -69,6 +69,41 @@ function collectImports(sourceFile) {
   return sourceFile.ast.statements.filter(ts.isImportDeclaration);
 }
 
+function containsStringLiteral(node, value) {
+  let found = false;
+
+  function visit(current) {
+    if (
+      (ts.isStringLiteral(current) || ts.isNoSubstitutionTemplateLiteral(current)) &&
+      current.text === value
+    ) {
+      found = true;
+      return;
+    }
+
+    ts.forEachChild(current, visit);
+  }
+
+  visit(node);
+  return found;
+}
+
+function containsIdentifier(node, value) {
+  let found = false;
+
+  function visit(current) {
+    if (ts.isIdentifier(current) && current.text === value) {
+      found = true;
+      return;
+    }
+
+    ts.forEachChild(current, visit);
+  }
+
+  visit(node);
+  return found;
+}
+
 const docsList = parseTsx(docsListPath);
 const docsListControls = parseTsx(docsListControlsPath);
 const docsPageFrame = parseTsx(docsPageFramePath);
@@ -140,13 +175,17 @@ const docsSectionBlockText = docsSectionBlock.source;
 if (!docsSectionBlockText.includes('aria-expanded={open}')) {
   errors.push('DocsSectionBlock must expose aria-expanded state on its toggle.');
 }
-if (!docsSectionBlockText.includes('window.location.hash')) {
+if (
+  !containsIdentifier(docsSectionBlock.ast, 'window') ||
+  !containsIdentifier(docsSectionBlock.ast, 'location') ||
+  !containsIdentifier(docsSectionBlock.ast, 'hash')
+) {
   errors.push('DocsSectionBlock must auto-expand when the URL hash targets a section.');
 }
-if (!docsSectionBlockText.includes('hashchange')) {
+if (!containsStringLiteral(docsSectionBlock.ast, 'hashchange')) {
   errors.push('DocsSectionBlock must react to hash changes.');
 }
-if (!docsSectionBlockText.includes('docs:set-all-sections')) {
+if (!containsStringLiteral(docsSectionBlock.ast, 'docs:set-all-sections')) {
   errors.push('DocsSectionBlock must listen for global section expand/collapse events.');
 }
 if (!docsSectionBlockText.includes('role="region"')) {
