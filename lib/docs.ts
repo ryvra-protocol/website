@@ -10,12 +10,26 @@ export type DocsSidebarGroup = {
   items: DocsSidebarItem[];
 };
 
+export type DocsAudience = "User" | "Merchant" | "Developer";
+
+export type DocsListItem =
+  | string
+  | {
+      summary: string;
+      body?: string;
+      children?: DocsListItem[];
+      childrenOrdered?: boolean;
+      code?: string;
+    };
+
 export type DocsHeading = {
   id: string;
   title: string;
+  kind?: "faq";
   body?: string;
-  bullets?: string[];
-  steps?: string[];
+  audience?: DocsAudience[];
+  bullets?: DocsListItem[];
+  steps?: DocsListItem[];
   links?: DocsSidebarItem[];
 };
 
@@ -165,6 +179,14 @@ export const docsSidebarGroups: DocsSidebarGroup[] = [
     title: "Tokenomics",
     items: [
       { href: "/docs/tokenomics", title: "Tokenomics" },
+      {
+        href: "/docs/tokenomics/litepaper-faq",
+        title: "Litepaper FAQ",
+      },
+      {
+        href: "/docs/tokenomics/tokenomics-faq",
+        title: "Tokenomics FAQ",
+      },
       {
         href: "/docs/tokenomics/detailed-tokenomics-specification",
         title: "Detailed Tokenomics Specification",
@@ -599,6 +621,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "recommended-reading-order",
         title: "Recommended reading order",
         links: [
+          getDocLink("/docs/tokenomics/litepaper-faq"),
           getDocLink("/docs/developer-guide/architecture-overview"),
           getDocLink("/docs/governance-and-security-model"),
           getDocLink("/docs/audit-and-provenance"),
@@ -687,6 +710,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/developer-guide/architecture-overview"),
           getDocLink("/docs/developer-guide/authentication"),
           getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/tokenomics/litepaper-faq"),
           getDocLink("/docs/rfc-index"),
         ],
       },
@@ -764,6 +788,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/governance-and-security-model"),
           getDocLink("/docs/developer-guide/observability-and-runbooks"),
           getDocLink("/docs/developer-guide/webhooks-events"),
+          getDocLink("/docs/tokenomics/litepaper-faq"),
           getDocLink("/docs/rfc-index"),
         ],
       },
@@ -2679,6 +2704,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/developer-guide/api-overview"),
           getDocLink("/docs/governance-and-security-model"),
           getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/tokenomics/litepaper-faq"),
         ],
       },
       {
@@ -4048,7 +4074,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
   },
   "/docs/tokenomics": {
     description:
-      "Tokenomics docs now start with a plain-language overview and then point to the detailed specification and existing litepaper materials.",
+      "Tokenomics docs start with plain-language explanations, then point to FAQs and the deeper specification for readers who need more detail.",
     metadataTitle: "Tokenomics",
     metadataDescription:
       "Audience-first Ryvra tokenomics documentation covering plain-language framing, deeper specification detail, and disclosure boundaries.",
@@ -4066,6 +4092,8 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "what-to-read-first",
         title: "What to read first",
         links: [
+          getDocLink("/docs/tokenomics/litepaper-faq"),
+          getDocLink("/docs/tokenomics/tokenomics-faq"),
           getDocLink("/docs/tokenomics/detailed-tokenomics-specification"),
           getDocLink("/docs/glossary"),
         ],
@@ -4079,6 +4107,201 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "source-of-truth",
         title: "Source of truth",
         body: "Current public tokenomics wording is anchored in `/litepaper`, `lib/tokenomics.ts`, and the mirrored markdown files under `content/`.",
+      },
+      {
+        id: "faq-navigation",
+        title: "FAQ navigation",
+        body: "Use the Litepaper FAQ for trust-model questions and the Tokenomics FAQ for token-specific questions and disclosures.",
+        links: [
+          getDocLink("/docs/tokenomics/litepaper-faq"),
+          getDocLink("/docs/tokenomics/tokenomics-faq"),
+          getDocLink("/docs/tokenomics/detailed-tokenomics-specification"),
+        ],
+      },
+    ],
+  },
+  "/docs/tokenomics/litepaper-faq": {
+    description:
+      "Audience-friendly answers to the most common Litepaper questions, with direct links back to the deeper architecture, governance, and provenance pages.",
+    metadataTitle: "Litepaper FAQ",
+    metadataDescription:
+      "Plain-language Ryvra Litepaper FAQ covering the problem Ryvra solves, authority versus AI reasoning, gateway execution, safety boundaries, and provenance.",
+    calloutVariant: "note",
+    calloutTitle: "Start here for the shortest answers",
+    calloutBody:
+      "These answers are written for mixed audiences first, then linked back to the deeper docs when you need exact architecture language.",
+    lastUpdated: "2026-09-12",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Users, merchants, developers, and reviewers who want a plain-language explanation of Ryvra before reading deeper specification pages.",
+      },
+      {
+        id: "faq-1",
+        kind: "faq",
+        title: "What problem does Ryvra solve?",
+        audience: ["User", "Merchant", "Developer"],
+        body: "Ryvra solves the gap between software that can suggest financial actions and systems that must still decide, in a governed way, whether those actions should be allowed to happen.",
+        links: [
+          getDocLink("/docs/introduction"),
+          getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/governance-and-security-model"),
+        ],
+      },
+      {
+        id: "faq-2",
+        kind: "faq",
+        title: "What is the difference between AI reasoning and financial authority?",
+        audience: ["User", "Merchant", "Developer"],
+        body: "AI reasoning can generate an idea or recommendation. Financial authority is the governed power to approve and execute that idea. Ryvra keeps those two roles separate.",
+        links: [
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/developer-guide/financial-intent-model"),
+          getDocLink("/docs/rfc-technical-specs"),
+        ],
+      },
+      {
+        id: "faq-3",
+        kind: "faq",
+        title: "How do mandates, policies, and risk approvals work together?",
+        audience: ["Merchant", "Developer"],
+        body: "Mandates define scope, policies define the rules, and independent risk decides whether a valid-looking request is still safe enough to proceed. A request needs all three to align before execution.",
+        links: [
+          getDocLink("/docs/developer-guide/policy-risk-integration"),
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/developer-guide/authentication"),
+        ],
+      },
+      {
+        id: "faq-4",
+        kind: "faq",
+        title: "Why does gateway-only execution matter?",
+        audience: ["Merchant", "Developer"],
+        body: "Gateway-only execution means agents do not talk directly to money-moving systems. Requests must pass through the governed intake boundary where identity, authority, and control checks are enforced first.",
+        links: [
+          getDocLink("/docs/developer-guide/architecture-overview"),
+          getDocLink("/docs/developer-guide/api-sdk-onboarding"),
+          getDocLink("/docs/rfc-index"),
+        ],
+      },
+      {
+        id: "faq-5",
+        kind: "faq",
+        title: "What does provenance mean for trust?",
+        audience: ["User", "Merchant", "Developer"],
+        body: "Provenance is the evidence chain that shows what was proposed, who approved it, what executed, what settled, and whether anyone intervened. It makes automation reviewable instead of opaque.",
+        links: [
+          getDocLink("/docs/audit-and-provenance"),
+          getDocLink("/docs/security-and-risk"),
+          getDocLink("/docs/rfc-technical-specs"),
+        ],
+      },
+      {
+        id: "last-updated",
+        title: "Last updated",
+        body: "2026-09-12",
+      },
+    ],
+  },
+  "/docs/tokenomics/tokenomics-faq": {
+    description:
+      "Audience-friendly answers to public tokenomics questions, with clear disclosures about what is illustrative, governance-controlled, or not yet public.",
+    metadataTitle: "Tokenomics FAQ",
+    metadataDescription:
+      "Plain-language Ryvra Tokenomics FAQ covering token utility, incentives, supply and allocation disclosures, vesting and unlock status, governance limits, and key risks.",
+    calloutVariant: "note",
+    calloutTitle: "Public facts first",
+    calloutBody:
+      "This FAQ explains what Ryvra has said publicly today and avoids inventing token details that have not been published.",
+    lastUpdated: "2026-09-12",
+    headings: [
+      {
+        id: "who-is-this-for",
+        title: "Who is this for?",
+        body: "Users, merchants, developers, and researchers who need a plain-language tokenomics overview before reading the structured specification.",
+      },
+      {
+        id: "faq-1",
+        kind: "faq",
+        title: "What is the token used for?",
+        audience: ["User", "Merchant", "Developer"],
+        body: "Public materials position the token around future network participation, ecosystem alignment, and governance. Final utility terms remain subject to later published documentation and approvals.",
+        links: [
+          getDocLink("/docs/tokenomics"),
+          getDocLink("/docs/tokenomics/detailed-tokenomics-specification"),
+        ],
+      },
+      {
+        id: "faq-2",
+        kind: "faq",
+        title: "How do incentives align with network usage?",
+        audience: ["User", "Merchant"],
+        body: "The clearest public example today is Proof of Transaction, where eligible activity can earn contribution points before any token generation event. The intent is to align participation with real network usage rather than passive assumptions.",
+        links: [
+          getDocLink("/docs/tokenomics"),
+          getDocLink("/docs/tokenomics/detailed-tokenomics-specification"),
+        ],
+      },
+      {
+        id: "faq-3",
+        kind: "faq",
+        title: "What is public today about supply or allocation?",
+        audience: ["User", "Developer"],
+        body: "Ryvra has shared illustrative allocation envelope ranges, but it has not published a final supply model or final allocation commitments in binding form.",
+        links: [
+          getDocLink("/docs/tokenomics/detailed-tokenomics-specification"),
+          getDocLink("/docs/tokenomics/litepaper-faq"),
+        ],
+      },
+      {
+        id: "faq-4",
+        kind: "faq",
+        title: "Are emissions, vesting, or unlock schedules final?",
+        audience: ["User", "Merchant", "Developer"],
+        body: "No. Final emissions, vesting, and unlock mechanics are not public final terms today and will require governance and legal or compliance review before publication.",
+        links: [
+          getDocLink("/docs/tokenomics/detailed-tokenomics-specification"),
+          getDocLink("/docs/governance-and-security-model"),
+        ],
+      },
+      {
+        id: "faq-5",
+        kind: "faq",
+        title: "What role does governance play, and what are its limits?",
+        audience: ["Merchant", "Developer"],
+        body: "Governance may set or approve parameters such as cadence, thresholds, allocation inputs, and future token mechanics, but it does not erase legal, compliance, or publication constraints.",
+        links: [
+          getDocLink("/docs/governance-and-security-model"),
+          getDocLink("/docs/tokenomics/detailed-tokenomics-specification"),
+        ],
+      },
+      {
+        id: "faq-6",
+        kind: "faq",
+        title: "What key risks should readers keep in mind?",
+        audience: ["User", "Merchant", "Developer"],
+        body: "Token timing can change, participation may vary by jurisdiction, and points are not tokens today. Public tokenomics material is informational and should not be read as investment advice or a guarantee of issuance, value, or return.",
+        bullets: [
+          {
+            summary: "Disclosure checklist",
+            children: [
+              "Participation, accrual, and claims can be limited by jurisdiction.",
+              "Points remain a program metric before any final issuance terms are published.",
+              "Illustrative allocation, conversion, and timing assumptions can change after governance and legal review.",
+            ],
+          },
+        ],
+        links: [
+          getDocLink("/docs/tokenomics"),
+          getDocLink("/docs/tokenomics/detailed-tokenomics-specification"),
+          getDocLink("/docs/security-and-risk"),
+        ],
+      },
+      {
+        id: "last-updated",
+        title: "Last updated",
+        body: "2026-09-12",
       },
     ],
   },
@@ -4123,6 +4346,14 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           "Public materials frame the token around future network participation, ecosystem alignment, and governance, but final utility terms are not yet published in a binding form.",
           "Participation and claiming may depend on jurisdiction and compliance requirements.",
           "Nothing on this page is investment advice or a promise of token issuance, value, or returns.",
+        ],
+      },
+      {
+        id: "faq-entry-points",
+        title: "FAQ entry points",
+        links: [
+          getDocLink("/docs/tokenomics/litepaper-faq"),
+          getDocLink("/docs/tokenomics/tokenomics-faq"),
         ],
       },
       {
@@ -4275,6 +4506,31 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           "Explain concepts before introducing protocol terms.",
           "Link to deep specs instead of front-loading jargon into overview pages.",
           "Use consistent terminology across users, merchants, developers, tokenomics, and security pages.",
+        ],
+      },
+      {
+        id: "faq-authoring",
+        title: "FAQ authoring",
+        bullets: [
+          "Add audience tags to each FAQ entry so readers can see who the answer is primarily for.",
+          "Answer in natural language first, then link back to architecture, governance, provenance, or tokenomics deep dives.",
+          "Keep source-of-truth FAQ content in `lib/docs.ts` and update editorial mirrors under `content/` when applicable.",
+        ],
+      },
+      {
+        id: "collapsible-list-conventions",
+        title: "Collapsible list conventions",
+        bullets: [
+          "All docs list items render as collapsible `<details>/<summary>` UI in the portal.",
+          "Write summary lines that remain clear when collapsed.",
+          {
+            summary: "Use nested children for supporting detail",
+            children: [
+              "Move examples, exceptions, or secondary notes under nested children instead of making the top line too long.",
+              "Preserve code examples inside structured `code` blocks when a list item needs inline reference material.",
+            ],
+          },
+          "Do not depend on collapsible behavior to hide critical disclosures that should also appear in surrounding prose.",
         ],
       },
       {

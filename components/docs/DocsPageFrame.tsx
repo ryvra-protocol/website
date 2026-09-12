@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { DocsList } from "@/components/docs/DocsList";
+import { DocsListControls } from "@/components/docs/DocsListControls";
 import type { DocsBreadcrumb, DocsPage, DocsSidebarItem } from "@/lib/docs";
 import { DocsCallout } from "@/components/docs/DocsCallout";
 import { DocsHeading } from "@/components/docs/DocsHeading";
@@ -12,9 +14,14 @@ type DocsPageFrameProps = {
 };
 
 export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFrameProps) {
+  const articleId = `docs-page-${page.href.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase()}`;
+  const hasCollapsibleLists = page.headings.some(
+    (heading) => Boolean(heading.steps?.length) || Boolean(heading.bullets?.length),
+  );
+
   return (
     <div className="docs-page-shell">
-      <article className="docs-article">
+      <article id={articleId} className="docs-article" data-docs-collapsible-root="true">
         <nav className="docs-breadcrumbs" aria-label="Breadcrumb">
           <ol>
             {breadcrumbs.map((crumb, index) => {
@@ -44,26 +51,32 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
           {page.calloutBody}
         </DocsCallout>
 
+        {hasCollapsibleLists ? <DocsListControls rootId={articleId} /> : null}
+
         {page.headings.map((heading) => (
           <section key={heading.id} className="docs-section-block">
             <DocsHeading id={heading.id}>{heading.title}</DocsHeading>
+            {heading.audience && heading.audience.length > 0 ? (
+              <>
+                <span id={`${heading.id}-audience-label`} className="sr-only">
+                  Audience tags
+                </span>
+                <ul className="docs-audience-tags" aria-labelledby={`${heading.id}-audience-label`}>
+                  {heading.audience.map((audience) => (
+                    <li key={`${heading.id}-${audience}`}>{audience}</li>
+                  ))}
+                </ul>
+              </>
+            ) : null}
             {heading.body ? <p>{heading.body}</p> : null}
             {heading.steps && heading.steps.length > 0 ? (
-              <ol>
-                {heading.steps.map((step, index) => (
-                  <li key={`${heading.id}-step-${index}`}>{step}</li>
-                ))}
-              </ol>
+              <DocsList items={heading.steps} ordered />
             ) : null}
             {heading.bullets && heading.bullets.length > 0 ? (
-              <ul>
-                {heading.bullets.map((bullet, index) => (
-                  <li key={`${heading.id}-bullet-${index}`}>{bullet}</li>
-                ))}
-              </ul>
+              <DocsList items={heading.bullets} />
             ) : null}
             {heading.links && heading.links.length > 0 ? (
-              <ul>
+              <ul className="docs-link-list">
                 {heading.links.map((link) => (
                   <li key={`${heading.id}-${link.href}`}>
                     <Link href={link.href}>{link.title}</Link>

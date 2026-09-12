@@ -9,8 +9,10 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
+    "docs:content-check": "node scripts/content-integration-check.mjs",
     "docs:link-check": "node scripts/docs-link-check.mjs",
-    "docs:anchor-check": "node scripts/docs-anchor-check.mjs"
+    "docs:anchor-check": "node scripts/docs-anchor-check.mjs",
+    "docs:collapsible-check": "node scripts/docs-collapsible-check.mjs"
   },
   "dependencies": {
     "next": "16.2.10",

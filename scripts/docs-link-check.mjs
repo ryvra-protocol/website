@@ -16,6 +16,21 @@ const pageByHref = new Map();
 const placeholderPattern = /\b(placeholder|coming soon|tba|tbd|scaffold|deferred)\b/i;
 const sitemapFilePath = path.resolve(__dirname, '..', 'app', 'sitemap.ts');
 
+function flattenDocsListItems(items = []) {
+  return items.flatMap((item) => {
+    if (typeof item === 'string') {
+      return [item];
+    }
+
+    return [
+      item.summary,
+      item.body || '',
+      item.code || '',
+      ...flattenDocsListItems(item.children || []),
+    ];
+  });
+}
+
 if (!Array.isArray(docsPages) || docsPages.length === 0) {
   errors.push('docsPages is empty.');
 }
@@ -51,8 +66,9 @@ for (const page of docsPages) {
     ...page.headings.flatMap((heading) => [
       heading.title,
       heading.body || '',
-      ...(heading.bullets || []),
-      ...(heading.steps || []),
+      ...(heading.audience || []),
+      ...flattenDocsListItems(heading.bullets || []),
+      ...flattenDocsListItems(heading.steps || []),
     ]),
   ].join(' ');
 

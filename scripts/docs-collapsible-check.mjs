@@ -1,0 +1,157 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import ts from 'typescript';
+import { loadDocsModule } from './docs-validation-data.mjs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const docsListPath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsList.tsx');
+const docsListControlsPath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsListControls.tsx');
+const docsPageFramePath = path.resolve(__dirname, '..', 'components', 'docs', 'DocsPageFrame.tsx');
+const docs = loadDocsModule();
+const errors = [];
+
+function parseTsx(filePath) {
+  const source = fs.readFileSync(filePath, 'utf8');
+  return {
+    source,
+    ast: ts.createSourceFile(filePath, source, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX),
+  };
+}
+
+function getTagName(node, sourceFile) {
+  return ts.isIdentifier(node.tagName) ? node.tagName.text : node.tagName.getText(sourceFile);
+}
+
+function getJsxAttribute(node, name) {
+  const attribute = node.attributes.properties.find(
+    (property) => ts.isJsxAttribute(property) && property.name.text === name,
+  );
+
+  return attribute && ts.isJsxAttribute(attribute) ? attribute : undefined;
+}
+
+function hasBooleanAttribute(node, name) {
+  return Boolean(getJsxAttribute(node, name));
+}
+
+function getExpressionText(attribute, sourceFile) {
+  if (
+    !attribute ||
+    !attribute.initializer ||
+    !ts.isJsxExpression(attribute.initializer) ||
+    !attribute.initializer.expression
+  ) {
+    return undefined;
+  }
+
+  return attribute.initializer.expression.getText(sourceFile.ast);
+}
+
+function collectJsxTags(sourceFile) {
+  const tags = [];
+
+  function visit(node) {
+    if (ts.isJsxOpeningElement(node) || ts.isJsxSelfClosingElement(node)) {
+      tags.push(node);
+    }
+    ts.forEachChild(node, visit);
+  }
+
+  visit(sourceFile.ast);
+  return tags;
+}
+
+function collectImports(sourceFile) {
+  return sourceFile.ast.statements.filter(ts.isImportDeclaration);
+}
+
+const docsList = parseTsx(docsListPath);
+const docsListControls = parseTsx(docsListControlsPath);
+const docsPageFrame = parseTsx(docsPageFramePath);
+
+const docsListTags = collectJsxTags(docsList);
+if (!docsListTags.some((node) => getTagName(node, docsList.ast) === 'details')) {
+  errors.push('DocsList must use native <details> semantics.');
+}
+if (!docsListTags.some((node) => getTagName(node, docsList.ast) === 'summary')) {
+  errors.push('DocsList must use native <summary> semantics.');
+}
+if (
+  !docsListTags.some(
+    (node) =>
+      getTagName(node, docsList.ast) === 'DocsList' &&
+      getExpressionText(getJsxAttribute(node, 'items'), docsList) === 'normalized.children',
+  )
+) {
+  errors.push('DocsList must render nested list items recursively.');
+}
+
+const docsListControlTags = collectJsxTags(docsListControls);
+const controlsText = docsListControls.source;
+if (!controlsText.includes('Expand all') || !controlsText.includes('Collapse all')) {
+  errors.push('DocsListControls must expose Expand all and Collapse all controls.');
+}
+if (!docsListControlTags.some((node) => getTagName(node, docsListControls.ast) === 'button')) {
+  errors.push('DocsListControls must render button controls.');
+}
+
+const pageFrameImports = collectImports(docsPageFrame);
+const hasDocsListImport = pageFrameImports.some(
+  (node) => node.moduleSpecifier.getText(docsPageFrame.ast).includes('DocsList'),
+);
+const hasDocsListControlsImport = pageFrameImports.some(
+  (node) => node.moduleSpecifier.getText(docsPageFrame.ast).includes('DocsListControls'),
+);
+if (!hasDocsListImport || !hasDocsListControlsImport) {
+  errors.push('DocsPageFrame must import DocsList and DocsListControls.');
+}
+
+const pageFrameTags = collectJsxTags(docsPageFrame);
+const docsListUsage = pageFrameTags.filter((node) => getTagName(node, docsPageFrame.ast) === 'DocsList');
+if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'DocsListControls')) {
+  errors.push('DocsPageFrame must render DocsListControls.');
+}
+if (!docsListUsage.some((node) => hasBooleanAttribute(node, 'ordered'))) {
+  errors.push('DocsPageFrame must render ordered docs lists through DocsList.');
+}
+if (!docsListUsage.some((node) => !hasBooleanAttribute(node, 'ordered'))) {
+  errors.push('DocsPageFrame must render unordered docs lists through DocsList.');
+}
+if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'ul')) {
+  errors.push('DocsPageFrame must continue rendering plain related-link lists.');
+}
+
+const pages = docs.docsPages;
+const hasOrdered = pages.some((page) => page.headings.some((heading) => (heading.steps || []).length > 0));
+const hasUnordered = pages.some((page) => page.headings.some((heading) => (heading.bullets || []).length > 0));
+const hasDeeplyNested = pages.some((page) =>
+  page.headings.some((heading) =>
+    [heading.bullets || [], heading.steps || []].some((items) =>
+      items.some(
+        (item) => typeof item !== 'string' && Array.isArray(item.children) && item.children.length > 0,
+      ),
+    ),
+  ),
+);
+
+if (!hasOrdered) {
+  errors.push('Expected at least one ordered docs list for collapsible coverage.');
+}
+if (!hasUnordered) {
+  errors.push('Expected at least one unordered docs list for collapsible coverage.');
+}
+if (!hasDeeplyNested) {
+  errors.push('Expected at least one nested docs list item for collapsible coverage.');
+}
+
+if (errors.length > 0) {
+  console.error('Docs collapsible checks failed:');
+  for (const error of errors) {
+    console.error(`- ${error}`);
+  }
+  process.exit(1);
+}
+
+console.log('Docs collapsible checks passed.');

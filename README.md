@@ -91,8 +91,10 @@ These docs routes are the canonical public-navigation layer for website messagin
 - `pnpm start` – run production server
 - `pnpm lint` – lint checks
 - `pnpm typecheck` – TypeScript type checks
+- `pnpm docs:content-check` – litepaper/docs FAQ integration checks
 - `pnpm docs:link-check` – docs route and internal link integrity checks
 - `pnpm docs:anchor-check` – docs heading anchor normalization checks
+- `pnpm docs:collapsible-check` – docs collapsible-list architecture checks
 
 ---
 
@@ -111,5 +113,9 @@ These docs routes are the canonical public-navigation layer for website messagin
 - Homepage and capability pages should use natural language and compliance-friendly wording.
 - Update `/content/brand-narrative.md` when messaging framework changes.
 - Update `/lib/docs.ts` when audience tracks, glossary terms, tokenomics links, or CTA targets change.
+- Litepaper route copy lives in `/app/litepaper/page.tsx`; tokenomics constants live in `/lib/tokenomics.ts`; editorial mirrors live in `/content/litepaper-tokenomics.md`, `/content/litepaper-faq.md`, and `/content/tokenomics-faq.md`.
+- FAQ pages in the docs portal are authored in `/lib/docs.ts` using `audience` tags on each FAQ heading.
+- Docs list items now render as collapsible `<details>/<summary>` blocks globally through `/components/docs/DocsList.tsx`; prefer short lead summaries and optional nested children when authoring deeper list content.
+- If a list item needs nested guidance, keep the top-level summary concise and place supporting detail in nested `children` content rather than overloading the summary line.
 - Keep the docs portal in a “natural language first, spec second” structure.
 - Check `/docs/docs-ia-v2` and `/docs/writing-style-and-templates` before making larger documentation IA changes.

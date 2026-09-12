@@ -36,6 +36,18 @@ body {
   line-height: 1.5;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -143,6 +155,11 @@ a {
   background: transparent;
   border-color: var(--border);
   color: var(--foreground);
+}
+
+.button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 .grid {
@@ -697,6 +714,17 @@ a {
   margin-top: 1rem;
 }
 
+.docs-list-controls {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin: 1rem 0 1.2rem;
+}
+
+.docs-list-controls-button {
+  padding-inline: 0.95rem;
+}
+
 .docs-heading {
   display: flex;
   align-items: center;
@@ -724,6 +752,128 @@ a {
   opacity: 1;
 }
 
+.docs-audience-tags {
+  margin: 0.55rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.docs-audience-tags li {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-muted);
+  padding: 0.18rem 0.55rem;
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.docs-collapsible-list {
+  margin: 0.85rem 0 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.55rem;
+}
+
+.docs-collapsible-list .docs-collapsible-list {
+  margin-top: 0.8rem;
+}
+
+.docs-collapsible-list-item {
+  padding-left: 0.1rem;
+}
+
+.docs-collapsible-details {
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--surface-muted) 70%, var(--surface));
+}
+
+.docs-collapsible-summary {
+  list-style: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6rem;
+  cursor: pointer;
+  padding: 0.8rem 0.95rem;
+  font-weight: 600;
+}
+
+.docs-collapsible-summary::-webkit-details-marker {
+  display: none;
+}
+
+.docs-collapsible-summary::before {
+  content: "▸";
+  color: var(--accent);
+  line-height: 1.2;
+  transform-origin: center;
+  transition: transform 0.15s ease;
+}
+
+.docs-collapsible-details[open] > .docs-collapsible-summary::before {
+  transform: rotate(90deg);
+}
+
+.docs-collapsible-summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 0.65rem;
+}
+
+.docs-collapsible-summary-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.docs-collapsible-leaf {
+  border: 1px solid var(--border);
+  border-radius: 0.8rem;
+  background: color-mix(in srgb, var(--surface-muted) 70%, var(--surface));
+  padding: 0.8rem 0.95rem;
+  font-weight: 600;
+}
+
+.docs-link-list {
+  margin: 0.85rem 0 0;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.docs-link-list a {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.docs-collapsible-panel {
+  border-top: 1px solid var(--border);
+  padding: 0.85rem 0.95rem 0.95rem;
+}
+
+.docs-collapsible-panel > :first-child {
+  margin-top: 0;
+}
+
+.docs-collapsible-panel > :last-child {
+  margin-bottom: 0;
+}
+
+.docs-collapsible-panel p {
+  color: var(--muted);
+}
+
+.docs-collapsible-code {
+  margin: 0.85rem 0 0;
+  padding: 0.8rem;
+  border-radius: 0.7rem;
+  overflow: auto;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
 .docs-pager {
   margin-top: 1.3rem;
   padding-top: 1rem;
@@ -749,6 +899,13 @@ a {
 
 .docs-pager-link-next {
   text-align: right;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-heading-anchor,
+  .docs-collapsible-summary::before {
+    transition: none;
+  }
 }
 
 @media (max-width: 1080px) {
