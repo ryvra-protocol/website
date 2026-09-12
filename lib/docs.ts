@@ -4731,7 +4731,7 @@ function getCanonicalHeadingTitle(heading: DocsHeading) {
     return "Purpose";
   }
 
-  if (normalizedTitle.startsWith("step by step")) {
+  if (normalizedTitle.includes("step by step")) {
     return "Step-by-step";
   }
 
