@@ -4490,20 +4490,20 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
     calloutVariant: "note",
     calloutTitle: "Write for the reader's task",
     calloutBody:
-      "Every page should help the right audience complete a job before it asks them to learn internal terminology.",
+      "Give each page a concise purpose statement first, then let the body carry the instructions and deeper context.",
     headings: [
       {
         id: "standard-template",
         title: "Standard template",
         bullets: [
-          "Summary",
+          "Purpose",
           "Audience",
           "Prerequisites",
-          "In plain English",
           "Step-by-step",
           "Troubleshooting",
           "Related pages",
           "Last updated",
+          "Compatibility window",
           "Source of truth",
         ],
       },
@@ -4511,7 +4511,9 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
         id: "writing-rules",
         title: "Writing rules",
         bullets: [
+          "Lead with a concise Purpose statement that tells the reader what the page is for.",
           "Use short paragraphs and action-oriented headings.",
+          "Reduce repeated helper copy under standard labels when the body already carries the instruction.",
           "Reduce acronyms or define them the first time they appear.",
           "Explain concepts before introducing protocol terms.",
           "Link to deep specs instead of front-loading jargon into overview pages.",
@@ -4550,6 +4552,14 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
           getDocLink("/docs/docs-ia-v2"),
           getDocLink("/docs/glossary"),
           getDocLink("/docs/release-notes"),
+        ],
+      },
+      {
+        id: "navigation-governance",
+        title: "Navigation governance",
+        bullets: [
+          "Keep the top nav focused on broad product, docs, and ecosystem entry points.",
+          "Keep narrower supporting links such as `/founder` in the footer unless a product requirement says otherwise.",
         ],
       },
     ],
