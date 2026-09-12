@@ -55,11 +55,20 @@ function DocsSectionBlockCollapsible({
   const [open, setOpen] = useState(defaultOpen);
   const panelId = useMemo(() => `${id}-panel`, [id]);
   const buttonId = useMemo(() => `${id}-toggle`, [id]);
-  const labelId = useMemo(() => `${id}-label`, [id]);
 
   useEffect(() => {
+    const getCurrentHash = () => {
+      const rawHash = window.location.hash.slice(1);
+
+      try {
+        return decodeURIComponent(rawHash);
+      } catch {
+        return rawHash;
+      }
+    };
+
     const syncHashState = () => {
-      const hash = decodeURIComponent(window.location.hash.slice(1));
+      const hash = getCurrentHash();
       if (hash === id) {
         setOpen(true);
       }
@@ -92,19 +101,16 @@ function DocsSectionBlockCollapsible({
             className="docs-section-toggle"
             aria-expanded={open}
             aria-controls={panelId}
-            aria-label={`${open ? "Collapse" : "Expand"} ${title} section`}
             data-docs-section-toggle="true"
             onClick={() => setOpen((currentOpen) => !currentOpen)}
           >
             <span className="docs-section-chevron" aria-hidden="true">
               ▸
             </span>
-            <span id={labelId} className="docs-section-toggle-label">
-              {title}
-            </span>
+            <span className="docs-section-toggle-label">{title}</span>
           </button>
         </DocsHeading>
-        <div id={panelId} className="docs-section-panel" role="region" aria-labelledby={labelId} hidden={!open}>
+        <div id={panelId} className="docs-section-panel" role="region" aria-labelledby={buttonId} hidden={!open}>
           {children}
         </div>
       </div>

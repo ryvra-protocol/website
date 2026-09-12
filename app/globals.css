@@ -798,7 +798,7 @@ a {
 
 .docs-section-toggle:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: -2px;
+  outline-offset: 2px;
   border-radius: 0.75rem;
 }
 
