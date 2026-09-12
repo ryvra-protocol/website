@@ -16,18 +16,18 @@ const pageByHref = new Map();
 const placeholderPattern = /\b(placeholder|coming soon|tba|tbd|scaffold|deferred)\b/i;
 const sitemapFilePath = path.resolve(__dirname, '..', 'app', 'sitemap.ts');
 
+function normalizeToken(value) {
+  return value
+    .toLowerCase()
+    .replace(/&/g, ' and ')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+}
+
 function flattenDocsListItems(items = []) {
   return items.flatMap((item) => {
     if (typeof item === 'string') {
       return [item];
-    }
-
-    function normalizeToken(value) {
-      return value
-        .toLowerCase()
-        .replace(/&/g, ' and ')
-        .replace(/[^a-z0-9]+/g, ' ')
-        .trim();
     }
 
     return [
