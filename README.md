@@ -95,6 +95,7 @@ These docs routes are the canonical public-navigation layer for website messagin
 - `pnpm docs:link-check` – docs route and internal link integrity checks
 - `pnpm docs:anchor-check` – docs heading anchor normalization checks
 - `pnpm docs:collapsible-check` – docs collapsible-list architecture checks
+- `pnpm docs:ui-check` – docs metadata/footer placement and navigation regression checks
 
 ---
 
@@ -118,4 +119,7 @@ These docs routes are the canonical public-navigation layer for website messagin
 - Docs list items now render as collapsible `<details>/<summary>` blocks globally through `/components/docs/DocsList.tsx`; prefer short lead summaries and optional nested children when authoring deeper list content.
 - If a list item needs nested guidance, keep the top-level summary concise and place supporting detail in nested `children` content rather than overloading the summary line.
 - Keep the docs portal in a “natural language first, spec second” structure.
+- Docs metadata belongs in the shared end-of-page footer only; do not add standalone `Last updated` or `Compatibility window` sections inside docs content.
+- Use a concise `Purpose` statement for page-level orientation and trim repeated helper copy under standard labels such as `Prerequisites`, `Step-by-step`, `Troubleshooting`, `Related pages`, and `FAQ`.
+- Keep the top nav limited to broad product and docs entry points; keep narrower supporting links like `/founder` in the footer unless navigation requirements change.
 - Check `/docs/docs-ia-v2` and `/docs/writing-style-and-templates` before making larger documentation IA changes.

@@ -3,7 +3,6 @@ import Link from "next/link";
 const links = [
   { href: "/capabilities", label: "Capabilities" },
   { href: "/brand", label: "Brand" },
-  { href: "/founder", label: "Founder" },
   { href: "/docs", label: "Docs" },
   { href: "/docs/user-guide", label: "For Users" },
   { href: "/docs/merchant-guide", label: "For Merchants" },
@@ -15,10 +14,11 @@ const links = [
 
 export function Navbar() {
   return (
-    <header>
+    <header className="site-header">
       <nav className="nav" aria-label="Primary">
         <Link href="/" className="wordmark" aria-label="Ryvra Home">
-          Ryvra
+          <span className="wordmark-mark" aria-hidden="true" />
+          <span className="wordmark-text">Ryvra</span>
         </Link>
         <div className="nav-links">
           {links.map((link) => (

@@ -10,7 +10,7 @@
 
 1. `corepack prepare pnpm@10.16.0 --activate`
 2. `pnpm install`
-3. `pnpm lint && pnpm typecheck && pnpm build`
+3. `pnpm lint && pnpm typecheck && pnpm build && pnpm docs:link-check && pnpm docs:anchor-check && pnpm docs:collapsible-check && pnpm docs:ui-check`
 
 ## Pull requests
 
@@ -23,6 +23,17 @@
 - Author live docs FAQ pages in `/lib/docs.ts` and keep editorial mirrors in `/content/` aligned when those pages are reader-facing source material.
 - Add `audience` tags to each FAQ entry using `User`, `Merchant`, and/or `Developer`.
 - Lead with a direct natural-language answer, then link to deeper docs instead of front-loading jargon.
+
+## Docs page authoring
+
+- Keep `Last updated` and `Compatibility window` in the shared page metadata footer only; they belong at the end of each docs page, not in the main body.
+- Make the first highlighted statement a concise `Purpose` line that tells the reader what the page is for.
+- Simplify repeated helper copy under labels like `Prerequisites`, `Step-by-step`, `Troubleshooting`, `Related pages`, and `FAQ`; keep critical instructions in the body.
+
+## Navigation governance
+
+- Reserve the top nav for broad product, brand, docs, and external ecosystem entry points.
+- Keep narrower biography or supporting links such as `/founder` in the footer unless a product requirement says otherwise.
 
 ## Collapsible docs lists
 

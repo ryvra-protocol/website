@@ -27,6 +27,57 @@ function matchesPrefix(value: string, prefixes: readonly string[]) {
   return prefixes.some((prefix) => value === prefix || value.startsWith(`${prefix} `));
 }
 
+function matchesSuffix(value: string, suffixes: readonly string[]) {
+  return suffixes.some((suffix) => value === suffix || value.endsWith(` ${suffix}`));
+}
+
+export function getDocsDisplayTitle(heading: Pick<DocsHeading, "id" | "title" | "kind">) {
+  const normalizedTitle = normalizeSectionToken(heading.title);
+  const normalizedId = normalizeSectionToken(heading.id);
+
+  if (
+    matchesPrefix(normalizedTitle, ["purpose", "purpose and scope"]) ||
+    matchesPrefix(normalizedId, ["purpose", "purpose and scope"]) ||
+    normalizedTitle === "who is this for" ||
+    normalizedId === "who is this for" ||
+    normalizedTitle === "in plain english" ||
+    normalizedId === "in plain english"
+  ) {
+    return "Purpose";
+  }
+
+  if (
+    matchesPrefix(normalizedTitle, ["prerequisites"]) ||
+    matchesSuffix(normalizedTitle, ["prerequisites"]) ||
+    matchesPrefix(normalizedId, ["prerequisites"]) ||
+    matchesSuffix(normalizedId, ["prerequisites"])
+  ) {
+    return "Prerequisites";
+  }
+
+  if (matchesPrefix(normalizedTitle, ["step by step"]) || matchesPrefix(normalizedId, ["step by step"])) {
+    return "Step-by-step";
+  }
+
+  if (
+    matchesPrefix(normalizedTitle, ["troubleshooting", "recovery", "recovery and escalation"]) ||
+    matchesPrefix(normalizedId, ["troubleshooting", "recovery", "recovery and escalation"])
+  ) {
+    return "Troubleshooting";
+  }
+
+  if (
+    normalizedTitle === "related pages" ||
+    normalizedId === "related pages" ||
+    normalizedTitle === "related docs" ||
+    normalizedId === "related docs"
+  ) {
+    return "Related pages";
+  }
+
+  return heading.title;
+}
+
 export function getDocsSectionBlockConfig(
   heading: Pick<DocsHeading, "id" | "title" | "kind">,
 ): DocsSectionBlockConfig | null {
@@ -50,7 +101,12 @@ export function getDocsSectionBlockConfig(
     return { kind: "audience", defaultOpen: true };
   }
 
-  if (matchesPrefix(normalizedTitle, ["prerequisites"]) || matchesPrefix(normalizedId, ["prerequisites"])) {
+  if (
+    matchesPrefix(normalizedTitle, ["prerequisites"]) ||
+    matchesSuffix(normalizedTitle, ["prerequisites"]) ||
+    matchesPrefix(normalizedId, ["prerequisites"]) ||
+    matchesSuffix(normalizedId, ["prerequisites"])
+  ) {
     return { kind: "prerequisites", defaultOpen: false };
   }
 

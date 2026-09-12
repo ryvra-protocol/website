@@ -60,6 +60,16 @@ type AuthoredDocContent = {
   headings: DocsHeading[];
 };
 
+function isMetadataHeading(heading: DocsHeading) {
+  const normalized = `${heading.id} ${heading.title}`
+    .toLowerCase()
+    .replace(/&/g, " and ")
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+
+  return normalized === "last updated" || normalized === "compatibility window";
+}
+
 export const docsSidebarGroups: DocsSidebarGroup[] = [
   {
     title: "Overview",
@@ -4717,7 +4727,7 @@ export const docsPages: DocsPage[] = docsSidebarItems.map((item) => {
     calloutVariant: authored.calloutVariant ?? getCalloutVariant(item.href),
     calloutTitle: authored.calloutTitle ?? "Summary",
     calloutBody: authored.calloutBody ?? authored.description,
-    headings: authored.headings,
+    headings: authored.headings.filter((heading) => !isMetadataHeading(heading)),
   };
 });
 

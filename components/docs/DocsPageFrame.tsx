@@ -5,7 +5,7 @@ import { DocsSectionBlock } from "@/components/docs/DocsSectionBlock";
 import type { DocsBreadcrumb, DocsPage, DocsSidebarItem } from "@/lib/docs";
 import { DocsCallout } from "@/components/docs/DocsCallout";
 import { DocsToc } from "@/components/docs/DocsToc";
-import { isDocsSectionBlock } from "@/lib/docsSectionBlocks";
+import { getDocsDisplayTitle, isDocsSectionBlock } from "@/lib/docsSectionBlocks";
 
 type DocsPageFrameProps = {
   page: DocsPage;
@@ -40,23 +40,19 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
 
         <h1 className="docs-page-title">{page.title}</h1>
         <p className="lead">{page.description}</p>
-        <div className="docs-page-meta" aria-label="Page update and compatibility metadata">
-          <p>
-            <strong>Last updated:</strong> {page.lastUpdated}
-          </p>
-          <p>
-            <strong>Compatibility window:</strong> {page.compatibilityWindow}
-          </p>
-        </div>
-
-        <DocsCallout variant={page.calloutVariant} title={page.calloutTitle}>
+        <DocsCallout variant={page.calloutVariant} title="Purpose">
           {page.calloutBody}
         </DocsCallout>
 
         {hasCollapsibleLists || hasCollapsibleSections ? <DocsListControls rootId={articleId} /> : null}
 
         {page.headings.map((heading) => (
-          <DocsSectionBlock key={heading.id} id={heading.id} title={heading.title} kind={heading.kind}>
+          <DocsSectionBlock
+            key={heading.id}
+            id={heading.id}
+            title={getDocsDisplayTitle(heading)}
+            kind={heading.kind}
+          >
             {heading.audience && heading.audience.length > 0 ? (
               <>
                 <span id={`${heading.id}-audience-label`} className="sr-only">
@@ -106,10 +102,23 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
             <span />
           )}
         </nav>
+        <footer className="docs-page-meta" aria-label="Page update and compatibility metadata">
+          <p>
+            <strong>Last updated:</strong> {page.lastUpdated}
+          </p>
+          <p>
+            <strong>Compatibility window:</strong> {page.compatibilityWindow}
+          </p>
+        </footer>
       </article>
 
       <aside className="docs-right-rail">
-        <DocsToc items={page.headings.map((heading) => ({ id: heading.id, title: heading.title }))} />
+        <DocsToc
+          items={page.headings.map((heading) => ({
+            id: heading.id,
+            title: getDocsDisplayTitle(heading),
+          }))}
+        />
       </aside>
     </div>
   );
