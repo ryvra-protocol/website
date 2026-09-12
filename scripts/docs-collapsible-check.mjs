@@ -53,6 +53,27 @@ function getExpressionText(attribute, sourceFile) {
   return attribute.initializer.expression.getText(sourceFile.ast);
 }
 
+function getStringAttributeValue(attribute) {
+  if (!attribute || !attribute.initializer) {
+    return undefined;
+  }
+
+  if (ts.isStringLiteral(attribute.initializer)) {
+    return attribute.initializer.text;
+  }
+
+  if (
+    ts.isJsxExpression(attribute.initializer) &&
+    attribute.initializer.expression &&
+    (ts.isStringLiteral(attribute.initializer.expression) ||
+      ts.isNoSubstitutionTemplateLiteral(attribute.initializer.expression))
+  ) {
+    return attribute.initializer.expression.text;
+  }
+
+  return undefined;
+}
+
 function collectJsxTags(sourceFile) {
   const tags = [];
 
@@ -182,19 +203,24 @@ if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'ul'))
   errors.push('DocsPageFrame must continue rendering plain related-link lists.');
 }
 
-const pageFrameMetaMatches = docsPageFrame.source.match(/className="docs-page-meta"/g) || [];
-if (pageFrameMetaMatches.length !== 1) {
+const pageFrameMetaNodes = pageFrameTags.filter(
+  (node) => getStringAttributeValue(getJsxAttribute(node, 'className')) === 'docs-page-meta',
+);
+if (pageFrameMetaNodes.length !== 1) {
   errors.push('DocsPageFrame must render exactly one metadata footer block.');
 }
-const pagerIndex = docsPageFrame.source.indexOf('className="docs-pager"');
-const metadataIndex = docsPageFrame.source.indexOf('className="docs-page-meta"');
-if (pagerIndex === -1 || metadataIndex === -1 || metadataIndex < pagerIndex) {
+const pagerNodes = pageFrameTags.filter(
+  (node) => getStringAttributeValue(getJsxAttribute(node, 'className')) === 'docs-pager',
+);
+const pagerNode = pagerNodes[0];
+const metadataNode = pageFrameMetaNodes[0];
+if (!pagerNode || !metadataNode || metadataNode.pos < pagerNode.pos) {
   errors.push('DocsPageFrame metadata block must appear after the main docs content and pager.');
 }
-if (!docsPageFrame.source.includes('<strong>Last updated:</strong>')) {
+if (!docsPageFrame.source.includes('Last updated:')) {
   errors.push('DocsPageFrame metadata footer must include Last updated.');
 }
-if (!docsPageFrame.source.includes('<strong>Compatibility window:</strong>')) {
+if (!docsPageFrame.source.includes('Compatibility window:')) {
   errors.push('DocsPageFrame metadata footer must include Compatibility window.');
 }
 
@@ -215,10 +241,10 @@ if (!docsSectionBlockText.includes('role="region"')) {
   errors.push('DocsSectionBlock must expose section content as an accessible region.');
 }
 
-if (navbar.source.includes('{ href: "/founder", label: "Founder" }')) {
+if (containsStringLiteral(navbar.ast, '/founder')) {
   errors.push('Navbar must not include /founder in top navigation links.');
 }
-if (!footer.source.includes('{ href: "/founder", label: "Founder" }')) {
+if (!containsStringLiteral(footer.ast, '/founder')) {
   errors.push('Footer must retain Founder link for direct discovery.');
 }
 

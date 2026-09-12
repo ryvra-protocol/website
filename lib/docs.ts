@@ -4701,7 +4701,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
   },
 };
 
-function normalizeHeadingToken(value: string) {
+export function normalizeHeadingToken(value: string) {
   return value
     .toLowerCase()
     .replace(/&/g, " and ")
@@ -4709,7 +4709,7 @@ function normalizeHeadingToken(value: string) {
     .trim();
 }
 
-function shouldHideMetadataHeading(heading: DocsHeading) {
+export function shouldHideMetadataHeading(heading: DocsHeading) {
   const normalizedTitle = normalizeHeadingToken(heading.title);
   const normalizedId = normalizeHeadingToken(heading.id);
   return (
@@ -4720,7 +4720,7 @@ function shouldHideMetadataHeading(heading: DocsHeading) {
   );
 }
 
-function getCanonicalHeadingTitle(heading: DocsHeading) {
+export function getCanonicalHeadingTitle(heading: DocsHeading) {
   if (heading.kind === "faq") {
     return heading.title;
   }

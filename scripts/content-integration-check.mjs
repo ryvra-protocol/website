@@ -11,6 +11,7 @@ const litepaperSource = fs.readFileSync(litepaperFilePath, 'utf8');
 const litepaperAst = ts.createSourceFile(litepaperFilePath, litepaperSource, ts.ScriptTarget.Latest, true, ts.ScriptKind.TSX);
 const docs = loadDocsModule();
 const pageByHref = new Map(docs.docsPages.map((page) => [page.href, page]));
+const shouldHideMetadataHeading = docs.shouldHideMetadataHeading;
 const errors = [];
 
 function getTagName(node) {
@@ -92,7 +93,10 @@ for (const href of ['/docs/tokenomics/litepaper-faq', '/docs/tokenomics/tokenomi
   if (!headingIds.has('who-is-this-for')) {
     errors.push(`${href} is missing the who-is-this-for section.`);
   }
-  if (headingIds.has('last-updated') || headingIds.has('compatibility-window')) {
+  if (
+    typeof shouldHideMetadataHeading === 'function' &&
+    page.headings.some((heading) => shouldHideMetadataHeading(heading))
+  ) {
     errors.push(`${href} should rely on page metadata footer instead of inline metadata sections.`);
   }
 

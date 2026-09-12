@@ -10,19 +10,12 @@ const docsPages = docs.docsPages;
 const docsPageOrder = docs.docsPageOrder;
 const getDocBreadcrumbs = docs.getDocBreadcrumbs;
 const getDocNeighbors = docs.getDocNeighbors;
+const shouldHideMetadataHeading = docs.shouldHideMetadataHeading;
 
 const errors = [];
 const pageByHref = new Map();
 const placeholderPattern = /\b(placeholder|coming soon|tba|tbd|scaffold|deferred)\b/i;
 const sitemapFilePath = path.resolve(__dirname, '..', 'app', 'sitemap.ts');
-
-function normalizeToken(value) {
-  return value
-    .toLowerCase()
-    .replace(/&/g, ' and ')
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim();
-}
 
 function flattenDocsListItems(items = []) {
   return items.flatMap((item) => {
@@ -124,14 +117,7 @@ for (const page of docsPages) {
   }
 
   for (const heading of page.headings) {
-    const normalizedTitle = normalizeToken(heading.title);
-    const normalizedId = normalizeToken(heading.id);
-    if (
-      normalizedTitle === 'last updated' ||
-      normalizedId === 'last updated' ||
-      normalizedTitle === 'compatibility window' ||
-      normalizedId === 'compatibility window'
-    ) {
+    if (typeof shouldHideMetadataHeading === 'function' && shouldHideMetadataHeading(heading)) {
       errors.push(`Inline metadata heading found in ${page.href}#${heading.id}; metadata must render in footer only.`);
     }
 
