@@ -128,8 +128,10 @@ const hasOrdered = pages.some((page) => page.headings.some((heading) => (heading
 const hasUnordered = pages.some((page) => page.headings.some((heading) => (heading.bullets || []).length > 0));
 const hasDeeplyNested = pages.some((page) =>
   page.headings.some((heading) =>
-    (heading.bullets || []).some(
-      (item) => typeof item !== 'string' && Array.isArray(item.children) && item.children.length > 0,
+    [heading.bullets || [], heading.steps || []].some((items) =>
+      items.some(
+        (item) => typeof item !== 'string' && Array.isArray(item.children) && item.children.length > 0,
+      ),
     ),
   ),
 );

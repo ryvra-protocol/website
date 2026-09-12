@@ -16,10 +16,7 @@ type DocsPageFrameProps = {
 export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFrameProps) {
   const articleId = `docs-page-${page.href.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "").toLowerCase()}`;
   const hasCollapsibleLists = page.headings.some(
-    (heading) =>
-      Boolean(heading.steps?.length) ||
-      Boolean(heading.bullets?.length) ||
-      Boolean(heading.links?.length),
+    (heading) => Boolean(heading.steps?.length) || Boolean(heading.bullets?.length),
   );
 
   return (

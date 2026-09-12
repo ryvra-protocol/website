@@ -54,7 +54,7 @@ function visit(node) {
     const tagName = getTagName(node);
     const id = getStringAttributeValue(getJsxAttribute(node, 'id'));
 
-    if (id && /^h[1-6]$/.test(tagName)) {
+    if (id && (/^h[1-6]$/.test(tagName) || tagName === 'Section')) {
       litepaperSectionIds.add(id);
     }
 
