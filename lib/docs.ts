@@ -4747,10 +4747,6 @@ function getCanonicalHeadingTitle(heading: DocsHeading) {
     return "Related pages";
   }
 
-  if (normalizedTitle === "faq navigation" || normalizedTitle === "faq entry points") {
-    return "FAQ";
-  }
-
   return heading.title;
 }
 
