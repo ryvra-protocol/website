@@ -25,6 +25,7 @@ export type DocsListItem =
 export type DocsHeading = {
   id: string;
   title: string;
+  kind?: "faq";
   body?: string;
   audience?: DocsAudience[];
   bullets?: DocsListItem[];
@@ -4138,6 +4139,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-1",
+        kind: "faq",
         title: "What problem does Ryvra solve?",
         audience: ["User", "Merchant", "Developer"],
         body: "Ryvra solves the gap between software that can suggest financial actions and systems that must still decide, in a governed way, whether those actions should be allowed to happen.",
@@ -4149,6 +4151,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-2",
+        kind: "faq",
         title: "What is the difference between AI reasoning and financial authority?",
         audience: ["User", "Merchant", "Developer"],
         body: "AI reasoning can generate an idea or recommendation. Financial authority is the governed power to approve and execute that idea. Ryvra keeps those two roles separate.",
@@ -4160,6 +4163,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-3",
+        kind: "faq",
         title: "How do mandates, policies, and risk approvals work together?",
         audience: ["Merchant", "Developer"],
         body: "Mandates define scope, policies define the rules, and independent risk decides whether a valid-looking request is still safe enough to proceed. A request needs all three to align before execution.",
@@ -4171,6 +4175,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-4",
+        kind: "faq",
         title: "Why does gateway-only execution matter?",
         audience: ["Merchant", "Developer"],
         body: "Gateway-only execution means agents do not talk directly to money-moving systems. Requests must pass through the governed intake boundary where identity, authority, and control checks are enforced first.",
@@ -4182,6 +4187,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-5",
+        kind: "faq",
         title: "What does provenance mean for trust?",
         audience: ["User", "Merchant", "Developer"],
         body: "Provenance is the evidence chain that shows what was proposed, who approved it, what executed, what settled, and whether anyone intervened. It makes automation reviewable instead of opaque.",
@@ -4217,6 +4223,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-1",
+        kind: "faq",
         title: "What is the token used for?",
         audience: ["User", "Merchant", "Developer"],
         body: "Public materials position the token around future network participation, ecosystem alignment, and governance. Final utility terms remain subject to later published documentation and approvals.",
@@ -4227,6 +4234,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-2",
+        kind: "faq",
         title: "How do incentives align with network usage?",
         audience: ["User", "Merchant"],
         body: "The clearest public example today is Proof of Transaction, where eligible activity can earn contribution points before any token generation event. The intent is to align participation with real network usage rather than passive assumptions.",
@@ -4237,6 +4245,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-3",
+        kind: "faq",
         title: "What is public today about supply or allocation?",
         audience: ["User", "Developer"],
         body: "Ryvra has shared illustrative allocation envelope ranges, but it has not published a final supply model or final allocation commitments in binding form.",
@@ -4247,6 +4256,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-4",
+        kind: "faq",
         title: "Are emissions, vesting, or unlock schedules final?",
         audience: ["User", "Merchant", "Developer"],
         body: "No. Final emissions, vesting, and unlock mechanics are not public final terms today and will require governance and legal or compliance review before publication.",
@@ -4257,6 +4267,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-5",
+        kind: "faq",
         title: "What role does governance play, and what are its limits?",
         audience: ["Merchant", "Developer"],
         body: "Governance may set or approve parameters such as cadence, thresholds, allocation inputs, and future token mechanics, but it does not erase legal, compliance, or publication constraints.",
@@ -4267,6 +4278,7 @@ const authoredDocsByHref: Record<string, AuthoredDocContent> = {
       },
       {
         id: "faq-6",
+        kind: "faq",
         title: "What key risks should readers keep in mind?",
         audience: ["User", "Merchant", "Developer"],
         body: "Token timing can change, participation may vary by jurisdiction, and points are not tokens today. Public tokenomics material is informational and should not be read as investment advice or a guarantee of issuance, value, or return.",

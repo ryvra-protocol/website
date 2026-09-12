@@ -49,27 +49,6 @@ function getExpressionText(attribute, sourceFile) {
   return attribute.initializer.expression.getText(sourceFile.ast);
 }
 
-function getStringAttributeValue(attribute) {
-  if (!attribute || !attribute.initializer) {
-    return undefined;
-  }
-
-  if (ts.isStringLiteral(attribute.initializer)) {
-    return attribute.initializer.text;
-  }
-
-  if (
-    ts.isJsxExpression(attribute.initializer) &&
-    attribute.initializer.expression &&
-    (ts.isStringLiteral(attribute.initializer.expression) ||
-      ts.isNoSubstitutionTemplateLiteral(attribute.initializer.expression))
-  ) {
-    return attribute.initializer.expression.text;
-  }
-
-  return undefined;
-}
-
 function collectJsxTags(sourceFile) {
   const tags = [];
 
@@ -137,11 +116,11 @@ if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'DocsL
 if (!docsListUsage.some((node) => hasBooleanAttribute(node, 'ordered'))) {
   errors.push('DocsPageFrame must render ordered docs lists through DocsList.');
 }
-if (!docsListUsage.some((node) => getStringAttributeValue(getJsxAttribute(node, 'mode')) === 'links')) {
-  errors.push('DocsPageFrame must render linked docs lists through DocsList.');
+if (docsListUsage.length < 2) {
+  errors.push('DocsPageFrame must render multiple collapsible docs list variants through DocsList.');
 }
-if (docsListUsage.length < 3) {
-  errors.push('DocsPageFrame must render multiple docs list modes through DocsList.');
+if (!pageFrameTags.some((node) => getTagName(node, docsPageFrame.ast) === 'ul')) {
+  errors.push('DocsPageFrame must continue rendering plain related-link lists.');
 }
 
 const pages = docs.docsPages;

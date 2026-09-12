@@ -74,7 +74,13 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
               <DocsList items={heading.bullets} />
             ) : null}
             {heading.links && heading.links.length > 0 ? (
-              <DocsList items={heading.links} mode="links" />
+              <ul className="docs-link-list">
+                {heading.links.map((link) => (
+                  <li key={`${heading.id}-${link.href}`}>
+                    <Link href={link.href}>{link.title}</Link>
+                  </li>
+                ))}
+              </ul>
             ) : null}
           </section>
         ))}

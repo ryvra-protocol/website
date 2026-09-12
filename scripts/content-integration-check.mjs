@@ -106,7 +106,7 @@ for (const href of ['/docs/tokenomics/litepaper-faq', '/docs/tokenomics/tokenomi
     errors.push(`${href} is missing the last-updated section.`);
   }
 
-  const faqHeadings = page.headings.filter((heading) => heading.id.startsWith('faq-'));
+  const faqHeadings = page.headings.filter((heading) => heading.kind === 'faq');
   if (faqHeadings.length === 0) {
     errors.push(`${href} has no FAQ entries.`);
   }

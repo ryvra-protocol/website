@@ -1,10 +1,8 @@
-import Link from "next/link";
-import type { DocsListItem, DocsSidebarItem } from "@/lib/docs";
+import type { DocsListItem } from "@/lib/docs";
 
 type DocsListProps = {
-  items: DocsListItem[] | DocsSidebarItem[];
+  items: DocsListItem[];
   ordered?: boolean;
-  mode?: "content" | "links";
   depth?: number;
 };
 
@@ -14,25 +12,11 @@ type NormalizedDocsListItem = {
   children?: DocsListItem[];
   childrenOrdered?: boolean;
   code?: string;
-  href?: string;
 };
 
-function normalizeDocsListItem(
-  item: DocsListItem | DocsSidebarItem,
-  mode: "content" | "links",
-): NormalizedDocsListItem {
-  if (mode === "links") {
-    const link = item as DocsSidebarItem;
-
-    return {
-      summary: link.title,
-      body: "Open the related page for the deeper explanation and source-of-truth detail.",
-      href: link.href,
-    };
-  }
-
+function normalizeDocsListItem(item: DocsListItem): NormalizedDocsListItem {
   if (typeof item === "string") {
-    return { summary: item, body: item };
+    return { summary: item };
   }
 
   const contentItem = item as Exclude<DocsListItem, string>;
@@ -53,7 +37,6 @@ function normalizeDocsListItem(
 export function DocsList({
   items,
   ordered = false,
-  mode = "content",
   depth = 0,
 }: DocsListProps) {
   const ListTag = ordered ? "ol" : "ul";
@@ -65,43 +48,32 @@ export function DocsList({
       data-docs-collapsible-depth={depth}
     >
       {items.map((item, index) => {
-        const normalized = normalizeDocsListItem(item, mode);
-        const hasPanel =
-          Boolean(normalized.body) ||
-          Boolean(normalized.href) ||
-          Boolean(normalized.code) ||
-          Boolean(normalized.children?.length);
+        const normalized = normalizeDocsListItem(item);
+        const hasPanel = Boolean(normalized.body) || Boolean(normalized.code) || Boolean(normalized.children?.length);
 
         return (
           <li key={`${depth}-${index}-${normalized.summary}`} className="docs-collapsible-list-item">
             {hasPanel ? (
-              <div className="docs-collapsible-item-shell">
-                <details className="docs-collapsible-details" data-docs-collapsible-item="true">
-                  <summary className="docs-collapsible-summary" aria-expanded="false">
-                    <span className="docs-collapsible-summary-text">{normalized.summary}</span>
-                  </summary>
-                  <div className="docs-collapsible-panel">
-                    {normalized.body ? <p>{normalized.body}</p> : null}
-                    {normalized.code ? (
-                      <pre className="docs-collapsible-code">
-                        <code>{normalized.code}</code>
-                      </pre>
-                    ) : null}
-                    {normalized.children?.length ? (
-                      <DocsList
-                        items={normalized.children}
-                        ordered={normalized.childrenOrdered}
-                        depth={depth + 1}
-                      />
-                    ) : null}
-                  </div>
-                </details>
-                {normalized.href ? (
-                  <Link href={normalized.href} className="docs-collapsible-item-link">
-                    Open page
-                  </Link>
-                ) : null}
-              </div>
+              <details className="docs-collapsible-details" data-docs-collapsible-item="true">
+                <summary className="docs-collapsible-summary" aria-expanded="false">
+                  <span className="docs-collapsible-summary-text">{normalized.summary}</span>
+                </summary>
+                <div className="docs-collapsible-panel">
+                  {normalized.body ? <p>{normalized.body}</p> : null}
+                  {normalized.code ? (
+                    <pre className="docs-collapsible-code">
+                      <code>{normalized.code}</code>
+                    </pre>
+                  ) : null}
+                  {normalized.children?.length ? (
+                    <DocsList
+                      items={normalized.children}
+                      ordered={normalized.childrenOrdered}
+                      depth={depth + 1}
+                    />
+                  ) : null}
+                </div>
+              </details>
             ) : (
               <div className="docs-collapsible-leaf">
                 <span className="docs-collapsible-summary-text">{normalized.summary}</span>
