@@ -18,7 +18,7 @@ export function DocsToc({ items }: DocsTocProps) {
       <ul>
         {items.map((item) => (
           <li key={item.id}>
-            <a href={`#${item.id}`}>{item.title}</a>
+            <a className="docs-toc-link" href={`#${item.id}`}>{item.title}</a>
           </li>
         ))}
       </ul>

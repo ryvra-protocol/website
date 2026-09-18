@@ -86,7 +86,7 @@ export default function BrandPage() {
 
   return (
     <>
-      <Section className="hero" title={narrative.title}>
+      <Section className="hero" level={1} title={narrative.title}>
         {narrative.intro.map((line, index) => (
           <p className={index === 0 ? "lead" : undefined} key={line}>
             {line}

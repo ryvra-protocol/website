@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <Section title="Terms">
+    <Section level={1} className="hero" title="Terms">
       <p className="lead">
         Ryvra website content is provided for informational purposes and
         integration planning.

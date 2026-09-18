@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 export default function FounderPage() {
   return (
     <>
-      <Section className="hero founder-hero" title="Founder & CEO">
+      <Section className="hero founder-hero" level={1} title="Founder and CEO">
         <p className="lead">{founderProfile.subtitle}</p>
         <div className="founder-profile-layout">
           <div className="founder-photo-shell">

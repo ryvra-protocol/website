@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 
 export default function LitepaperPage() {
   return (
-    <Section id="litepaper" title="Ryvra Litepaper">
+    <Section id="litepaper" level={1} className="hero" title="Ryvra Litepaper">
       <p className="lead">
         Status: {TOKENOMICS_LITEPAPER_STATUS} · Version: {TOKENOMICS_LITEPAPER_VERSION}
         {" · "}As of {TOKENOMICS_AS_OF_DATE}
@@ -93,7 +93,7 @@ export default function LitepaperPage() {
         Editorial mirrors in <code>content/</code> stay aligned to that source.
       </p>
 
-      <h3 id="what-ryvra-is">What Ryvra is</h3>
+      <h2 className="subhead" id="what-ryvra-is">What Ryvra is</h2>
       <p>
         Ryvra separates AI reasoning from financial authority. That means an agent can
         suggest a payment, trade, treasury move, or workflow step, while Ryvra decides
@@ -108,9 +108,9 @@ export default function LitepaperPage() {
         ))}
       </div>
 
-      <h3 id="why-programmable-financial-authority-matters">
+      <h2 className="subhead" id="why-programmable-financial-authority-matters">
         Why programmable financial authority matters
-      </h3>
+      </h2>
       <p>
         The hard problem is not getting an AI to generate an idea. The hard problem is
         making sure only the right ideas can become real financial actions.
@@ -121,7 +121,7 @@ export default function LitepaperPage() {
         ))}
       </ul>
 
-      <h3 id="how-agent-safety-boundaries-work">How agent safety boundaries work</h3>
+      <h2 className="subhead" id="how-agent-safety-boundaries-work">How agent safety boundaries work</h2>
       <p>
         Ryvra uses the Agent Gateway and control-plane systems to keep proposal logic
         separate from execution authority. The result is bounded automation instead of
@@ -133,9 +133,9 @@ export default function LitepaperPage() {
         ))}
       </ul>
 
-      <h3 id="how-ledger-settlement-and-provenance-fit-together">
+      <h2 className="subhead" id="how-ledger-settlement-and-provenance-fit-together">
         How ledger, settlement, and provenance fit together
-      </h3>
+      </h2>
       <p>
         Ryvra is designed so people, products, and auditors can tell the difference
         between a request, an approval, an execution step, and a final financial
@@ -147,9 +147,9 @@ export default function LitepaperPage() {
         ))}
       </ul>
 
-      <h3 id="confidential-execution-and-private-markets">
+      <h2 className="subhead" id="confidential-execution-and-private-markets">
         Confidential execution and private markets
-      </h3>
+      </h2>
       <p>
         Some financial workflows need sensitive data to stay protected. Ryvra extends
         the same authority, risk, and settlement model into protected execution
@@ -160,7 +160,7 @@ export default function LitepaperPage() {
         approve actions or how teams audit the result.
       </p>
 
-      <h3 id="overview-first-deep-spec-second">Overview first, deep spec second</h3>
+      <h2 className="subhead" id="overview-first-deep-spec-second">Overview first, deep spec second</h2>
       <p>
         Start with the audience-first docs if you want the shortest path to understanding
         the trust model, then use the tokenomics and RFC layers when you need exact
@@ -178,7 +178,7 @@ export default function LitepaperPage() {
         </Link>
       </div>
 
-      <h3 id="key-parameters">Tokenomics snapshot</h3>
+      <h2 className="subhead" id="key-parameters">Tokenomics snapshot</h2>
       <p>
         Ryvra keeps the tokenomics overview readable here and the structured assumptions
         below so readers can distinguish current public framing from later, deeper
@@ -193,28 +193,28 @@ export default function LitepaperPage() {
         ))}
       </div>
 
-      <h3 id="current-policy-assumptions">Current policy assumptions</h3>
+      <h2 className="subhead" id="current-policy-assumptions">Current policy assumptions</h2>
       <ul>
         {TOKENOMICS_POLICY_ASSUMPTIONS.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
 
-      <h3 id="governance-adjustable-parameters">Governance-adjustable parameters</h3>
+      <h2 className="subhead" id="governance-adjustable-parameters">Governance-adjustable parameters</h2>
       <ul>
         {TOKENOMICS_GOVERNANCE_PARAMETERS.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
 
-      <h3 id="legal-compliance-constraints">Legal and compliance constraints</h3>
+      <h2 className="subhead" id="legal-compliance-constraints">Legal and compliance constraints</h2>
       <ul>
         {TOKENOMICS_LEGAL_COMPLIANCE_CONSTRAINTS.map((item) => (
           <li key={item}>{item}</li>
         ))}
       </ul>
 
-      <h3 id="tokenomics-visuals">Illustrative visuals</h3>
+      <h2 className="subhead" id="tokenomics-visuals">Illustrative visuals</h2>
       <p className="disclaimer">
         As of {TOKENOMICS_AS_OF_DATE}. {TOKENOMICS_VISUAL_DISCLOSURE}
       </p>
@@ -223,19 +223,19 @@ export default function LitepaperPage() {
         <EligibilityFunnelDiagram />
       </div>
 
-      <h3 id="conversion-framework">Conversion framework (illustrative)</h3>
+      <h2 className="subhead" id="conversion-framework">Conversion framework (illustrative)</h2>
       <div className="tokenomics-visual-grid">
         <TgeConversionCard />
       </div>
       <p className="disclaimer">{TOKENOMICS_CONVERSION_POLICY_DISCLOSURE}</p>
 
-      <h3 id="allocation-envelope">Allocation envelope (illustrative)</h3>
+      <h2 className="subhead" id="allocation-envelope">Allocation envelope (illustrative)</h2>
       <div className="tokenomics-visual-grid">
         <AllocationEnvelopeRangeBar />
       </div>
       <p className="disclaimer">{TOKENOMICS_ALLOCATION_POLICY_DISCLOSURE}</p>
 
-      <h3 id="tokenomics-faq-preview">Questions readers usually ask next</h3>
+      <h2 className="subhead" id="tokenomics-faq-preview">Questions readers usually ask next</h2>
       <div className="grid grid-2">
         {TOKENOMICS_FAQ_ITEMS.slice(0, 4).map((item) => (
           <article className="card" key={item.question}>

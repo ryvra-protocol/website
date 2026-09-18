@@ -5,8 +5,10 @@ import type { CapabilityPageContent } from "@/lib/capabilities";
 export function CapabilityPage({ page }: { page: CapabilityPageContent }) {
   return (
     <>
-      <Section className="hero" title={page.title}>
-        <p className="lead">{page.summary}</p>
+      <section className="section hero section-unnumbered">
+        <span className="tag tag-authority">Capability</span>
+        <h1 className="hero-title">{page.title}</h1>
+        <p className="hero-lead">{page.summary}</p>
         <p>{page.description}</p>
         <div className="button-row">
           {page.primaryCtas.map((cta) => (
@@ -19,21 +21,24 @@ export function CapabilityPage({ page }: { page: CapabilityPageContent }) {
             </Link>
           ))}
         </div>
-      </Section>
+      </section>
 
       <Section title="What it enables">
-        <div className="grid grid-2">
+        <div className="clause-list clause-list-split">
           {page.capabilities.map((capability) => (
-            <article className="card" key={capability.title}>
-              <strong>{capability.title}</strong>
+            <div className="clause-item" key={capability.title}>
+              <h3>{capability.title}</h3>
               <p>{capability.body}</p>
-            </article>
+            </div>
           ))}
         </div>
       </Section>
 
       <Section title="Control model">
-        <ul>
+        <p className="lead">
+          Constraints this module holds regardless of what an agent proposes.
+        </p>
+        <ul className="rule-list rule-list-divided">
           {page.controls.map((control) => (
             <li key={control}>{control}</li>
           ))}
@@ -41,38 +46,49 @@ export function CapabilityPage({ page }: { page: CapabilityPageContent }) {
       </Section>
 
       <Section title="Where it fits">
-        <div className="grid grid-2">
+        <div className="clause-list clause-list-split">
           {page.operators.map((operator) => (
-            <article className="card" key={operator.title}>
-              <strong>{operator.title}</strong>
+            <div className="clause-item" key={operator.title}>
+              <h3>{operator.title}</h3>
               <p>{operator.body}</p>
-            </article>
+            </div>
           ))}
         </div>
       </Section>
 
       <Section title="Related resources">
-        <div className="grid grid-2">
-          <article className="card">
-            <strong>Documentation</strong>
-            <ul className="tokenomics-list">
+        <div className="related-columns">
+          <div>
+            <h3 className="related-title">Documentation</h3>
+            <ul className="index-list index-list-compact">
               {page.docsLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href}>{link.label}</Link>
+                  <Link className="index-row" href={link.href}>
+                    <span className="index-row-label">{link.label}</span>
+                    <span className="index-row-marker" aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>
-          </article>
-          <article className="card">
-            <strong>Platform suite</strong>
-            <ul className="tokenomics-list">
+          </div>
+
+          <div>
+            <h3 className="related-title">Platform suite</h3>
+            <ul className="index-list index-list-compact">
               {page.relatedPages.map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href}>{link.label}</Link>
+                  <Link className="index-row" href={link.href}>
+                    <span className="index-row-label">{link.label}</span>
+                    <span className="index-row-marker" aria-hidden="true">
+                      →
+                    </span>
+                  </Link>
                 </li>
               ))}
             </ul>
-          </article>
+          </div>
         </div>
       </Section>
     </>

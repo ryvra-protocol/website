@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPage() {
   return (
-    <Section title="Privacy">
+    <Section level={1} className="hero" title="Privacy">
       <p className="lead">
         Ryvra limits collected website data to what is required for support,
         documentation delivery, and operational security.

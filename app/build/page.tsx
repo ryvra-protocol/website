@@ -16,62 +16,86 @@ export const metadata: Metadata = {
   },
 };
 
+const path = [
+  {
+    title: "Start the integration",
+    body: "Review API and SDK onboarding, environment assumptions, and the first workflows that are safe to run.",
+    links: [{ href: "/docs/developer-guide/api-sdk-onboarding", label: "API and SDK onboarding" }],
+  },
+  {
+    title: "Validate the control model",
+    body: "Confirm authority boundaries, security constraints and governance expectations before any production cutover.",
+    links: [{ href: "/docs/governance-and-security-model", label: "Governance and security model" }],
+  },
+  {
+    title: "Study the architecture",
+    body: "Align internal design and review paths against the architecture overview and the RFC index.",
+    links: [
+      { href: "/docs/developer-guide/architecture-overview", label: "Architecture overview" },
+      { href: "/docs/rfc-index", label: "RFC index" },
+    ],
+  },
+  {
+    title: "Prepare enterprise operations",
+    body: "Work through provenance, auditability, suspension and emergency control patterns before go-live.",
+    links: [{ href: "/docs/audit-and-provenance", label: "Audit and provenance" }],
+  },
+];
+
 export default function BuildPage() {
   return (
-    <Section title="Build with Ryvra">
-      <p className="lead">
-        Build bounded autonomous-finance products on top of Ryvra’s control plane,
-        execution plane, and ledger-backed settlement model.
-      </p>
+    <>
+      <section className="section hero section-unnumbered">
+        <span className="tag tag-authority">Integration</span>
+        <h1 className="hero-title">Build with Ryvra</h1>
+        <p className="hero-lead">
+          Build bounded autonomous-finance products on the control plane, the execution plane and
+          ledger-backed settlement.
+        </p>
+        <div className="button-row">
+          <Link className="button button-primary" href="/docs/developer-guide/api-sdk-onboarding">
+            Start the quickstart
+          </Link>
+          <Link className="button button-secondary" href="/docs/rfc-technical-specs">
+            Read the specs
+          </Link>
+        </div>
+      </section>
 
-      <div className="grid grid-2">
-        <article className="card">
-          <strong>Start integration</strong>
-          <p>Review API and SDK onboarding, environment assumptions, and first safe workflows.</p>
-          <div className="button-row">
-            <Link className="button button-primary" href="/docs/developer-guide/api-sdk-onboarding">
-              API + SDK onboarding
-            </Link>
-          </div>
-        </article>
-        <article className="card">
-          <strong>Validate control model</strong>
-          <p>Review authority boundaries, security constraints, and governance expectations before production cutover.</p>
-          <div className="button-row">
-            <Link className="button button-secondary" href="/docs/governance-and-security-model">
-              Governance + security model
-            </Link>
-          </div>
-        </article>
-      </div>
+      <Section title="Integration path">
+        <p className="lead">
+          Four stages, in order. Each one has a canonical page that the docs treat as the source of
+          truth.
+        </p>
 
-      <div className="grid grid-2">
-        <article className="card">
-          <strong>Study the architecture</strong>
-          <p>Use the architecture overview and RFC index to align internal design and review paths.</p>
-          <div className="button-row">
-            <Link className="button button-secondary" href="/docs/developer-guide/architecture-overview">
-              Architecture overview
-            </Link>
-            <Link className="button button-secondary" href="/docs/rfc-index">
-              RFC index
-            </Link>
-          </div>
-        </article>
-        <article className="card">
-          <strong>Prepare enterprise operations</strong>
-          <p>Understand provenance, auditability, suspension, and emergency control patterns before go-live.</p>
-          <div className="button-row">
-            <Link className="button button-secondary" href="/docs/audit-and-provenance">
-              Audit + provenance
-            </Link>
-          </div>
-        </article>
-      </div>
+        <ol className="path-list">
+          {path.map((step, index) => (
+            <li className="path-step" key={step.title}>
+              <span className="path-index" aria-hidden="true">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <div className="path-body">
+                <h3>{step.title}</h3>
+                <p>{step.body}</p>
+                <div className="button-row">
+                  {step.links.map((link) => (
+                    <Link className="button button-secondary" href={link.href} key={link.href}>
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </Section>
 
-      <p>
-        Integration and escalation contact: <a href="mailto:ecosystem@ryvra.org">ecosystem@ryvra.org</a>
-      </p>
-    </Section>
+      <Section title="Escalation">
+        <p>
+          Integration and escalation contact:{" "}
+          <a href="mailto:ecosystem@ryvra.org">ecosystem@ryvra.org</a>
+        </p>
+      </Section>
+    </>
   );
 }

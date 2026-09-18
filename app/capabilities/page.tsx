@@ -13,31 +13,33 @@ export const metadata: Metadata = {
 export default function CapabilitiesPage() {
   return (
     <>
-      <Section className="hero" title="Ryvra capabilities">
-        <p className="lead">
-          Ryvra provides programmable financial infrastructure for bounded autonomous-finance
-          workflows across payments, markets, and treasury operations.
+      <section className="section hero section-unnumbered">
+        <span className="tag tag-authority">Platform</span>
+        <h1 className="hero-title">Ryvra capabilities</h1>
+        <p className="hero-lead">
+          Programmable financial infrastructure for bounded autonomous-finance workflows across
+          payments, markets and treasury operations.
         </p>
         <p>
-          Every capability page follows the same model: AI can propose, Ryvra authorizes, and
-          deterministic systems execute against ledger and settlement truth.
+          Every module follows the same model: AI can propose, Ryvra authorizes, and deterministic
+          systems execute against ledger and settlement truth.
         </p>
-      </Section>
+      </section>
 
       <Section title="Platform modules">
-        <div className="grid grid-2">
+        <ul className="index-list">
           {capabilityPages.map((page) => (
-            <article className="card" key={page.slug}>
-              <strong>{page.title}</strong>
-              <p>{page.summary}</p>
-              <div className="button-row">
-                <Link className="button button-secondary" href={`/capabilities/${page.slug}`}>
-                  Open page
-                </Link>
-              </div>
-            </article>
+            <li key={page.slug}>
+              <Link className="index-row" href={`/capabilities/${page.slug}`}>
+                <span className="index-row-label">{page.title}</span>
+                <span className="index-row-marker" aria-hidden="true">
+                  &rarr;
+                </span>
+                <span className="index-row-desc">{page.summary}</span>
+              </Link>
+            </li>
           ))}
-        </div>
+        </ul>
       </Section>
     </>
   );

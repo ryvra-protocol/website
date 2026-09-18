@@ -31,7 +31,7 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
 
               return (
                 <li key={crumb.href}>
-                  {isLast ? <span aria-current="page">{crumb.title}</span> : <Link href={crumb.href}>{crumb.title}</Link>}
+                  {isLast ? <span aria-current="page">{crumb.title}</span> : <Link className="docs-breadcrumb-link" href={crumb.href}>{crumb.title}</Link>}
                 </li>
               );
             })}
@@ -72,7 +72,7 @@ export function DocsPageFrame({ page, breadcrumbs, previous, next }: DocsPageFra
               <ul className="docs-link-list">
                 {heading.links.map((link) => (
                   <li key={`${heading.id}-${link.href}`}>
-                    <Link href={link.href}>{link.title}</Link>
+                    <Link className="docs-link-list-link" href={link.href}>{link.title}</Link>
                   </li>
                 ))}
               </ul>
